@@ -29,36 +29,36 @@ this project under **Custom domains** in the Cloudflare dashboard and send clien
 
 ---
 
-## Adding a new demo
+## Adding a new demo — your part
 
-**1. Make the folder.** `brand-name-standard` or `brand-name-premium`. Lowercase, hyphens.
-Put `index.html` inside, with any `js/`, `logo.png` etc. in that same folder.
+You don't edit any files yourself. Three steps.
 
-**2. Add a card to the root `index.html`.** Copy an existing `<a class="card">` block. The
-opening tag **must** carry both attributes or the picker won't see it:
+**1.** Open a Claude Code session on this folder: `C:\Projects\Websites\demos`
 
-```html
-<a class="card" data-slug="brand-name-premium" data-sector="Immigration" href="brand-name-premium/" target="_blank" rel="noopener">
-```
+**2.** Say what you want, in plain words. For example:
 
-- `data-slug` — must exactly match the folder name
-- `data-sector` — the industry. Reuse an existing spelling (`Immigration`, `Food & FMCG`)
-  or add a new one; each distinct value becomes a quick-filter button in the picker.
+> Add a new Premium demo for a fictional restaurant chain.
 
-Also pick a card background: reuse `art-1` … `art-4`, or add an `.art-5` rule in the CSS.
+> Turn the concept site in this zip into a demo. Rebrand it to a fictional company.
 
-**3. Push.**
+Claude reads `CLAUDE.md` in this folder automatically, so it already knows the rules —
+the folder naming, the card attributes the picker needs, the noindex tag, the fictional
+brand, and the full checklist for stripping a real client's details out of a concept site.
+You don't have to remember or mention any of it.
+
+**3.** When it says it's done, run these three lines in PowerShell:
 
 ```powershell
 git add .
-git commit -m "Add brand-name-premium demo"
+git commit -m "Add the new demo"
 git push
 ```
 
-Cloudflare rebuilds on its own. Live in about a minute.
+Then open https://demos-1g7.pages.dev/ and scroll the new demo top to bottom. If something
+looks wrong, say so in the same Claude session.
 
-**4. Check it in a browser.** Open the new URL and scroll the whole page. Don't trust that
-the files are right because the commands succeeded.
+That's the whole thing. Everything technical lives in `CLAUDE.md` — that file is written
+for Claude, not for you, and you never need to open it.
 
 ---
 
@@ -86,33 +86,14 @@ link until the library is bigger.
 
 ## Turning a real client concept into a demo
 
-Concept sites built for a real prospect carry that company's identity in more places than a
-search will find. This list exists because two rebrands here missed things:
+Say so in the Claude session and it handles it. A concept built for a real client hides
+their identity in about eleven places a plain search won't find — logos split across tags,
+text painted onto a canvas, phone numbers in five formats, the founder's real biography,
+map coordinates, file-number prefixes. The full checklist is in `CLAUDE.md`.
 
-- [ ] **Company name split across tags** — a two-tone logo is `<b>NOVA<span>WORLD</span></b>`.
-      Searching for "NovaWorld" finds nothing. Search for each half separately.
-- [ ] **Text painted onto a canvas by JavaScript** — `fillText('NOVA')` in a `.js` file.
-      Invisible to any search of the HTML.
-- [ ] **Image files** — a `logo.png` is the client's actual mark. Replace the file.
-- [ ] **Phone numbers in every format** — `+1 (647) 404-6682`, `647-404-6682`, `6474046682`,
-      `tel:+1647...`, `wa.me/1647...`. Search for the digits alone.
-- [ ] **Street address**, including inside a Google Maps query string
-- [ ] **Named people** — swap for `[Consultant Name]`, never invent a replacement person
-- [ ] **The founder's biography and dates** — arrival year, licence year, the whole story.
-      Changing the name but keeping "arrived as a student in 2004" keeps the real person.
-- [ ] **Office locations**, including latitude/longitude and timezone strings in map code
-- [ ] **Reference codes** — file numbers like `NW-2004-001` carry the old initials
-- [ ] **`<meta name="robots" content="noindex">`** — add it if the original lacked one
-- [ ] **The disclaimer** — must say the firm is fictional, not "not the official X site"
-
-**Check the invented name is free before using it.** Search it. "Northway Immigration" and
-"Ardent Immigration" both turned out to be real Canadian firms. In a crowded industry,
-assume any plausible name is taken until proven otherwise.
-
-**Then open the page and scroll all of it.** A find-and-replace can't see split tags or
-canvas text; your eyes can.
-
----
+The one thing worth knowing yourself: **always check an invented brand name isn't a real
+company.** "Northway Immigration" and "Ardent Immigration" both looked invented and both
+turned out to be real Canadian firms.
 
 ## The two-copies rule
 
