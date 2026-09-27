@@ -46,16 +46,10 @@ the folder naming, the card attributes the picker needs, the noindex tag, the fi
 brand, and the full checklist for stripping a real client's details out of a concept site.
 You don't have to remember or mention any of it.
 
-**3.** When it says it's done, run these three lines in PowerShell:
+**3.** That's it — Claude also does the `git` commands and publishes it for you.
 
-```powershell
-git add .
-git commit -m "Add the new demo"
-git push
-```
-
-Then open https://demos-1g7.pages.dev/ and scroll the new demo top to bottom. If something
-looks wrong, say so in the same Claude session.
+When it tells you it's pushed, wait about a minute, then open the link it gives you and
+scroll the whole page. If something looks wrong, say so in the same session.
 
 That's the whole thing. Everything technical lives in `CLAUDE.md` — that file is written
 for Claude, not for you, and you never need to open it.

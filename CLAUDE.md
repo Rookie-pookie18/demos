@@ -35,8 +35,32 @@ Give the card a background class: reuse `art-1`…`art-4` or add a new `.art-N` 
 - a footer line saying the company is fictional
 - an invented brand — never a real company's name
 
-**4. Tell him to run** `git add .` → `git commit -m "..."` → `git push`, then to open the
-live URL and scroll the whole page.
+**4. Commit and push it yourself.** Sidak should not have to run git for this. Once the
+demo is built and its card is added, run:
+
+```
+git add .
+git commit -m "Add <brand> <tier> demo"
+git push
+```
+
+Before you push, confirm all four: the folder contains `index.html`; the card exists in the
+root `index.html` with a `data-slug` that exactly matches the folder name; `noindex` is in
+the new demo's head; the footer says the company is fictional. A push goes straight to a
+live public site, so check rather than assume.
+
+After pushing, give him the demo's live URL and tell him Cloudflare takes about a minute,
+then to open it and scroll the whole page.
+
+### What appears where
+
+Two different things, and it matters:
+
+- **The demo's own URL** (`/brand-name-premium/`) works as soon as the folder is pushed.
+  Cloudflare serves every folder in this repo automatically.
+- **The card on the homepage** only appears if you added it to the root `index.html`.
+  Pushing a folder without a card gives a demo that is live but invisible and unlisted —
+  which is occasionally useful, but is almost never what he meant. Add the card.
 
 ---
 
