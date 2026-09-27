@@ -10,16 +10,18 @@ demos\
   .gitignore
   _template\              starting point for a new demo pair
   anna-mills-premium\
-  novaworld-premium\
-  novaworld-standard\
+  kestrel-premium\
+  kestrel-standard\
+  calder-finch-premium\
 ```
 
 ## Live at
 
 **https://demos-1g7.pages.dev/** — the showcase page
 https://demos-1g7.pages.dev/anna-mills-premium/
-https://demos-1g7.pages.dev/novaworld-premium/
-https://demos-1g7.pages.dev/novaworld-standard/
+https://demos-1g7.pages.dev/kestrel-premium/
+https://demos-1g7.pages.dev/kestrel-standard/
+https://demos-1g7.pages.dev/calder-finch-premium/
 
 GitHub: `Sidak-dang/demos` · Cloudflare Pages project: `demos-1g7`
 
