@@ -483,8 +483,8 @@ const hrefOf=x=>x.fl?"#"+x.s:"#"+x.c+"."+x.s;
 const ORIGINS=[
  {id:"del",label:"India · Delhi",city:"Delhi",lon:77.2,lat:28.6,tz:["Asia/Kolkata","Asia/Calcutta"]},
  {id:"chd",label:"India · Chandigarh",city:"Chandigarh",lon:76.8,lat:30.7,tz:[]},
- {id:"dxb",label:"UAE · Dubai",city:"Dubai",lon:55.3,lat:25.2,tz:["Asia/Dubai"]},
- {id:"pnh",label:"Cambodia · Phnom Penh",city:"Phnom Penh",lon:104.9,lat:11.6,tz:["Asia/Phnom_Penh"]}
+ {id:"mnl",label:"Philippines · Manila",city:"Manila",lon:121.0,lat:14.6,tz:["Asia/Manila"]},
+ {id:"nbo",label:"Kenya · Nairobi",city:"Nairobi",lon:36.8,lat:-1.29,tz:["Africa/Nairobi"]}
 ];
 const TOR={city:"Toronto",lon:-79.38,lat:43.65}, MIS={city:"Toronto",lon:-79.64,lat:43.59};
 const STUDY_DEST=[{city:"Canada",lon:-79.4,lat:43.7},{city:"USA",lon:-74,lat:40.7},{city:"UK",lon:-1.3,lat:51.8},{city:"Germany",lon:10,lat:51},{city:"Australia",lon:151.2,lat:-33.9}];
@@ -578,10 +578,10 @@ function homeHTML(){
 <section class="trust" aria-label="Credentials">
   <div class="wrap">
     <div><span class="mono">Licensed with</span><b>CICC · RCIC <span class="tbd">[TBD: no.]</span></b></div>
-    <div><span class="mono">RCIC since</span><b>2019</b></div>
+    <div><span class="mono">RCIC since</span><b>2020</b></div>
     <div><span class="mono">Also</span><b>Commissioner for Taking Affidavits, Ontario</b></div>
     <div><span class="mono">Also</span><b>Licensed Foreign Worker Recruitment Agent, Manitoba</b></div>
-    <div><span class="mono">Offices &amp; affiliates</span><b>Canada · India · UAE · Cambodia</b></div>
+    <div><span class="mono">Offices &amp; affiliates</span><b>Canada · India · Philippines · Kenya</b></div>
   </div>
 </section>
 <section class="journey dark" id="journey" aria-labelledby="jh">
@@ -621,10 +621,10 @@ function homeHTML(){
       <div class="ph" style="aspect-ratio:4/5">[T1 · Portrait of [Consultant Name] — real photo from the client]</div>
       <div>
         <div class="mini-route">
-          <div class="stop"><p class="mono">2004</p><h4>Arrives in Canada as an international student</h4><p>From <span class="tbd">[TBD: home city]</span>. He went through admission and immigration himself, with all its struggles.</p></div>
-          <div class="stop"><p class="mono">While studying</p><h4>Starts helping other students</h4><p>He helps other students get admission to Canadian institutions. Over time, that help grows into an immigration business.</p></div>
-          <div class="stop"><p class="mono">2019</p><h4>Licensed as an RCIC and founds Kestrel</h4><p>[Consultant Name] becomes a Regulated Canadian Immigration Consultant and starts Kestrel Immigration Services in Canada.</p></div>
-          <div class="stop now"><p class="mono">Today</p><h4>Offices and affiliates abroad</h4><p>India, UAE, Cambodia and others <span class="tbd">[TBD: which are own offices, which are affiliates]</span>. Built on three values: trust, integrity and honesty.</p></div>
+          <div class="stop"><p class="mono">2012</p><h4>Arrives in Canada on a closed work permit</h4><p>From <span class="tbd">[TBD: home city]</span>. He worked through permanent residence himself, with almost no useful guidance.</p></div>
+          <div class="stop"><p class="mono">2016</p><h4>Starts helping colleagues</h4><p>Co-workers start asking him to check their files. Over time, that help grows into an immigration practice.</p></div>
+          <div class="stop"><p class="mono">2020</p><h4>Licensed as an RCIC and founds Kestrel</h4><p>[Consultant Name] qualifies as a Regulated Canadian Immigration Consultant and starts Kestrel Immigration Services in Canada.</p></div>
+          <div class="stop now"><p class="mono">Today</p><h4>Offices and affiliates abroad</h4><p>India, Philippines, Kenya and others <span class="tbd">[TBD: which are own offices, which are affiliates]</span>. Built on three values: trust, integrity and honesty.</p></div>
         </div>
         <div class="creds"><span class="tag">Commissioner for Taking Affidavits · Ontario</span><span class="tag">Licensed Foreign Worker Recruitment Agent · Manitoba</span></div>
         <p style="margin-top:20px"><a class="more" href="#about" data-hop>About us and the team →</a></p>
@@ -641,8 +641,8 @@ function homeHTML(){
       <div class="olist">
         <div class="office"><p class="mono">Head office · Canada</p><h3>Toronto, Ontario</h3><p>Unit 12 – 480 Harrowgate Road, Toronto, ON M5V 1A1<br>1 416 555 0142 · 1 416 555 0143<br>info@kestrelimmigration.example</p></div>
         <div class="office"><p class="mono">India</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
-        <div class="office"><p class="mono">UAE</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
-        <div class="office"><p class="mono">Cambodia</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
+        <div class="office"><p class="mono">Philippines</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
+        <div class="office"><p class="mono">Kenya</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
       </div>
     </div>
   </div>
@@ -691,7 +691,7 @@ const FAQ=[
  {q:"Are you part of the government or IRCC?",a:"No. We are a private firm and are not affiliated with IRCC or any government. Government decisions are made by government officers."},
  {q:"Can you guarantee my visa or permanent residence?",a:"No, and nobody honest can. We assess your options carefully, prepare a complete application and explain the risks before you apply."},
  {q:"How does the eligibility assessment work?",a:"You fill in the assessment form in our secure client system (CaseCloud). <span class='tbd'>[TBD: what happens next, who replies, and how soon]</span>"},
- {q:"Do you have offices outside Canada?",a:"Our head office is in Toronto, Ontario. We also work through offices and affiliates in India, the UAE, Cambodia and other countries. <span class='tbd'>[TBD: addresses]</span>"}
+ {q:"Do you have offices outside Canada?",a:"Our head office is in Toronto, Ontario. We also work through offices and affiliates in India, the Philippines, Kenya and other countries. <span class='tbd'>[TBD: addresses]</span>"}
 ];
 function ctaHTML(){return `
 <section class="sec dark cta" aria-labelledby="ch">
@@ -752,11 +752,11 @@ function aboutHTML(){return pageHead({crumbs:"About",title:"About Kestrel",lead:
  `<div class="pbody"><div class="wrap twocol"><div>
   <section class="fblock"><h3>Vision</h3><p style="font-size:22px;font-weight:700;color:var(--ink);max-width:30ch">“To be a trusted partner and assist in achieving the dreams of aspiring students, individuals, and businesses.”</p></section>
   <section class="fblock"><h3>How we work</h3><p>We take time to understand each client's needs and recommend the most appropriate option. Our core values are trust, integrity and honesty. We keep client information confidential and use it only for the client's application.</p></section>
-  <section class="fblock"><h3>Founder</h3><p>[Consultant Name] came to Canada in 2004 as an international student and went through admission and immigration himself. While studying, he helped other students get admission to Canadian institutions, and that help grew into an immigration business. He became a Regulated Canadian Immigration Consultant in 2019 and started Kestrel Immigration Services. The firm now works with offices and affiliates in India, the UAE, Cambodia and other countries. [Consultant Name] is also a Commissioner for Taking Affidavits in Ontario and a Licensed Foreign Worker Recruitment Agent for Manitoba.</p></section>
+  <section class="fblock"><h3>Founder</h3><p>[Consultant Name] moved to Canada in 2012 on a closed work permit and worked through permanent residence himself, with almost no useful guidance. After watching colleagues pay good money for advice that led nowhere, he retrained and qualified as a Regulated Canadian Immigration Consultant in 2020, then started Kestrel Immigration Services. The firm now works with offices and affiliates in India, the Philippines, Kenya and other countries. [Consultant Name] is also a Commissioner for Taking Affidavits in Ontario and a Licensed Foreign Worker Recruitment Agent for Manitoba.</p></section>
   <section class="fblock"><h3>Team</h3><div class="team"><div class="ph">[T1 · [Consultant Name], RCIC]</div><div class="ph">[T2 · Team member · TBD]</div><div class="ph">[T3 · Team member · TBD]</div><div class="ph">[T4 · Team member · TBD]</div></div></section>
   <section class="fblock"><h3>Our office</h3><div class="ph" style="min-height:240px">[H1 · Toronto office, real photo]&nbsp;·&nbsp;[H2 · Consultation room]</div></section>
  </div><aside class="aside">
-  <div class="box darkbox"><h3 style="color:var(--paper)">Credentials</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px;color:var(--on-dark-muted);font-size:14.5px"><li>RCIC, licensed with CICC <span class="tbd">[TBD: no.]</span></li><li>RCIC since 2019</li><li>Commissioner for Taking Affidavits, Ontario</li><li>Licensed Foreign Worker Recruitment Agent, Manitoba <span class="tbd">[TBD: no.]</span></li><li>CAPIC member <span class="tbd">[TBD: confirm current]</span></li></ul><p style="margin-top:14px"><a style="color:var(--sun)" href="https://register.college-ic.ca/Public-Register-EN/Public-Register-EN/RCIC_Search.aspx" target="_blank" rel="noopener">Verify on the CICC register ↗</a></p></div>
+  <div class="box darkbox"><h3 style="color:var(--paper)">Credentials</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px;color:var(--on-dark-muted);font-size:14.5px"><li>RCIC, licensed with CICC <span class="tbd">[TBD: no.]</span></li><li>RCIC since 2020</li><li>Commissioner for Taking Affidavits, Ontario</li><li>Licensed Foreign Worker Recruitment Agent, Manitoba <span class="tbd">[TBD: no.]</span></li><li>CAPIC member <span class="tbd">[TBD: confirm current]</span></li></ul><p style="margin-top:14px"><a style="color:var(--sun)" href="https://register.college-ic.ca/Public-Register-EN/Public-Register-EN/RCIC_Search.aspx" target="_blank" rel="noopener">Verify on the CICC register ↗</a></p></div>
   <div class="box"><h3>Testimonials</h3><p class="muted" style="font-size:14.5px">Shown only with each client's written approval (CICC Code s.45). <span class="tbd">[TBD: approved testimonials]</span></p></div>
  </aside></div></div>`+ctaHTML();}
 function contactHTML(){return pageHead({crumbs:"Contact",title:"Contact us",lead:"Call, WhatsApp, email or visit our Toronto office.",step:null})+
@@ -776,7 +776,7 @@ function contactHTML(){return pageHead({crumbs:"Contact",title:"Contact us",lead
    <div style="position:relative;height:200px;margin:14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line-dark)" id="cMap"></div>
    <a style="color:var(--sun)" href="https://www.google.com/maps/search/?api=1&amp;query=480+Harrowgate+Road+Toronto+ON" target="_blank" rel="noopener">Open in Google Maps ↗</a></div>
    <div class="box"><h3>Phone &amp; email</h3><p class="muted" style="font-size:14.5px;font-family:var(--mono)">1 416 555 0142<br>1 416 555 0143<br>Toll-free +1 (800) 555-0199<br>WhatsApp +1 416 555 0144<br>info@kestrelimmigration.example</p><p class="muted" style="font-size:14px;margin-top:8px">Hours: <span class="tbd">[TBD]</span></p></div>
-   <div class="box"><h3>Offices abroad</h3><p class="muted" style="font-size:14.5px">India · UAE · Cambodia <span class="tbd">[TBD: addresses, and office or affiliate]</span></p></div>
+   <div class="box"><h3>Offices abroad</h3><p class="muted" style="font-size:14.5px">India · Philippines · Kenya <span class="tbd">[TBD: addresses, and office or affiliate]</span></p></div>
  </aside></div></div>`;}
 function assessHTML(){return pageHead({crumbs:"Assessment",title:"Eligibility assessment",lead:"Tell us about your education, work and family. We'll look at which pathways fit.",step:0})+
  `<div class="pbody"><div class="wrap twocol"><div>
@@ -831,8 +831,8 @@ function initPageMap(kind){
   const host=$("#pMap");if(!host)return;const m=makeMap(host,"dark");m.resize();maps.p=m;
   const wide=m.w>760;const box=wide?{x:.7,y:.55,w:.52,h:.72}:{x:.5,y:.5,w:.9,h:.8};
   if(kind==="study"){m.routes=STUDY_DEST.map(d=>({pts:arc(origin,d),p:0,head:true}));m.setCities([{...origin,label:origin.city,pulse:1},...STUDY_DEST.map(d=>({...d,label:d.city,small:1}))]);m.fit([...STUDY_DEST.map(d=>[d.lon,d.lat]),[origin.lon,origin.lat]],box);}
-  else if(kind==="office"||kind==="founder"){m.routes=kind==="founder"?[{pts:arc(origin,MIS),p:0}]:[];m.setCities([{...MIS,label:"Toronto",pulse:1}]);m.cam={lon:-79.64,lat:43.59,ppd:wide?22:14};m.cx=wide?.72:.6;m.cy=.5;if(kind==="founder"){m.fit([[origin.lon,origin.lat],[MIS.lon,MIS.lat]],box);m.setCities([{...MIS,label:"Canada · 2004"}]);}}
-  else if(kind==="network"){const pts=[[MIS.lon,MIS.lat],[78.9,22],[54.4,24.3],[105,12.5]];m.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:0,head:false}));m.setCities([{...MIS,label:"Toronto"},{lon:78.9,lat:22,label:"India",small:1},{lon:54.4,lat:24.3,label:"UAE",small:1},{lon:105,lat:12.5,label:"Cambodia",small:1}]);m.fit(pts,box);}
+  else if(kind==="office"||kind==="founder"){m.routes=kind==="founder"?[{pts:arc(origin,MIS),p:0}]:[];m.setCities([{...MIS,label:"Toronto",pulse:1}]);m.cam={lon:-79.64,lat:43.59,ppd:wide?22:14};m.cx=wide?.72:.6;m.cy=.5;if(kind==="founder"){m.fit([[origin.lon,origin.lat],[MIS.lon,MIS.lat]],box);m.setCities([{...MIS,label:"Canada · 2012"}]);}}
+  else if(kind==="network"){const pts=[[MIS.lon,MIS.lat],[78.9,22],[121.0,14.6],[37.9,-0.02]];m.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:0,head:false}));m.setCities([{...MIS,label:"Toronto"},{lon:78.9,lat:22,label:"India",small:1},{lon:121.0,lat:14.6,label:"Philippines",small:1},{lon:37.9,lat:-0.02,label:"Kenya",small:1}]);m.fit(pts,box);}
   else {const pts=arc(origin,TOR);m.routes=[{pts,p:0}];m.setCities([{...origin,label:origin.city,pulse:1},{...TOR,label:"Toronto"}]);m.fit([[origin.lon,origin.lat],[TOR.lon,TOR.lat],...pts],box);}
   m.draw();
   if(RM){m.routes.forEach(r=>r.p=1);m.draw();return;}
@@ -872,8 +872,8 @@ function initHome(){
   initBoard();
   // offices
   const om=makeMap($("#oMap"),"dark");maps.o=om;
-  function drawOffices(){om.resize();const pts=[[MIS.lon,MIS.lat],[78.9,22],[54.4,24.3],[105,12.5]];om.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:1,head:false}));
-    om.setCities([{...MIS,label:"Toronto",pulse:1},{lon:78.9,lat:22,label:"India · TBD",small:1},{lon:54.4,lat:24.3,label:"UAE · TBD",small:1},{lon:105,lat:12.5,label:"Cambodia · TBD",small:1}]);
+  function drawOffices(){om.resize();const pts=[[MIS.lon,MIS.lat],[78.9,22],[121.0,14.6],[37.9,-0.02]];om.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:1,head:false}));
+    om.setCities([{...MIS,label:"Toronto",pulse:1},{lon:78.9,lat:22,label:"India · TBD",small:1},{lon:121.0,lat:14.6,label:"Philippines · TBD",small:1},{lon:37.9,lat:-0.02,label:"Kenya · TBD",small:1}]);
     om.fit(pts,{x:.5,y:.5,w:.84,h:.62});om.draw();}
   drawOffices();
   updateJourney();

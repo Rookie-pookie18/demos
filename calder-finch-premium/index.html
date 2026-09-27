@@ -78,7 +78,7 @@ nav.solid{background:rgba(244,241,234,.86);backdrop-filter:blur(12px);-webkit-ba
 .ch h1,.ch h2{margin:18px 0 22px}
 .ch .row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:32px}
 .hint{font:500 11.5px var(--mono);letter-spacing:.1em;color:var(--muted)}
-.note{margin-top:18px;font:500 12px var(--mono);color:var(--ink);background:rgba(255,204,41,.35);display:inline-block;padding:6px 10px;border-radius:3px}
+.note{margin-top:18px;font:500 12px var(--mono);color:var(--ink);background:rgba(63,155,130,.35);display:inline-block;padding:6px 10px;border-radius:3px}
 .stamps-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
 .stamps-list li{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--line);color:var(--muted);padding:7px 12px;border-radius:4px;transition:all .35s}
 .stamps-list li.hit{border-color:var(--ink);color:var(--ink);background:#fff}
@@ -227,7 +227,7 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;paddin
   -webkit-mask-image:radial-gradient(circle at 30% 40%,#000 55%,rgba(0,0,0,.72) 75%);mask-image:radial-gradient(circle at 30% 40%,#000 55%,rgba(0,0,0,.72) 75%)}
 .pg-stamp b{font:800 38px/1 var(--head)}
 .pg-stamp small{font:600 9px var(--mono);letter-spacing:.14em}
-.template-note{margin-top:34px;display:inline-block;font:500 12px var(--mono);background:rgba(255,204,41,.35);padding:7px 11px;border-radius:3px}
+.template-note{margin-top:34px;display:inline-block;font:500 12px var(--mono);background:rgba(63,155,130,.35);padding:7px 11px;border-radius:3px}
 .pg-body{display:grid;grid-template-columns:260px minmax(0,1fr);gap:6vw;padding:9vh 0 10vh;align-items:start}
 .toc{position:sticky;top:110px}
 .toc ol{list-style:none;margin:14px 0 26px;border-left:2px solid var(--line)}
@@ -265,7 +265,7 @@ h3.sub{font-size:22px;margin:34px 0 10px}
 .tl li{position:relative}
 .tl .n{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--gold);font:700 16px var(--head);position:relative}
 .tl b{display:block;font:700 17px/1.3 var(--head);margin-top:16px}
-.tl i{display:inline-block;font:500 11px var(--mono);font-style:normal;background:rgba(255,204,41,.4);padding:3px 7px;border-radius:3px;margin-top:6px}
+.tl i{display:inline-block;font:500 11px var(--mono);font-style:normal;background:rgba(63,155,130,.4);padding:3px 7px;border-radius:3px;margin-top:6px}
 .tl p{font-size:14.5px;margin-top:8px}
 .faq details{border-top:1px solid var(--line)}
 .faq details:last-of-type{border-bottom:1px solid var(--line)}
@@ -370,8 +370,8 @@ body.inner .wa{bottom:22px}
 
         <article class="ch" data-ch="1">
           <p class="label">02 — The founder</p>
-          <h2>In 2004, this was <em>his</em> passport.</h2>
-          <p class="lead">[Consultant Name] came to Canada as an international student and went through admission and immigration himself. He began helping other students while still studying. He's been solving the same problem, from the inside, ever since.</p>
+          <h2>In 2009, this was <em>his</em> passport.</h2>
+          <p class="lead">[Consultant Name] arrived in Canada in 2009 for a postgraduate degree and stayed on to work in a settlement agency, sitting across the desk from people whose files had been mishandled elsewhere. He qualified as a Regulated Canadian Immigration Consultant in 2021 and opened Calder Finch to do the job properly.</p>
         </article>
 
         <article class="ch" data-ch="2">
@@ -409,9 +409,9 @@ body.inner .wa{bottom:22px}
 
   <!-- ================= PROOF ================= -->
   <section class="proof">
-    <div class="num" data-fade><b>2004</b><span>Founder arrives in Canada as an international student</span></div>
-    <div class="num" data-fade><b>2019</b><span>Licensed as a Regulated Canadian Immigration Consultant</span></div>
-    <div class="num" data-fade><b>4+</b><span>Countries with offices &amp; affiliates: Canada, India, UAE, Cambodia</span></div>
+    <div class="num" data-fade><b>2009</b><span>Founder arrives in Canada as a postgraduate student</span></div>
+    <div class="num" data-fade><b>2021</b><span>Licensed as a Regulated Canadian Immigration Consultant</span></div>
+    <div class="num" data-fade><b>4+</b><span>Countries with offices &amp; affiliates: Canada, India, Nigeria, Vietnam</span></div>
   </section>
 
   <!-- ================= FOUNDER ================= -->
@@ -423,7 +423,7 @@ body.inner .wa{bottom:22px}
     <div class="copy">
       <p class="label" data-fade>About the firm</p>
       <h2 class="big" data-fade>Built on <em>Trust</em>, Integrity and Honesty.</h2>
-      <p class="lead" data-fade>Calder Finch Immigration Services was founded in Toronto by [Consultant Name] after more than a decade of helping students and families reach Canada. Today the firm offers end-to-end immigration support to individuals, businesses and investors, with offices and affiliates in India, the UAE, Cambodia and beyond.</p>
+      <p class="lead" data-fade>Calder Finch Immigration Services was founded in Toronto by [Consultant Name] after more than a decade of helping students and families reach Canada. Today the firm offers end-to-end immigration support to individuals, businesses and investors, with offices and affiliates in India, Nigeria, Vietnam and beyond.</p>
       <p class="lead" data-fade>Client information is used only to process the application and is never shared with anyone except IRCC.</p>
     </div>
   </section>
@@ -768,7 +768,7 @@ function coverTex(){
   const [c, g] = cv(1024, 1418);
   g.fillStyle = INK; g.fillRect(0, 0, 1024, 1418);
   for (let i = 0; i < 26000; i++) { g.fillStyle = `rgba(${Math.random() > .5 ? '255,255,255' : '0,0,0'},${Math.random() * .05})`; g.fillRect(Math.random() * 1024, Math.random() * 1418, 2, 2); }
-  g.strokeStyle = 'rgba(255,204,41,.55)'; g.lineWidth = 3; g.strokeRect(46, 46, 932, 1326);
+  g.strokeStyle = 'rgba(63,155,130,.55)'; g.lineWidth = 3; g.strokeRect(46, 46, 932, 1326);
   g.fillStyle = GOLD; g.textAlign = 'center';
   g.font = '600 38px "IBM Plex Mono", monospace'; g.fillText('N O V A   W O R L D', 512, 200);
   // emblem: globe
@@ -792,8 +792,8 @@ function dataTex(){
   g.beginPath(); g.arc(235, 400, 82, 0, Math.PI * 2); g.fill();
   g.beginPath(); g.ellipse(235, 640, 150, 130, 0, Math.PI, 0); g.fill();
   const f = (y, k, v) => { g.fillStyle = '#6B6072'; g.font = '400 22px "IBM Plex Mono", monospace'; g.fillText(k, 450, y); g.fillStyle = INK; g.font = '700 38px "Inter Tight", Arial'; g.fillText(v, 450, y + 44); };
-  f(260, 'NAME', 'YOUR NAME'); f(370, 'DESTINATION', 'CANADA'); f(480, 'PATHWAY', 'TO BE ASSESSED'); f(590, 'FILE NO.', 'NW-2004-001');
-  g.fillStyle = 'rgba(255,204,41,.9)'; g.fillRect(70, 720, 884, 8);
+  f(260, 'NAME', 'YOUR NAME'); f(370, 'DESTINATION', 'CANADA'); f(480, 'PATHWAY', 'TO BE ASSESSED'); f(590, 'FILE NO.', 'CF-2009-001');
+  g.fillStyle = 'rgba(63,155,130,.9)'; g.fillRect(70, 720, 884, 8);
   g.fillStyle = INK; g.font = '400 24px "IBM Plex Mono", monospace';
   ['Prepared by a Regulated Canadian', 'Immigration Consultant (RCIC).'].forEach((t, i) => g.fillText(t, 70, 790 + i * 36));
   g.font = '500 34px "IBM Plex Mono", monospace'; g.fillStyle = 'rgba(45,31,56,.8)';

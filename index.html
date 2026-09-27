@@ -117,6 +117,37 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
   text-transform:uppercase;color:var(--fg-2);flex-wrap:wrap}
 .flinks a:hover{color:var(--gold)}
 
+
+/* ── picker (only visible with ?pick) ── */
+#picker{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,13,18,.93);
+  backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:18px var(--gut) 20px;
+  display:none;box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+#picker.on{display:block}
+#picker .pk-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+#picker h4{margin:0;font-family:var(--display);font-weight:400;font-size:17px}
+#picker .pk-count{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+#picker .pk-quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+#picker .pk-quick button{background:transparent;border:1px solid var(--line);color:var(--fg-2);
+  border-radius:99px;padding:6px 13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;transition:border-color .25s,color .25s}
+#picker .pk-quick button:hover{border-color:var(--gold);color:var(--gold)}
+#picker .pk-list{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+#picker label{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;
+  padding:9px 14px;cursor:pointer;font-size:14px;color:var(--fg-2);transition:border-color .25s,color .25s,background .25s}
+#picker label:has(input:checked){border-color:var(--gold);color:var(--fg);background:rgba(224,168,76,.09)}
+#picker input{accent-color:var(--gold);width:15px;height:15px;cursor:pointer}
+#picker .pk-share{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+#picker .pk-share input[type=text]{flex:1;min-width:240px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:10px;padding:11px 14px;color:var(--fg-2);
+  font-family:var(--mono);font-size:12px}
+#picker .pk-share button{background:var(--gold);color:#0a0d12;border:0;border-radius:10px;
+  padding:11px 20px;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+#picker .pk-share a.pk-prev{display:inline-flex;align-items:center;padding:11px 18px;border:1px solid var(--line);
+  border-radius:10px;font-size:14px;color:var(--fg-2);white-space:nowrap}
+#picker .pk-note{margin:12px 0 0;font-size:12.5px;color:var(--fg-3);max-width:70ch}
+body.has-picker{padding-bottom:230px}
+@media (max-width:700px){ body.has-picker{padding-bottom:330px} }
+
 @media (max-width:760px){
   .tiers{grid-template-columns:minmax(0,1fr)}
 }
@@ -168,7 +199,7 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
 
 <div class="grid">
 
-  <a class="card" href="anna-mills-premium/" target="_blank" rel="noopener">
+  <a class="card" data-slug="anna-mills-premium" data-sector="Food & FMCG" href="anna-mills-premium/" target="_blank" rel="noopener">
     <span class="tag tag--p">Premium</span>
     <div class="card__art art-1"><span>Anna Mills</span></div>
     <div class="card__body">
@@ -178,7 +209,7 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
     </div>
   </a>
 
-  <a class="card" href="kestrel-premium/" target="_blank" rel="noopener">
+  <a class="card" data-slug="kestrel-premium" data-sector="Immigration" href="kestrel-premium/" target="_blank" rel="noopener">
     <span class="tag tag--p">Premium</span>
     <div class="card__art art-2"><span>Kestrel</span></div>
     <div class="card__body">
@@ -188,7 +219,7 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
     </div>
   </a>
 
-  <a class="card" href="kestrel-standard/" target="_blank" rel="noopener">
+  <a class="card" data-slug="kestrel-standard" data-sector="Immigration" href="kestrel-standard/" target="_blank" rel="noopener">
     <span class="tag tag--s">Standard</span>
     <div class="card__art art-3"><span>Kestrel</span></div>
     <div class="card__body">
@@ -199,7 +230,7 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
   </a>
 
 
-  <a class="card" href="calder-finch-premium/" target="_blank" rel="noopener">
+  <a class="card" data-slug="calder-finch-premium" data-sector="Immigration" href="calder-finch-premium/" target="_blank" rel="noopener">
     <span class="tag tag--p">Premium</span>
     <div class="card__art art-4"><span>Calder Finch</span></div>
     <div class="card__body">
@@ -222,5 +253,84 @@ footer{max-width:1240px;margin:clamp(84px,14vh,150px) auto 0;padding:0 var(--gut
   </div>
 </footer>
 </div>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var grid = document.querySelector('.grid');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card[data-slug]'));
+  var picking = q.has('pick');
+
+  // Visitor view: keep only the demos named in ?show=
+  if (!picking && q.get('show')) {
+    var keep = q.get('show').split(',').map(function(x){ return x.trim(); }).filter(Boolean);
+    var matches = cards.filter(function(c){ return keep.indexOf(c.dataset.slug) > -1; });
+    if (matches.length) {
+      cards.forEach(function(c){ if (keep.indexOf(c.dataset.slug) === -1) c.remove(); });
+    }
+  }
+  if (!picking) return;
+
+  // ── Sidak's picker ──
+  document.body.classList.add('has-picker');
+  var sectors = [];
+  cards.forEach(function(c){ if (sectors.indexOf(c.dataset.sector) === -1) sectors.push(c.dataset.sector); });
+
+  var el = document.createElement('div');
+  el.id = 'picker'; el.className = 'on';
+  el.innerHTML =
+    '<div class="pk-top"><h4>Choose what this person sees</h4><span class="pk-count"></span></div>' +
+    '<div class="pk-quick"><button data-all>All</button><button data-none>None</button>' +
+      sectors.map(function(x){ return '<button data-sector="'+x+'">'+x+'</button>'; }).join('') +
+    '</div>' +
+    '<div class="pk-list">' + cards.map(function(c){
+        var name = c.querySelector('h3').textContent.trim();
+        var tier = c.querySelector('.tag').textContent.trim();
+        return '<label><input type="checkbox" checked value="'+c.dataset.slug+'">'+name+' · '+tier+'</label>';
+      }).join('') + '</div>' +
+    '<div class="pk-share"><input type="text" readonly><button>Copy link</button>' +
+      '<a class="pk-prev" target="_blank" rel="noopener">Preview ↗</a></div>' +
+    '<p class="pk-note">The selection lives inside the link, so every link you send is independent — ' +
+    'sending a new one never changes an old one. Anyone can still reach the full list by trimming the URL, ' +
+    'so treat this as tidying, not privacy.</p>';
+  document.body.appendChild(el);
+
+  var boxes = Array.prototype.slice.call(el.querySelectorAll('input[type=checkbox]'));
+  var out = el.querySelector('input[type=text]');
+  var prev = el.querySelector('.pk-prev');
+  var count = el.querySelector('.pk-count');
+  var copyBtn = el.querySelector('.pk-share button');
+
+  function sync(){
+    var on = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.value; });
+    var url = location.origin + location.pathname + (on.length && on.length < boxes.length
+      ? '?show=' + on.join(',') : '');
+    out.value = url;
+    prev.href = url;
+    count.textContent = on.length + ' of ' + boxes.length + ' shown';
+    cards.forEach(function(c){ c.style.display = on.indexOf(c.dataset.slug) > -1 ? '' : 'none'; });
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', sync); });
+  el.querySelector('[data-all]').addEventListener('click', function(){ boxes.forEach(function(b){ b.checked = true; }); sync(); });
+  el.querySelector('[data-none]').addEventListener('click', function(){ boxes.forEach(function(b){ b.checked = false; }); sync(); });
+  Array.prototype.slice.call(el.querySelectorAll('[data-sector]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var want = btn.dataset.sector;
+      boxes.forEach(function(b){
+        var card = cards.filter(function(c){ return c.dataset.slug === b.value; })[0];
+        b.checked = card && card.dataset.sector === want;
+      });
+      sync();
+    });
+  });
+  copyBtn.addEventListener('click', function(){
+    out.select();
+    var done = function(){ copyBtn.textContent = 'Copied'; setTimeout(function(){ copyBtn.textContent = 'Copy link'; }, 1600); };
+    if (navigator.clipboard) { navigator.clipboard.writeText(out.value).then(done, function(){ document.execCommand('copy'); done(); }); }
+    else { document.execCommand('copy'); done(); }
+  });
+  sync();
+})();
+</script>
 </body>
 </html>
