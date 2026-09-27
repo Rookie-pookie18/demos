@@ -71,8 +71,8 @@
     g.fillStyle = '#101b3a'; g.fillRect(0, 0, PW, 190);
     g.fillStyle = '#e8874a'; g.fillRect(0, 190, PW, 8);
     g.font = '700 58px Montserrat, Arial, sans-serif'; g.textBaseline = 'alphabetic';
-    g.fillStyle = '#eef1f6'; g.fillText('NOVA', 64, 108);
-    var w = g.measureText('NOVA').width; g.fillStyle = '#e8874a'; g.fillText('WORLD', 64 + w + 8, 108);
+    g.fillStyle = '#eef1f6'; g.fillText('KES', 64, 108);
+    var w = g.measureText('KES').width; g.fillStyle = '#e8874a'; g.fillText('TREL', 64 + w + 8, 108);
     g.font = '500 22px "IBM Plex Mono", monospace'; g.fillStyle = 'rgba(238,241,246,.7)';
     g.fillText('IMMIGRATION SERVICES INC.  ·  TORONTO, ON', 64, 150);
     /* title */
