@@ -1,359 +1,467 @@
-/* Ittarbagh premium demo — scroll story, range pour, hash-routed inner pages. */
-(function () {
-  var D = window.ITB, A = window.Art, L = window.Liquid;
-  var root = document.documentElement;
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var mobile = matchMedia('(max-width: 760px)').matches;
-  var $ = function (s, c) { return (c || document).querySelector(s); };
-  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var esc = A.esc;
-  var bySlug = {}; D.teas.forEach(function (t) { bySlug[t.slug] = t; });
-  var inr = function (n) { return '₹' + n.toLocaleString('en-IN'); };
+/* Ittarbagh Tea Co. (fictional) — premium demo.
+   Home: one 3D caddy travels through the story, posed by anchors in the markup (data-tin).
+   Inner pages are rendered from data.js by a small hash router. */
+import { TEAS, BY_SLUG } from './data.js';
 
-  function palOf(key) {
-    if (bySlug[key]) return bySlug[key];
-    return D[key] || D.master;
-  }
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const root = document.documentElement;
+const mobile = matchMedia('(max-width:760px)').matches;
+const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const smooth = (t) => t * t * (3 - 2 * t);
+const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+const photo = (k) => `img/${k}.jpg`;
+const inr = (n) => '₹' + n.toLocaleString('en-IN');
 
-  // ── smooth scroll ──
-  var lenis = null;
-  if (!reduced && window.Lenis) {
-    lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
-    (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
-  }
-  function toTop() { if (lenis) lenis.scrollTo(0, { immediate: true, force: true }); window.scrollTo(0, 0); }
-  function scrollToY(y) { if (lenis) lenis.scrollTo(y, { duration: 1.4 }); else window.scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }); }
+const home = $('#home'), view = $('#view');
+let stage = null, snaps = null;
 
-  L.setPalette(D.master.pal, D.master.ink, true);
+// ── smooth scroll ───────────────────────────────────────────────
+let lenis = null;
+if (!reduced && window.Lenis) lenis = new window.Lenis({ duration: 1.15, smoothWheel: true });
+const scrollTo = (y, immediate = false) => {
+  if (lenis) lenis.scrollTo(y, { immediate, duration: 1.4 });
+  else window.scrollTo({ top: y, behavior: immediate || reduced ? 'auto' : 'smooth' });
+};
 
-  // ── preloader ──
-  var pre = $('#pre'), pct = $('#pct'), preDone = false;
-  function endPre() {
-    if (preDone) return; preDone = true;
+// ── preloader ───────────────────────────────────────────────────
+const pre = $('#pre'), bar = $('#pre .bar i');
+let loaded = 0, preDone = false;
+const bump = () => { loaded++; bar.style.transform = `scaleX(${Math.min(1, loaded / 3)})`; if (loaded >= 3) setTimeout(finishPre, 350); };
+function finishPre() {
+  if (preDone) return; preDone = true;
+  bar.style.transform = 'scaleX(1)';
+  setTimeout(() => {
     pre.classList.add('done');
-    setTimeout(function () { $('.hero').classList.add('in'); }, 150);
-  }
-  if (reduced) { endPre(); }
-  else {
-    var t0 = performance.now();
-    (function tick(now) { var p = Math.min(1, (now - t0) / 1900); pct.textContent = Math.round(p * 100); if (p < 1 && !preDone) requestAnimationFrame(tick); })(t0);
-    setTimeout(endPre, 2350);
-    $('.skip', pre).addEventListener('click', endPre);
-  }
+    root.classList.add('gl-on');
+    $('#hh').classList.add('in');
+    startReveals();
+  }, reduced ? 0 : 250);
+  setTimeout(() => pre.remove(), 1400);
+  setTimeout(makeSnaps, 900);
+}
+$('#pre .skip').addEventListener('click', finishPre);
+setTimeout(finishPre, reduced ? 0 : 4200); // never hold the visitor longer than this
+document.fonts.ready.then(bump);
+if (document.readyState === 'complete') bump(); else addEventListener('load', bump, { once: true });
 
-  // ── home: build pieces ──
-  var heroTin = $('#heroTin');
-  heroTin.innerHTML = A.tin(D.teas[0]);
-  ['#F7B6C6', '#E79AAF', '#F9C3D1'].forEach(function (c, i) {
-    var p = document.createElement('div'); p.className = 'petal-fly'; p.setAttribute('aria-hidden', 'true');
-    p.style.cssText = ['left:-8%;top:12%', 'right:-4%;top:48%', 'left:12%;bottom:-4%'][i] + ';animation-delay:' + (-i * 3) + 's;width:' + [44, 34, 28][i] + 'px';
-    p.innerHTML = A.ing.petal(c); heroTin.appendChild(p);
+// ── 3D stage ────────────────────────────────────────────────────
+function hasWebGL() {
+  try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
+}
+(async () => {
+  if (!hasWebGL()) { root.classList.add('no-webgl'); bump(); return; }
+  try {
+    const { createStage } = await import('./stage.js');
+    stage = await createStage($('#gl'), { mobile, reduced });
+    addEventListener('resize', stage.resize);
+    measure();
+    if (!view.hidden) stage.setTea(pageTea || TEAS[0], false); else if (range) range.sync();
+  } catch (e) {
+    console.warn('3D stage unavailable', e);
+    root.classList.add('no-webgl');
+  }
+  bump();
+})();
+
+function makeSnaps() {
+  if (!stage || snaps) return;
+  try { snaps = stage.snapshots(mobile ? 420 : 560, mobile ? 540 : 720); } catch (e) { console.warn('snapshots failed', e); return; }
+  $$('[data-snap]').forEach(fillSnap);
+}
+function fillSnap(el) {
+  const s = snaps && snaps[el.dataset.snap];
+  if (!s) return;
+  const img = new Image(); img.className = 'snap'; img.alt = el.dataset.alt || ''; img.src = s;
+  el.replaceWith(img);
+}
+
+// ── anchors: pose the tin from the viewport-centre scroll position ─
+const DEF = { x: 0, y: 0, s: 0.5, w: 0.3, rx: 0.1, ry: 0, rz: 0, o: 0, p: 0.4 };
+let anchors = [], vh = innerHeight;
+function readPose(el) {
+  const raw = mobile ? el.dataset.tinM || el.dataset.tin : el.dataset.tin;
+  if (!raw || raw === 'skip') return null; // desktop-only or phone-only anchors
+  try { return { ...DEF, ...JSON.parse(raw) }; } catch { return { ...DEF }; }
+}
+function measure() {
+  vh = innerHeight;
+  const scope = view.hidden ? home : view;
+  const foot = document.querySelector('footer');
+  const docH = document.documentElement.scrollHeight;
+  const lo = vh / 2, hi = Math.max(lo, docH - vh / 2);
+  anchors = [];
+  [...$$('[data-tin],[data-tin-m]', scope), foot].forEach((el) => {
+    const pose = readPose(el); if (!pose) return;
+    const top = el.getBoundingClientRect().top + scrollY, h = el.offsetHeight;
+    const at = el.dataset.tinAt && $(el.dataset.tinAt, el);
+    if (at) { const r = at.getBoundingClientRect(); pose.y += (top + h / 2 - (r.top + scrollY + r.height / 2)) / vh; }
+    if (el.hasAttribute('data-span')) {
+      anchors.push({ y: top + vh / 2, pose }, { y: top + h - vh / 2, pose });
+    } else anchors.push({ y: el.hasAttribute('data-tin-top') ? top : top + h / 2, pose });
   });
-
-  // promise words
-  var promise = $('#promise');
-  var accent = ['attar.', 'petals', 'Nothing', 'else'];
-  promise.innerHTML = promise.textContent.trim().split(/\s+/).map(function (w) {
-    return '<span class="w' + (accent.indexOf(w) > -1 ? ' acc' : '') + '">' + esc(w) + '</span>';
-  }).join(' ');
-  var words = $$('.w', promise);
-
-  // range pour
-  var N = D.teas.length;
-  var range = $('#range');
-  range.style.height = (N * (mobile ? 60 : 80) + 100) + 'vh';
-  $('#rTot').textContent = String(N).padStart(2, '0');
-  $('#rNames').innerHTML = D.teas.map(function (t) {
-    var w = t.name.split(' '), a = w.slice(0, Math.ceil(w.length / 2)).join(' '), b = w.slice(Math.ceil(w.length / 2)).join(' ');
-    return '<div class="r-name"><h2><span class="lm"><span>' + esc(a) + '</span></span><span class="lm"><span><em>' + esc(b) + '</em></span></span></h2></div>';
-  }).join('');
-  $('#rMeta').innerHTML = D.teas.map(function (t, i) {
-    return '<div class="r-item" data-i="' + i + '"><span class="kind">' + esc(t.kind) + ' · from ' + inr(t.sizes[0][1]) + '</span><p>' + esc(t.tagline) + '</p>' +
-      '<ul class="chips">' + t.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>' +
-      '<a class="pill" href="#/tea/' + t.slug + '" data-colour="' + t.pal[2] + '" data-cursor="view">View ' + esc(t.short) + ' <i>→</i></a></div>';
-  }).join('');
-  $('#rStage').innerHTML = D.teas.map(function (t) { return '<div class="r-tin" aria-hidden="true">' + A.tin(t) + '</div>'; }).join('');
-  $('#rDots').innerHTML = D.teas.map(function (t, i) { return '<button type="button" role="tab" aria-label="' + esc(t.name) + '" data-i="' + i + '"></button>'; }).join('');
-  var rNames = $$('.r-name'), rItems = $$('.r-item'), rTins = $$('.r-tin'), rDots = $$('#rDots button'), rCur = -1;
-  function rangeY(i) { var top = range.getBoundingClientRect().top + window.scrollY; return top + (i + 0.5) / N * (range.offsetHeight - innerHeight); }
-  rDots.forEach(function (b) { b.addEventListener('click', function () { scrollToY(rangeY(+b.dataset.i)); }); });
-  rItems.forEach(function (it) { $('a', it).addEventListener('focus', function () { var i = +it.dataset.i; if (i !== rCur) { window.scrollTo(0, rangeY(i)); if (lenis) lenis.scrollTo(rangeY(i), { immediate: true }); } }); });
-  function setRange(i) {
-    if (i === rCur) return; rCur = i;
-    rNames.forEach(function (el, k) { el.classList.toggle('in', k === i); el.classList.toggle('out', k < i); });
-    rItems.forEach(function (el, k) { el.classList.toggle('on', k === i); });
-    rTins.forEach(function (el, k) { el.classList.toggle('on', k === i); el.classList.toggle('gone', k < i); });
-    rDots.forEach(function (el, k) { el.classList.toggle('on', k === i); el.setAttribute('aria-selected', k === i); });
-    $('#rNum').textContent = String(i + 1).padStart(2, '0');
-    range.dataset.pal = D.teas[i].slug;
-  }
-  setRange(0);
-
-  // ingredients (three parallax depths)
-  var ingSpots = [
-    ['petal', 6, 14, 90, 1], ['leaf', 82, 10, 120, 2], ['saffron', 12, 62, 110, 3], ['cardamom', 86, 58, 90, 3],
-    ['almond', 70, 84, 70, 1], ['hibiscus', 22, 86, 100, 2], ['cinnamon', 44, 6, 90, 1], ['petal', 92, 34, 56, 3],
-    ['leaf', 2, 40, 70, 1], ['petal', 60, 92, 48, 3]
-  ];
-  if (mobile) ingSpots = ingSpots.filter(function (s, i) { return i % 2 === 0; });
-  $('#ings').innerHTML = ingSpots.map(function (s) {
-    var size = mobile ? s[3] * 0.62 : s[3];
-    return '<div class="ing d' + s[4] + '" data-depth="' + s[4] + '" aria-hidden="true" style="left:' + s[1] + '%;top:' + s[2] + '%;width:' + size + 'px">' + A.ing[s[0]]() + '</div>';
-  }).join('');
-  var ings = $$('.ing'), insideSec = $('.inside');
-
-  $('#blossomA').innerHTML = '<svg viewBox="0 0 100 100">' + A.rose(50, 50, 40, '#fff', '#F6D3DB') + '</svg>';
-  var stockists = ['[Stockist logo]', '[Café partner]', '[Quick-commerce app]', '[Gourmet store]', '[Hotel group]', '[Marketplace]'];
-  $('#marq').innerHTML = stockists.concat(stockists).map(function (s) { return '<span>' + s + '</span>'; }).join('');
-  $('#fTeas').innerHTML = D.teas.map(function (t) { return '<li><a href="#/tea/' + t.slug + '" data-colour="' + t.pal[2] + '">' + esc(t.name) + '</a></li>'; }).join('');
-
-  // hero toy: click the liquid to pour in the next tea's colour
-  var heroSec = $('.hero'), heroOverride = null, heroIdx = 0;
-  heroSec.addEventListener('click', function (e) {
-    if (e.target.closest('a,button')) return;
-    heroIdx = (heroIdx + 1) % N; var t = D.teas[heroIdx];
-    heroOverride = t.slug;
-    L.swirl(e.clientX, e.clientY);
-    heroTin.firstChild.outerHTML = A.tin(t);
-    heroTin.animate && heroTin.animate([{ transform: 'translateY(30px) scale(.92)', opacity: .4 }, { transform: 'none', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.16,1,.3,1)' });
-  });
-
-  // ── reveals ──
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -12% 0px' });
-  function observe(scope) {
-    $$('[data-rev],[data-melt]', scope).forEach(function (el) { io.observe(el); });
-    $$('h1,h2', scope).forEach(function (h) { if ($('.lm', h) && !h.closest('.r-name') && !h.closest('.hero')) io.observe(h); });
-  }
-  observe(document);
-
-  // ── scroll-driven frame loop ──
-  var nav = $('.nav'), homeEl = $('#home'), viewEl = $('#view'), footer = $('footer'), ribbon = $('.ribbon');
-  var onHome = true;
-  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
-  function progress(el) { var r = el.getBoundingClientRect(); return clamp(-r.top / Math.max(1, el.offsetHeight - innerHeight), 0, 1); }
-
-  function update() {
-    var y = window.scrollY;
-    nav.classList.toggle('solid', y > 80);
-    ribbon.classList.toggle('hide', footer.getBoundingClientRect().top < innerHeight - 40);
-    var mid = innerHeight * 0.5;
-
-    if (onHome) {
-      var pp = progress($('.promise')), nW = words.length;
-      for (var i = 0; i < nW; i++) words[i].style.setProperty('--f', clamp(pp * 1.25 * nW - i, 0, 1));
-      var rp = progress(range);
-      setRange(Math.min(N - 1, Math.floor(rp * N)));
-      range.style.setProperty('--prog', ((rCur + 1) / N).toFixed(3));
-      $('.r-count .bar i').style.transform = 'scaleX(' + ((rCur + 1) / N) + ')';
-      var ir = insideSec.getBoundingClientRect();
-      if (ir.bottom > 0 && ir.top < innerHeight) {
-        var off = (ir.top + ir.height / 2 - mid);
-        for (var k = 0; k < ings.length; k++) {
-          var d = +ings[k].dataset.depth, sp = d === 1 ? 0.12 : d === 2 ? 0.28 : 0.5;
-          ings[k].style.transform = 'translate3d(0,' + (off * sp).toFixed(1) + 'px,0) rotate(' + (off * 0.03 * d).toFixed(1) + 'deg)';
-        }
-      }
-    }
-
-    // palette driver: whichever [data-pal] crosses the middle of the screen
-    var scope = onHome ? homeEl : viewEl, els = $$('[data-pal]', scope).concat([footer]), hit = null;
-    for (var j = 0; j < els.length; j++) { var r = els[j].getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) { hit = els[j]; break; } }
-    if (hit) {
-      var key = hit.dataset.pal;
-      if (hit === heroSec && heroOverride) key = heroOverride;
-      var p = palOf(key);
-      L.setPalette(p.pal, p.ink);
-      L.calm = hit.dataset.calm ? +hit.dataset.calm : 0.3;
+  anchors.forEach((a) => (a.y = clamp(a.y, lo, hi)));
+  anchors.sort((a, b) => a.y - b.y);
+  if (range) range.measure();
+  if (manifesto) manifesto.measure();
+}
+function poseAt(c) {
+  if (!anchors.length) return { ...DEF };
+  if (c <= anchors[0].y) return anchors[0].pose;
+  for (let i = 0; i < anchors.length - 1; i++) {
+    const a = anchors[i], b = anchors[i + 1];
+    if (c <= b.y) {
+      const t = b.y === a.y ? 1 : smooth(clamp((c - a.y) / (b.y - a.y)));
+      const o = {};
+      for (const k in DEF) o[k] = a.pose[k] + (b.pose[k] - a.pose[k]) * t;
+      return o;
     }
   }
-  addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update);
+  return anchors[anchors.length - 1].pose;
+}
+new ResizeObserver(() => measure()).observe(document.body);
+addEventListener('resize', measure);
 
-  // ── cursor ──
-  var cur = $('.cursor');
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
-    var cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-    cur.style.opacity = '0';
-    addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; cur.style.opacity = ''; }, { passive: true });
-    (function loop() {
-      var vx = tx - cx, vy = ty - cy; cx += vx * 0.22; cy += vy * 0.22;
-      var sp = Math.min(0.6, Math.hypot(vx, vy) / 120), ang = Math.atan2(vy, vx) * 180 / Math.PI;
-      cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px) rotate(' + ang + 'deg) scale(' + (1 + sp) + ',' + (1 - sp * 0.5) + ')';
-      requestAnimationFrame(loop);
-    })();
-    document.addEventListener('pointerover', function (e) { cur.classList.toggle('big', !!e.target.closest('[data-cursor=view]')); });
-  } else cur.remove();
-
-  // ── mobile menu ──
-  var mb = $('.menu-btn');
-  mb.addEventListener('click', function () { var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
-
-  // ── home scroll buttons ──
-  document.addEventListener('click', function (e) {
-    var g = e.target.closest('[data-goto]'); if (!g) return;
-    var el = document.getElementById(g.dataset.goto); if (el) scrollToY(el.getBoundingClientRect().top + window.scrollY + (el === range ? innerHeight * 0.25 : 0));
-  });
-
-  // ── page transition ──
-  var wipe = $('#wipe'), wiping = false;
-  function clearWipe() { wipe.classList.remove('go', 'back'); wiping = false; }
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href^="#/"]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
-    var href = a.getAttribute('href');
-    nav.classList.remove('open');
-    if (href === location.hash || (href === '#/' && (location.hash === '' || location.hash === '#/'))) { e.preventDefault(); toTop(); return; }
-    if (reduced) return;
-    e.preventDefault();
-    wipe.style.setProperty('--wx', e.clientX + 'px'); wipe.style.setProperty('--wy', e.clientY + 'px');
-    wipe.style.setProperty('--wc', a.dataset.colour || '#F6D3DB');
-    wipe.classList.remove('back'); void wipe.offsetWidth; wipe.classList.add('go'); wiping = true;
-    setTimeout(function () { location.hash = href; }, 460);
-  });
-  addEventListener('pageshow', function (e) { if (e.persisted) clearWipe(); });
-
-  // ── inner page templates ──
-  var ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3c5 3.5 6.5 9 0 17-6.5-8-5-13.5 0-17z"/></svg>';
-  function cardVars(t) { return '--c0:' + t.pal[0] + ';--c1:' + t.pal[1] + ';--c2:' + t.pal[2] + ';--c3:' + t.pal[3] + ';--ci:' + t.ink; }
-  function card(t) {
-    return '<a class="t-card" href="#/tea/' + t.slug + '" data-colour="' + t.pal[2] + '" data-filter="' + t.filter + '" data-cursor="view" style="' + cardVars(t) + '">' +
-      '<div class="art">' + A.tin(t) + '</div><div class="body"><span class="kind">' + esc(t.kind) + '</span><h3>' + esc(t.name) + '</h3><p>' + esc(t.tagline) + '</p>' +
-      '<div class="price"><span>from ' + inr(t.sizes[0][1]) + '</span><i>View →</i></div></div></a>';
-  }
-  function footCta(txt) {
-    return '<section class="sec" style="text-align:center;padding-bottom:120px"><div class="wrap"><h2>' + txt + '</h2>' +
-      '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="pill" href="#/contact" data-colour="#F6D3DB">Enquire <i>→</i></a><a class="pill pill--ghost" href="#/teas" data-colour="#F6D3DB">All teas</a></div></div></section>';
-  }
-
-  var pages = {
-    teas: function () {
-      document.title = 'Our teas — Ittarbagh Tea Co.';
-      return '<header class="p-head" data-pal="master"><div><p class="crumbs"><a href="#/" data-colour="#F6D3DB">Home</a> / Teas</p>' +
-        '<h1><span class="lm"><span>Five teas.</span></span><span class="lm"><span><em>All with real rose.</em></span></span></h1>' +
-        '<p class="lede" data-rev>Two black, two green and one without caffeine. Every caddy is whole leaf and whole petal, blended in small batches.</p></div></header>' +
-        '<div class="solid" style="--ground:' + D.master.ground + '"><section class="sec"><div class="wrap">' +
-        '<div class="filters" role="group" aria-label="Filter teas"><button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="black">Black</button><button aria-pressed="false" data-f="green">Green</button><button aria-pressed="false" data-f="free">Caffeine-free</button></div>' +
-        '<div class="t-grid">' + D.teas.map(card).join('') + '</div></div></section>' + footCta('Buying for a café or <em>a wedding?</em>') + '</div>';
-    },
-    tea: function (slug) {
-      var t = bySlug[slug]; if (!t) return pages.nf();
-      document.title = t.name + ' — Ittarbagh Tea Co.';
-      var rel = D.teas.filter(function (x) { return x.slug !== t.slug; }).sort(function (a, b) { return (b.filter === t.filter) - (a.filter === t.filter); }).slice(0, 3);
-      return '<header class="prod-head" data-pal="' + t.slug + '"><div>' +
-        '<p class="crumbs"><a href="#/" data-colour="#F6D3DB">Home</a> / <a href="#/teas" data-colour="#F6D3DB">Teas</a> / ' + esc(t.name) + '</p>' +
-        '<p class="kicker">' + esc(t.kind) + '</p>' +
-        '<h1><span class="lm"><span>' + esc(t.name) + '</span></span></h1>' +
-        '<p class="tag" data-rev>' + esc(t.tagline) + '</p>' +
-        '<div class="sizes" role="group" aria-label="Size" data-rev>' + t.sizes.map(function (s, i) { return '<button type="button" aria-pressed="' + (i === (t.sizes.length > 2 ? 1 : 0)) + '" data-price="' + s[1] + '">' + esc(s[0]) + '<b>' + inr(s[1]) + '</b></button>'; }).join('') + '</div>' +
-        '<div class="buy" data-rev><a class="pill" href="#/contact" data-colour="' + t.pal[2] + '">Enquire to order <i>→</i></a><span class="note" style="margin:0">Online checkout isn\'t part of this demo.</span></div>' +
-        '</div><div class="tin">' + A.tin(t) + '</div></header>' +
-        '<div class="solid" style="--ground:' + t.ground + ';' + cardVars(t) + '">' +
-        '<section class="sec"><div class="wrap"><div class="benefits">' + t.benefits.map(function (b) { return '<div class="benefit" data-rev><div class="ico">' + ICON + '</div><h3>' + esc(b[0]) + '</h3><p>' + esc(b[1]) + '</p></div>'; }).join('') + '</div></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap two"><div><h2>About this <em>tea</em></h2><p class="lead" data-rev>' + esc(t.desc) + '</p></div>' +
-        '<div><h2>What\'s <em>inside</em></h2><ul class="inside-list" data-rev>' + t.inside.map(function (x) { var m = x.match(/^(.*?)\s*\((\d+%)\)$/); return '<li><span>' + esc(m ? m[1] : x) + '</span><span>' + (m ? m[2] : '') + '</span></li>'; }).join('') + '</ul>' +
-        '<p class="note">Tasting notes: ' + t.notes.map(esc).join(' · ') + '</p></div></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap"><h2>How to <em>brew it</em></h2><div class="brew">' + t.brew.map(function (b) { return '<div data-rev><b>' + esc(b[0]) + '</b><span>' + esc(b[1]) + '</span></div>'; }).join('') + '</div></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap two"><div><h2>Questions</h2></div><div>' + t.faqs.map(function (f) { return '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>'; }).join('') + '</div></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap"><h2>You might <em>also like</em></h2><div class="related">' + rel.map(card).join('') + '</div></div></section>' +
-        footCta('Want a caddy of <em>' + esc(t.short) + '?</em>') + '</div>';
-    },
-    about: function () {
-      document.title = 'Our story — Ittarbagh Tea Co.';
-      return '<header class="p-head" data-pal="story"><div><p class="crumbs"><a href="#/" data-colour="#F6D3DB">Home</a> / Our story</p>' +
-        '<h1><span class="lm"><span>The perfume</span></span><span class="lm"><span><em>garden.</em></span></span></h1>' +
-        '<p class="lede" data-rev><i>Ittar</i> is perfume, <i>bagh</i> is garden. We named the company after the rose fields outside Kannauj, where our petals come from.</p></div></header>' +
-        '<div class="solid" style="--ground:' + D.story.ground + '">' +
-        '<section class="sec"><div class="wrap two"><div><p class="lead" data-rev>Every summer, before sunrise, the rose fields around Kannauj are picked by hand and carried to the copper stills. The attar makers want the oil. We want what they leave behind.</p></div>' +
-        '<div><p data-rev>[Founder Name] grew up between a family attar workshop in Kannauj and a tea broker\'s office in Kolkata, and spent years tasting at the Kolkata auctions before blending anything to sell. The first caddies were gifts for relatives at Diwali. The relatives kept asking for more.</p>' +
-        '<p data-rev>Today we still buy leaf the same way: small lots, tasted before we bid, from gardens we can name. The petals are shade-dried within a week of picking, and every batch is blended by hand at one table in Kolkata.</p></div></div></section>' +
-        '<section class="sec" style="padding-top:0"><div class="wrap"><div class="stats">' +
-        [['5', 'teas in the range'], ['2', 'cities: Kannauj and Kolkata'], ['0', 'flavouring oils, ever'], ['1', 'blending table']].map(function (s) { return '<div data-rev><b>' + s[0] + '</b><span>' + s[1] + '</span></div>'; }).join('') +
-        '</div><p class="note">Placeholder figures for a fictional brand.</p></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap two"><div><h2>How we <em>got here</em></h2></div><div class="timeline">' +
-        [['Year 1', 'Damask Darjeeling, blended for family at Diwali.'], ['Year 2', 'Gulkand Chai joins, for everyone who wanted milk tea.'], ['Year 3', 'The first café in Kolkata puts us on its menu.'], ['Year 4', 'Kahwa Rose, Nilgiri Rose Green and Rose Hibiscus complete the range.'], ['Today', 'Caddies sold online, in cafés and as wedding and festival gift boxes.']].map(function (x) { return '<div data-rev><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('') +
-        '</div></div></section>' +
-        '<section class="sec" style="padding-top:20px"><div class="wrap"><h2>What we <em>hold to</em></h2><div class="values">' +
-        [['Petals, not perfume', 'If a tea smells of rose, it\'s because there are roses in it. We never use flavouring oil.'], ['Leaf you can name', 'We buy from gardens we know and can tell you which estate your tea came from.'], ['Small batches', 'Blended weekly, so the caddy you open was packed weeks ago, not seasons ago.']].map(function (v) { return '<div data-rev><h3>' + v[0] + '</h3><p>' + v[1] + '</p></div>'; }).join('') +
-        '</div></div></section>' + footCta('Taste the <em>garden.</em>') + '</div>';
-    },
-    contact: function () {
-      document.title = 'Where to buy — Ittarbagh Tea Co.';
-      return '<header class="p-head" data-pal="master"><div><p class="crumbs"><a href="#/" data-colour="#F6D3DB">Home</a> / Where to buy</p>' +
-        '<h1><span class="lm"><span>Where to</span></span><span class="lm"><span><em>find us.</em></span></span></h1>' +
-        '<p class="lede" data-rev>Order a caddy, stock us in your café or hotel, or build a gift box for a wedding or Diwali. We reply within one working day.</p></div></header>' +
-        '<div class="solid" style="--ground:' + D.master.ground + '"><section class="sec"><div class="wrap contact-grid">' +
-        '<div><h2>Send an <em>enquiry</em></h2><form id="enq" novalidate>' +
-        '<label>Name<input name="name" required autocomplete="name"></label>' +
-        '<label>Email<input name="email" type="email" required autocomplete="email"></label>' +
-        '<label>Phone<input name="phone" type="tel" autocomplete="tel"></label>' +
-        '<label>I\'m interested in<select name="type"><option>Buying for myself</option><option>Wholesale for a café or shop</option><option>Hotel or restaurant supply</option><option>Wedding or festival gift boxes</option><option>Corporate gifting</option></select></label>' +
-        '<label class="full">Message<textarea name="msg" placeholder="Which teas, how much, and by when?"></textarea></label>' +
-        '<div class="full"><button class="pill" type="submit">Send enquiry <i>→</i></button></div></form></div>' +
-        '<div><h2>Buy <em>online</em></h2><div class="where">' +
-        ['Marketplace', 'Quick-commerce app', 'Gourmet grocery chain'].map(function (m) { return '<div class="row ph-logo" data-rev><b>[' + m + ']</b><span>Placeholder link</span></div>'; }).join('') +
-        '</div><div class="info" data-rev><div><b>Email</b>hello@ittarbagh.example</div><div><b>Phone</b>555-0142 (placeholder)</div><div><b>Blending house</b>Kolkata, West Bengal</div><div><b>Petals from</b>Kannauj, Uttar Pradesh</div><div><b>Hours</b>Mon–Sat, 10:00–18:00 IST</div></div></div>' +
-        '</div></section></div>';
-    },
-    nf: function () {
-      document.title = 'Not found — Ittarbagh Tea Co.';
-      return '<header class="p-head" data-pal="master" style="min-height:80svh"><div><p class="crumbs">404</p><h1><span class="lm"><span>This cup</span></span><span class="lm"><span><em>is empty.</em></span></span></h1>' +
-        '<p class="lede">The page you wanted isn\'t here.</p><p style="margin-top:28px"><a class="pill" href="#/" data-colour="#F6D3DB">Back home <i>→</i></a></p></div></header>';
+// ── manifesto: words brighten as you scroll ──────────────────────
+const manifesto = (() => {
+  const p = $('#manifesto'); if (!p) return null;
+  const sec = p.closest('section');
+  p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w${/^(attar|petals|whole|recipe)/i.test(w) ? ' acc' : ''}">${w}</span>`).join(' ');
+  const words = $$('.w', p);
+  let top = 0, len = 1;
+  return {
+    measure() { top = sec.getBoundingClientRect().top + scrollY; len = Math.max(1, sec.offsetHeight - vh); },
+    update(y) {
+      const t = reduced ? 1 : clamp(((y - top) / len - 0.02) / 0.78);
+      const n = words.length * t;
+      words.forEach((w, i) => w.style.setProperty('--f', clamp(n - i).toFixed(3)));
     }
   };
-
-  function wireView() {
-    var f = $('.filters', viewEl);
-    if (f) f.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      $$('button', f).forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-      $$('.t-card', viewEl).forEach(function (c) { c.hidden = !(b.dataset.f === 'all' || c.dataset.filter === b.dataset.f); });
-    });
-    var sz = $('.sizes', viewEl);
-    if (sz) sz.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; $$('button', sz).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); });
-    var form = $('#enq', viewEl);
-    if (form) form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!form.name.value.trim() || !form.email.value.trim()) { (form.name.value.trim() ? form.email : form.name).focus(); return; }
-      form.innerHTML = '<p class="sent">Thank you. In the real site this would reach the Ittarbagh team. This is a demo, so nothing was sent.</p>';
-    });
-    if (matchMedia('(hover: hover)').matches && !reduced) {
-      $$('.t-card', viewEl).forEach(function (c) {
-        c.addEventListener('pointermove', function (e) { var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; c.style.transform = 'perspective(900px) rotateY(' + (x * 10) + 'deg) rotateX(' + (-y * 10) + 'deg) translateY(-4px)'; });
-        c.addEventListener('pointerleave', function () { c.style.transform = ''; });
-      });
-    }
-  }
-
-  // ── router ──
-  function route() {
-    var h = location.hash.replace(/^#\/?/, ''), parts = h.split('/');
-    nav.classList.remove('open'); mb.setAttribute('aria-expanded', 'false');
-    cur && cur.classList && cur.classList.remove('big');
-    if (!h) {
-      onHome = true; viewEl.hidden = true; viewEl.innerHTML = ''; homeEl.hidden = false;
-      document.title = 'Ittarbagh Tea Co. — Rose teas from Kannauj and the hills';
-    } else {
-      onHome = false; homeEl.hidden = true; viewEl.hidden = false;
-      var html = parts[0] === 'tea' ? pages.tea(parts[1]) : pages[parts[0]] && parts[0] !== 'tea' && parts[0] !== 'nf' ? pages[parts[0]]() : pages.nf();
-      viewEl.innerHTML = html;
-      wireView();
-      observe(viewEl);
-    }
-    $$('.nav ul a').forEach(function (a) { var on = a.getAttribute('href') === '#/' + parts[0]; if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    toTop();
-    if (lenis) lenis.resize();
-    var first = $('[data-pal]', onHome ? homeEl : viewEl), p = palOf(first.dataset.pal === 'master' && heroOverride && onHome ? heroOverride : first.dataset.pal);
-    L.setPalette(p.pal, p.ink, !wiping);
-    // timers, not rAF: the overlay must clear even if frames stall
-    setTimeout(function () {
-      update();
-      if (!onHome) $$('.p-head, .prod-head', viewEl).forEach(function (el) { el.classList.add('in'); });
-      if (wiping) { wipe.classList.add('back'); setTimeout(clearWipe, 540); }
-      else clearWipe();
-    }, 40);
-  }
-  addEventListener('hashchange', route);
-  route();
-  if (preDone) $('.hero').classList.add('in');
 })();
+
+// ── range: pinned, one tea per step ─────────────────────────────
+const range = (() => {
+  const sec = $('#range'); if (!sec) return null;
+  const bgs = $('#rBgs'), tint = $('#rTint'), count = $('#rCount'), L = $('#rLeft'), R = $('#rRight'), ticks = $('#rTicks');
+  bgs.innerHTML = TEAS.map((t) => `<div class="photo" style="background-image:url(${photo(t.photo)})"></div>`).join('');
+  L.innerHTML = TEAS.map((t, i) => `<div class="r-item"><span class="kind">${String(i + 1).padStart(2, '0')} · ${t.kind}</span><h3>${t.name}</h3></div>`).join('');
+  R.innerHTML = TEAS.map((t) => `<div class="r-item"><p>${t.tagline}</p><ul class="notes">${t.notes.map((n) => `<li>${n}</li>`).join('')}</ul><div class="r-price">${inr(t.sizes[0][1])}<small>${t.sizes[0][0]}</small></div><a class="link" href="#/tea/${t.slug}">View the tea <span aria-hidden="true">→</span></a></div>`).join('');
+  ticks.innerHTML = TEAS.map((t, i) => `<button type="button" role="tab" aria-label="${t.name}" data-i="${i}">${t.short}</button>`).join('');
+  const P = $$('.photo', bgs), LI = $$('.r-item', L), RI = $$('.r-item', R), TK = $$('button', ticks);
+  let top = 0, len = 1, cur = -1;
+  ticks.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    scrollTo(top + ((+b.dataset.i + 0.5) / TEAS.length) * len);
+  });
+  function set(i) {
+    if (i === cur) return;
+    const first = cur === -1; cur = i;
+    const t = TEAS[i];
+    P.forEach((el, k) => el.classList.toggle('on', k === i));
+    LI.forEach((el, k) => el.classList.toggle('on', k === i));
+    RI.forEach((el, k) => el.classList.toggle('on', k === i));
+    TK.forEach((el, k) => { el.classList.toggle('on', k === i); el.setAttribute('aria-selected', k === i); });
+    tint.style.setProperty('--glow', rgba(t.glow, 0.55));
+    count.textContent = String(i + 1).padStart(2, '0');
+    if (stage && view.hidden) stage.setTea(t, !first && !reduced);
+  }
+  return {
+    measure() { top = sec.getBoundingClientRect().top + scrollY; len = Math.max(1, sec.offsetHeight - vh); },
+    update(y) {
+      const p = (y - top) / len;
+      TK.forEach((el, k) => el.style.setProperty('--p', clamp(p * TEAS.length - k).toFixed(3)));
+      set(clamp(Math.floor(p * TEAS.length), 0, TEAS.length - 1));
+    },
+    pinned(y) { return y > top - vh * 0.2 && y < top + len + vh * 0.2; },
+    sync() { const i = cur; cur = -1; set(Math.max(0, i)); }
+  };
+})();
+
+// ── marquee, footer list ────────────────────────────────────────
+const places = ['A café in Bandra', 'A hotel in Jaipur', 'A tea room in Kolkata', 'A gift shop in Shillong', 'A bakery in Pune', 'A bookshop in Kochi'];
+$('#marq').innerHTML = [...places, ...places].map((p) => `<span>${p}</span><span aria-hidden="true">✦</span>`).join('');
+$('#fTeas').innerHTML = TEAS.map((t) => `<li><a href="#/tea/${t.slug}">${t.name}</a></li>`).join('');
+$$('[data-goto]').forEach((b) => b.addEventListener('click', () => { const t = document.getElementById(b.dataset.goto); if (t) scrollTo(t.getBoundingClientRect().top + scrollY + 2); }));
+
+// ── reveals ─────────────────────────────────────────────────────
+let io = null;
+function startReveals() {
+  if (!io) io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  observe(document);
+}
+function observe(scope) {
+  if (!io) return;
+  const els = new Set($$('[data-rev]', scope));
+  $$('.lm', scope).forEach((l) => els.add(l.parentElement));
+  els.forEach((el) => { if (el.id !== 'hh' && !el.classList.contains('in')) io.observe(el); });
+}
+
+// ── nav ─────────────────────────────────────────────────────────
+const nav = $('.nav'), menuBtn = $('.menu-btn');
+menuBtn.addEventListener('click', () => { const o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+
+// ── the frame loop: scroll → DOM + tin ──────────────────────────
+const heroPhoto = $('#heroPhoto'), ribbon = $('.ribbon');
+let lastY = scrollY;
+function loop(t) {
+  requestAnimationFrame(loop);
+  if (lenis) lenis.raf(t);
+  const y = scrollY, c = y + vh / 2;
+  nav.classList.toggle('solid', y > 40 || nav.classList.contains('open'));
+  ribbon.classList.toggle('hide', (range && view.hidden && range.pinned(y)) || y + vh > document.documentElement.scrollHeight - 120);
+  if (!view.hidden) { /* inner page */ } else {
+    if (manifesto) manifesto.update(y);
+    if (range) range.update(y);
+    if (heroPhoto && y < vh * 1.2 && !reduced) heroPhoto.style.transform = `translate3d(0,${y * 0.28}px,0) scale(1.08)`;
+  }
+  if (!reduced) $$('[data-par]', view.hidden ? home : view).forEach((el) => {
+    const r = el.parentElement.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) return;
+    const off = ((r.top + r.height / 2) - vh / 2) * -(+el.dataset.par);
+    el.style.transform = `translate3d(0,${clamp(off, -r.height * 0.08, r.height * 0.08)}px,0)`;
+  });
+  if (stage) {
+    const p = poseAt(c);
+    stage.setPose(p); stage.setPetals(p.p);
+    if (!lenis) { stage.kick(-(y - lastY) * 0.004); }
+  }
+  lastY = y;
+}
+if (lenis) lenis.on('scroll', (e) => stage && stage.kick(-e.velocity * 0.01));
+requestAnimationFrame(loop);
+
+// ── inner pages ─────────────────────────────────────────────────
+const TIN_OFF = `data-tin='{"o":0,"y":0.35,"p":0.35}' data-tin-top`;
+const lines = (a, b) => `<span class="lm"><span>${a}</span></span><span class="lm"><span><em>${b}</em></span></span>`;
+const snapEl = (t) => (snaps ? `<img class="snap" src="${snaps[t.slug]}" alt="${t.name} caddy">` : `<span class="snap-fallback" data-snap="${t.slug}" data-alt="${t.name} caddy">${t.name}</span>`);
+const card = (t) => `
+  <a class="t-card" href="#/tea/${t.slug}" data-filter="${t.filter}" style="--g:${rgba(t.glow, 0.6)}" data-rev>
+    <div class="art"><div class="photo" style="background-image:url(${photo(t.photo)})"></div>${snapEl(t)}</div>
+    <div class="meta"><div><span class="kind">${t.kind}</span><h3>${t.name}</h3></div><span class="price">from ${inr(t.sizes[0][1])}</span></div>
+    <p>${t.tagline}</p>
+  </a>`;
+const ctaBand = (h = 'Find', e = 'your cup.') => `
+  <section class="sec" style="text-align:center;padding:130px 0 150px" ${TIN_OFF}>
+    <div class="wrap"><p class="lbl plain" style="justify-content:center">Orders, cafés &amp; gifting</p>
+    <h2 style="margin:24px 0 34px;font-size:clamp(54px,8vw,130px)">${lines(h, e)}</h2>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" data-rev><a class="btn" href="#/contact">Enquire <i>→</i></a><a class="btn btn--ghost" href="#/teas">All teas</a></div></div>
+  </section>`;
+const head = (img, crumb, h1, lede, tin = TIN_OFF) => `
+  <section class="p-head" ${tin}>
+    <div class="photo" style="background-image:url(${photo(img)})" data-par=".1"></div><div class="shade"></div>
+    <div class="wrap"><p class="crumbs"><a href="#/">Home</a> / ${crumb}</p><h1>${h1}</h1>${lede ? `<p class="lede" data-rev>${lede}</p>` : ''}</div>
+  </section>`;
+
+const PAGES = {
+  teas() {
+    return {
+      title: 'The teas',
+      html: head('tea-leaves', 'The teas', lines('The', 'collection.'), 'Five blends. Whole leaf from gardens we can name, real rose petals from Kannauj, and nothing sprayed on afterwards.',
+        `data-tin='{"x":0.27,"y":0.0,"s":0.5,"w":0.22,"rx":0.1,"ry":-0.4,"rz":-0.14,"o":1,"p":0.8}' data-tin-m='{"o":0,"y":0.3,"p":0.6}'`) + `
+      <section class="sec" ${TIN_OFF}><div class="wrap">
+        <div class="filters" role="group" aria-label="Filter teas">
+          <button type="button" aria-pressed="true" data-f="all">All</button><button type="button" aria-pressed="false" data-f="black">Black</button><button type="button" aria-pressed="false" data-f="green">Green</button><button type="button" aria-pressed="false" data-f="free">Caffeine-free</button>
+        </div>
+        <div class="t-grid">${TEAS.map(card).join('')}</div>
+        <p class="note">Prices are placeholders for a fictional brand.</p>
+      </div></section>` + ctaBand('Gift a', 'caddy.'),
+      init(v) {
+        const bs = $$('.filters button', v);
+        bs.forEach((b) => b.addEventListener('click', () => {
+          bs.forEach((x) => x.setAttribute('aria-pressed', x === b));
+          $$('.t-card', v).forEach((c) => (c.hidden = b.dataset.f !== 'all' && c.dataset.filter !== b.dataset.f));
+        }));
+      }
+    };
+  },
+  tea(slug) {
+    const t = BY_SLUG[slug]; if (!t) return PAGES.nf();
+    const [a, ...b] = t.name.split(' ');
+    const related = TEAS.filter((x) => x !== t).slice(0, 3);
+    return {
+      title: t.name, tea: t,
+      html: `
+      <section class="prod-head" style="--g:${rgba(t.glow, 0.5)}" data-tin='{"x":0.25,"y":0.0,"s":0.68,"w":0.3,"rx":0.1,"ry":-0.3,"rz":-0.12,"o":1,"p":0.9}' data-tin-m='{"x":0,"y":0.21,"s":0.3,"w":0.46,"rx":0.1,"ry":-0.3,"rz":-0.1,"o":1,"p":0.7}'>
+        <div class="photo" style="background-image:url(${photo(t.photo)})" data-par=".1"></div><div class="shade"></div>
+        <div class="prod-fallback frame" style="aspect-ratio:4/5"><img src="${photo(t.photo)}" alt=""></div>
+        <div class="wrap"><div class="col">
+          <p class="crumbs"><a href="#/">Home</a> / <a href="#/teas">The teas</a> / ${t.short}</p>
+          <h1><span class="lm"><span>${a}</span></span><span class="lm"><span>${b.join(' ')}</span></span></h1>
+          <p class="tag" data-rev>${t.tagline}</p>
+          <ul class="notes" data-rev>${t.notes.map((n) => `<li>${n}</li>`).join('')}</ul>
+          <div class="sizes" data-rev>${t.sizes.map((s, i) => `<button type="button" aria-pressed="${i === 0}"><b>${inr(s[1])}</b>${s[0]}</button>`).join('')}</div>
+          <div class="buy" data-rev><a class="btn" href="#/contact?tea=${t.slug}">Enquire to order <i>→</i></a><small>Demo site: no checkout, placeholder prices.</small></div>
+        </div></div>
+      </section>
+      <section class="sec" ${TIN_OFF}><div class="wrap">
+        <div class="benefits">${t.benefits.map((x, i) => `<div class="benefit" data-rev><span>0${i + 1}</span><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('')}</div>
+      </div></section>
+      <section class="sec" style="padding-top:20px" ${TIN_OFF}><div class="wrap two">
+        <div><p class="lbl">The blend</p><p class="lead" style="margin-top:24px" data-rev>${t.desc}</p></div>
+        <div><p class="lbl">What's inside</p><ul class="inside-list" style="margin-top:24px">${t.inside.map((r) => `<li data-rev><span>${r[0]}</span><b>${r[1]}</b></li>`).join('')}</ul><p class="note">Nothing else. No flavouring, no colour.</p></div>
+      </div></section>
+      <section class="sec" style="padding-top:20px" ${TIN_OFF}><div class="wrap">
+        <h2>${lines('How to', 'brew it.')}</h2>
+        <div class="brew">${t.brew.map((r) => `<div data-rev><b>${r[0]}</b><span>${r[1]}</span></div>`).join('')}</div>
+      </div></section>
+      <section class="sec" style="padding-top:20px" ${TIN_OFF}><div class="wrap two">
+        <div><h2>${lines('Good', 'questions.')}</h2></div>
+        <div>${t.faqs.map((f) => `<details data-rev><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div>
+      </div></section>
+      <section class="sec" style="padding-top:20px" ${TIN_OFF}><div class="wrap">
+        <h2>${lines('Also in', 'the garden.')}</h2>
+        <div class="t-grid">${related.map(card).join('')}</div>
+      </div></section>` + ctaBand(),
+      init(v) {
+        const bs = $$('.sizes button', v);
+        bs.forEach((b) => b.addEventListener('click', () => bs.forEach((x) => x.setAttribute('aria-pressed', x === b))));
+      }
+    };
+  },
+  about() {
+    return {
+      title: 'Our story',
+      html: head('dark-rose', 'Our story', lines('Attar fields,', 'tea hills.'), 'Ittarbagh means “garden of attar”. It started with one question at a Kolkata tea table: why does rose tea always taste of perfume?') + `
+      <section class="sec" ${TIN_OFF}><div class="wrap two" style="align-items:center">
+        <div class="frame" style="aspect-ratio:4/5" data-rev><img src="${photo('rose-bud')}" alt="A single rose bud" loading="lazy" data-par=".08"></div>
+        <div>
+          <p class="lbl">How it began</p>
+          <p class="lead" style="margin:24px 0" data-rev>Most rose teas are black tea sprayed with rose oil. [Founder Name] wanted the flower itself, so the answer was to go where the flowers are.</p>
+          <p style="color:var(--muted)" data-rev>In Kannauj, the attar makers distil thousands of kilos of damask rose every summer. Once the oil is drawn, the petals that are left still hold their colour and a soft, honest scent. We buy them, dry them in the shade, and fold them into whole-leaf tea tasted and bought in small lots in Kolkata.</p>
+          <p class="note">[Founder Name] is a placeholder. This is a fictional brand.</p>
+        </div>
+      </div></section>
+      <section class="sec" style="padding-top:0" ${TIN_OFF}><div class="wrap">
+        <div class="stats">
+          <div data-rev><b>5</b><span>blends, and no plans for fifty</span></div>
+          <div data-rev><b>2</b><span>cities: Kannauj and Kolkata</span></div>
+          <div data-rev><b>0</b><span>flavouring oils, in any caddy</span></div>
+          <div data-rev><b>1</b><span>blending table, by hand</span></div>
+        </div>
+      </div></section>
+      <section class="sec" ${TIN_OFF}><div class="wrap two">
+        <div><h2>${lines('From field', 'to caddy.')}</h2></div>
+        <div class="timeline">
+          <div data-rev><b>Dawn</b><span>Damask roses are picked around Kannauj before the sun warms them.</span></div>
+          <div data-rev><b>The stills</b><span>Attar makers distil the oil. We collect the petals they leave behind.</span></div>
+          <div data-rev><b>The shade</b><span>Petals dry slowly out of the sun, so they keep their colour.</span></div>
+          <div data-rev><b>Kolkata</b><span>Leaf is tasted at auction and bought in small lots from named gardens.</span></div>
+          <div data-rev><b>The table</b><span>Every batch is blended and packed by hand, then sealed in a caddy.</span></div>
+        </div>
+      </div></section>
+      <section class="sec" ${TIN_OFF}><div class="wrap">
+        <h2>${lines('What we', 'won’t do.')}</h2>
+        <div class="values">
+          <div class="v" data-rev><h3>No <em>oils</em></h3><p>If you can smell rose, it's because there are petals in the tea.</p></div>
+          <div class="v" data-rev><h3>No <em>dust</em></h3><p>Whole leaf only. Nothing broken down to fit a tea bag.</p></div>
+          <div class="v" data-rev><h3>No <em>secrets</em></h3><p>Every caddy lists what's inside, by percentage.</p></div>
+        </div>
+      </div></section>` + ctaBand('Taste the', 'difference.')
+    };
+  },
+  contact(q) {
+    const pick = q.get('tea');
+    return {
+      title: 'Where to buy',
+      html: head('rose-wall', 'Where to buy', lines('Where to', 'find us.'), 'Order a caddy, stock us in your café, or plan gift boxes for Diwali, weddings and corporate gifting.') + `
+      <section class="sec" ${TIN_OFF}><div class="wrap contact-grid">
+        <form novalidate>
+          <label>Name<input name="name" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+          <label>I'd like to<select name="type"><option>Order a caddy</option><option>Stock Ittarbagh (café / shop)</option><option>Gift boxes</option><option>Something else</option></select></label>
+          <label class="full">Tea<select name="tea"><option value="">Not sure yet</option>${TEAS.map((t) => `<option value="${t.slug}"${t.slug === pick ? ' selected' : ''}>${t.name}</option>`).join('')}</select></label>
+          <label class="full">Message<textarea name="msg"></textarea></label>
+          <div class="full"><button class="btn" type="submit">Send enquiry <i>→</i></button><p class="note">Demo form: nothing is sent anywhere.</p></div>
+        </form>
+        <div class="where">
+          <p class="lbl">Buy online</p>
+          <div style="margin-top:18px">
+            <div class="row">Our online shop<span>Placeholder</span></div>
+            <div class="row">Marketplace listing<span>Placeholder</span></div>
+            <div class="row">Cafés &amp; stockists<span>On request</span></div>
+          </div>
+          <div class="info">
+            <div><b>Email</b><span>hello@ittarbagh.example</span></div>
+            <div><b>Phone / WhatsApp</b><span>555-0142 (placeholder)</span></div>
+            <div><b>Blending room</b><span>Kolkata, West Bengal · petals from Kannauj, Uttar Pradesh</span></div>
+            <div><b>Hours</b><span>Mon–Sat, 10:00–18:00 IST</span></div>
+          </div>
+        </div>
+      </div></section>`,
+      init(v) {
+        const f = $('form', v);
+        f.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const n = f.name.value.trim();
+          f.innerHTML = `<div class="sent">Thank you${n ? ', ' + n.replace(/[<>&"]/g, '') : ''}. This is a demo, so nothing was sent — on a live site your enquiry would reach the team here.</div>`;
+        });
+      }
+    };
+  },
+  nf() {
+    return {
+      title: 'Not found',
+      html: head('dried-petals', 'Not found', lines('Steeped', 'too long.'), 'This page doesn’t exist. The teas do.') +
+        `<section class="sec" ${TIN_OFF}><div class="wrap"><a class="btn" href="#/">Back to the garden <i>→</i></a></div></section>`
+    };
+  }
+};
+
+// ── router ──────────────────────────────────────────────────────
+const curtain = $('#curtain');
+let homeY = 0, first = true, pageTea = null;
+function parse() {
+  const h = location.hash.replace(/^#\/?/, '');
+  const [path, qs] = h.split('?');
+  const parts = path.split('/').filter(Boolean);
+  return { parts, q: new URLSearchParams(qs || '') };
+}
+function render() {
+  const { parts, q } = parse();
+  const leavingHome = !view.hidden ? false : true;
+  if (leavingHome && !first) homeY = scrollY;
+  nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+
+  let page = null;
+  if (!parts.length) page = null;
+  else if (parts[0] === 'teas') page = PAGES.teas();
+  else if (parts[0] === 'tea') page = PAGES.tea(parts[1]);
+  else if (parts[0] === 'about') page = PAGES.about();
+  else if (parts[0] === 'contact') page = PAGES.contact(q);
+  else page = PAGES.nf();
+
+  if (!page) {
+    view.hidden = true; view.innerHTML = ''; home.hidden = false;
+    document.title = 'Ittarbagh Tea Co. — Petals, not perfume';
+  } else {
+    home.hidden = true; view.hidden = false; view.innerHTML = page.html;
+    document.title = page.title + ' — Ittarbagh Tea Co.';
+    if (page.init) page.init(view);
+    pageTea = page.tea || null;
+    if (stage) stage.setTea(pageTea || TEAS[0], false);
+  }
+  $$('.nav a[href^="#/"]').forEach((a) => {
+    const on = parts[0] && a.getAttribute('href') === '#/' + parts[0];
+    if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  if (lenis) lenis.resize();
+  const y = page ? 0 : homeY;
+  scrollTo(y, true); window.scrollTo(0, y);
+  measure();
+  if (!page && range) range.sync();
+  if (page) {
+    observe(view);
+    if (preDone) setTimeout(() => $$('.p-head h1, .prod-head h1', view).forEach((h) => h.classList.add('in')), 60);
+  }
+  first = false;
+}
+function go() {
+  if (first) { render(); return; }
+  curtain.classList.add('on');
+  setTimeout(() => { render(); setTimeout(() => curtain.classList.remove('on'), 80); }, reduced ? 0 : 380);
+}
+addEventListener('hashchange', go);
+if (history.scrollRestoration) history.scrollRestoration = 'manual';
+go();

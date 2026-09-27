@@ -1,0 +1,11 @@
+Photos: all CC0 (public domain dedication) from Wikimedia Commons.
+tea-leaves.jpg  CC0  https://commons.wikimedia.org/wiki/File:Blackened_tea_leaves_(Unsplash).jpg
+chai-kettles.jpg  CC0  https://commons.wikimedia.org/wiki/File:Boiling_Tea_Kettles_(165873).jpg
+dark-rose.jpg  CC0  https://commons.wikimedia.org/wiki/File:Dark_Rose_(Unsplash).jpg
+dried-petals.jpg  CC0  https://commons.wikimedia.org/wiki/File:Dried_rose_petals.jpg
+tea-hills.jpg  CC0  https://commons.wikimedia.org/wiki/File:Farm_Fields_of_Munnar_(Unsplash).jpg
+ruby-tea.jpg  CC0  https://commons.wikimedia.org/wiki/File:Herbal_Tea_(Unsplash).jpg
+rose-macro.jpg  CC0  https://commons.wikimedia.org/wiki/File:Red_rose_in_bokeh_(Unsplash).jpg
+rose-bud.jpg  CC0  https://commons.wikimedia.org/wiki/File:Rose_Bud_(Unsplash).jpg
+rose-wall.jpg  CC0  https://commons.wikimedia.org/wiki/File:Rose_garden_(Unsplash).jpg
+wet-rose.jpg  CC0  https://commons.wikimedia.org/wiki/File:Wet_red_rose_(Unsplash).jpg
