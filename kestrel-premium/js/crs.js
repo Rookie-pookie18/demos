@@ -14,7 +14,7 @@
   var C = function (h) { return new THREE.Color(h); };
 
   /* category colours: A core · B spouse · C transferability · D additional (bar spans are set in the shader) */
-  var CAT_COL = ['#ffcc29', '#7be3c6', '#8fb2ff', '#f08a6c'];
+  var CAT_COL = ['#e8874a', '#6fd2b4', '#8fb2ff', '#f08a6c'];
 
   AM.register('crs', {
     build: function (renderer, env) {
@@ -98,7 +98,7 @@
       var marks = new THREE.Group(); scene.add(marks);
       [0, 500, 540, 640].forEach(function (v) {
         var phi = v / 1200 * Math.PI * 2;
-        var m = new THREE.Mesh(new THREE.PlaneGeometry(0.012, 0.9), new THREE.MeshBasicMaterial({ color: '#ffcc29', transparent: true, opacity: 0.7 }));
+        var m = new THREE.Mesh(new THREE.PlaneGeometry(0.012, 0.9), new THREE.MeshBasicMaterial({ color: '#e8874a', transparent: true, opacity: 0.7 }));
         m.rotation.x = -Math.PI / 2; m.rotation.z = -phi;
         m.position.set(3.75 * Math.sin(phi), 0.005, -3.75 * Math.cos(phi)); marks.add(m);
       });
@@ -136,7 +136,7 @@
       /* the plane, circling */
       var plane = S.plane = AM.makePaper({ ticks: 4, stamps: 1, fold: 1, nx: 10, ny: 14, glow: 0.4 });
       plane.scale.setScalar(0.42); scene.add(plane);
-      var pgw = S.pglow = AM.glow('#ffcc29', 0.9, 0.35); scene.add(pgw);
+      var pgw = S.pglow = AM.glow('#e8874a', 0.9, 0.35); scene.add(pgw);
 
       scene.add(new THREE.HemisphereLight('#9fb6ff', '#0a1128', 0.9));
       var key = new THREE.DirectionalLight('#ffffff', 1.6); key.position.set(3, 6, 4); scene.add(key);

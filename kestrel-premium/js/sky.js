@@ -62,20 +62,20 @@
       /* the sheet */
       var paper = S.paper = AM.makePaper({ ticks: 0, stamps: 0, glow: 0.32 });
       var holder = S.holder = new THREE.Group(); holder.add(paper); scene.add(holder);
-      var glow = S.glowS = AM.glow('#ffcc29', 2.6, 0.18); glow.position.set(0, 0, -0.25); holder.add(glow);
+      var glow = S.glowS = AM.glow('#e8874a', 2.6, 0.18); glow.position.set(0, 0, -0.25); holder.add(glow);
 
       /* launch path + trail */
       var path = S.path = new THREE.CatmullRomCurve3([
         new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.35, 0.25, -2.2), new THREE.Vector3(1.3, 1.0, -8),
         new THREE.Vector3(3.0, 2.4, -20), new THREE.Vector3(5.5, 5.2, -44), new THREE.Vector3(8, 9, -80)
       ]);
-      var trail = S.trail = AM.trail(path, '#ffcc29', 0.012, 240, 0.22); scene.add(trail);
+      var trail = S.trail = AM.trail(path, '#e8874a', 0.012, 240, 0.22); scene.add(trail);
 
       /* lights */
       scene.add(new THREE.HemisphereLight('#9fb6ff', '#0a1128', 0.7));
       var key = new THREE.DirectionalLight('#dfe8ff', 2.0); key.position.set(-3, 3, 4); scene.add(key);
-      var rim = S.rim = new THREE.DirectionalLight('#ffcc29', 1.1); rim.position.set(3, -1, -2); scene.add(rim);
-      var aur = S.aurLight = new THREE.DirectionalLight('#6fe0c8', 0.0); aur.position.set(0, 4, -6); scene.add(aur);
+      var rim = S.rim = new THREE.DirectionalLight('#e8874a', 1.1); rim.position.set(3, -1, -2); scene.add(rim);
+      var aur = S.aurLight = new THREE.DirectionalLight('#6fd2b4', 0.0); aur.position.set(0, 4, -6); scene.add(aur);
 
       /* motes: ice glitter around the sheet */
       var m1 = S.motes = AM.motes(Math.round(260 * AM.TIER) + 60, [3, 2, 3], '#dfe8ff', 0.012, 0.6);

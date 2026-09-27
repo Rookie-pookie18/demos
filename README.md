@@ -16,10 +16,16 @@ demos\
 
 ## Live at
 
-`https://<project>.pages.dev/` — the showcase page
-`https://<project>.pages.dev/anna-mills-premium/` — an individual demo
+**https://demos-1g7.pages.dev/** — the showcase page
+https://demos-1g7.pages.dev/anna-mills-premium/
+https://demos-1g7.pages.dev/novaworld-premium/
+https://demos-1g7.pages.dev/novaworld-standard/
 
-Fill in the real address once Cloudflare Pages is connected.
+GitHub: `Sidak-dang/demos` · Cloudflare Pages project: `demos-1g7`
+
+The `-1g7` is Cloudflare's doing — `demos.pages.dev` was already taken by someone else, so it
+added a suffix. If that bothers you later, point a proper domain at this project in the
+Cloudflare dashboard under Custom domains, and send clients that instead.
 
 ## Adding a new demo — the whole process
 

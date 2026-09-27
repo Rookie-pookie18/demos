@@ -108,11 +108,11 @@
       [[-0.55, 0.55], [0.0, 0.55], [0.55, 0.55], [-0.28, 0.2]].forEach(function (w, i) {
         var m = new THREE.Mesh(new THREE.PlaneGeometry(i === 3 ? 0.28 : 0.3, i === 3 ? 0.48 : 0.3), new THREE.MeshBasicMaterial({ color: '#1a1420' }));
         m.position.set(w[0], w[1] + (i === 3 ? 0.04 : 0), 0.651); house.add(m);
-        var g = AM.glow('#ffb347', 1.1, 0); g.position.set(w[0], w[1], 0.8); house.add(g);
+        var g = AM.glow('#f0954e', 1.1, 0); g.position.set(w[0], w[1], 0.8); house.add(g);
         S.windows.push({ m: m, g: g });
       });
-      var warm = S.warm = new THREE.PointLight('#ffb347', 0, 7, 1.6); warm.position.set(0, 0.7, 1.2); house.add(warm);
-      S.lit = C('#ffc766'); S.dark = C('#1a1420');
+      var warm = S.warm = new THREE.PointLight('#f0954e', 0, 7, 1.6); warm.position.set(0, 0.7, 1.2); house.add(warm);
+      S.lit = C('#ffb366'); S.dark = C('#1a1420');
 
       /* lanterns: family members crossing the sky to the door */
       house.updateMatrixWorld(true); var door = new THREE.Vector3(); house.localToWorld(door.set(0, 0.9, 1.1));
@@ -123,20 +123,20 @@
         var st = new THREE.Vector3(s[0], s[1], s[2]);
         var mid = st.clone().lerp(e, 0.55); mid.y += 5 + i;
         var cv = new THREE.CatmullRomCurve3([st, mid, e]);
-        var tr = AM.trail(cv, '#ffcf7a', 0.03, 120, 0.35); scene.add(tr);
-        var g = AM.glow('#ffd18a', 1.4, 0); scene.add(g);
-        var core = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 8), new THREE.MeshBasicMaterial({ color: '#fff2d0' })); scene.add(core);
+        var tr = AM.trail(cv, '#ffbd7a', 0.03, 120, 0.35); scene.add(tr);
+        var g = AM.glow('#ffbf8a', 1.4, 0); scene.add(g);
+        var core = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 8), new THREE.MeshBasicMaterial({ color: '#ffeedc' })); scene.add(core);
         return { cv: cv, tr: tr, g: g, core: core, t0: 0.08 + i * 0.1 };
       });
 
       /* the file: the plane lands and unfolds */
       var paper = S.paper = AM.makePaper({ ticks: 4, stamps: 3, fold: 1, glow: 0.35 });
       var ph = S.pholder = new THREE.Group(); ph.add(paper); scene.add(ph);
-      S.pglow = AM.glow('#ffcc29', 1.6, 0); scene.add(S.pglow);
+      S.pglow = AM.glow('#e8874a', 1.6, 0); scene.add(S.pglow);
       S.landPath = new THREE.CatmullRomCurve3([
         new THREE.Vector3(-14, 8, -24), new THREE.Vector3(-6, 5, -8), new THREE.Vector3(-1.2, 2.4, 0.2), new THREE.Vector3(0.3, 1.55, 1.3)
       ]);
-      S.landTrail = AM.trail(S.landPath, '#ffcc29', 0.007, 160, 0.3); scene.add(S.landTrail);
+      S.landTrail = AM.trail(S.landPath, '#e8874a', 0.007, 160, 0.3); scene.add(S.landTrail);
 
       /* the maple-leaf constellation */
       var outline = leafOutline(), LC = new THREE.Vector3(6, 17, -46), LS = 12;
@@ -194,12 +194,12 @@
         fragmentShader: 'uniform float uDraw, uOp; varying float vO; void main(){ float a = step(vO, uDraw) * uOp; gl_FragColor = vec4(1., .62, .5, a * .9); }'
       }));
       lines.frustumCulled = false; scene.add(lines);
-      var red = S.redGlow = AM.glow('#d54d4d', 26, 0); red.position.copy(LC); red.material.fog = false; scene.add(red);
+      var red = S.redGlow = AM.glow('#c14c3c', 26, 0); red.position.copy(LC); red.material.fog = false; scene.add(red);
 
       /* light */
       scene.add(new THREE.HemisphereLight('#8ea8e8', '#141c33', 0.9));
       var moon = new THREE.DirectionalLight('#c9d8ff', 1.1); moon.position.set(-10, 14, 6); scene.add(moon);
-      var aur = S.aurL = new THREE.DirectionalLight('#6fe0c8', 0.4); aur.position.set(0, 10, -20); scene.add(aur);
+      var aur = S.aurL = new THREE.DirectionalLight('#6fd2b4', 0.4); aur.position.set(0, 10, -20); scene.add(aur);
       var snowfall = S.snowfall = AM.motes(Math.round(1400 * AM.TIER) + 200, [30, 14, 30], '#e8eeff', 0.05, -1.6);
       snowfall.position.set(1, 6, -2); scene.add(snowfall);
 

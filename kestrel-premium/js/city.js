@@ -117,7 +117,7 @@
       var site = S.site = new THREE.Group(); scene.add(site);
       /* blueprint: gold edges of the full volume + a floor grid */
       var bpGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(BW, BH, BW)); bpGeo.translate(0, BH / 2, 0);
-      var bp = S.bp = new THREE.LineSegments(bpGeo, new THREE.LineBasicMaterial({ color: '#ffcc29', transparent: true, opacity: 0 }));
+      var bp = S.bp = new THREE.LineSegments(bpGeo, new THREE.LineBasicMaterial({ color: '#e8874a', transparent: true, opacity: 0 }));
       site.add(bp);
       var gridPts = [];
       for (var f = 1; f < FLOORS; f++) {
@@ -125,27 +125,27 @@
         gridPts.push(-hw, y, -hw, hw, y, -hw, hw, y, -hw, hw, y, hw, hw, y, hw, -hw, y, hw, -hw, y, hw, -hw, y, -hw);
       }
       var gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.Float32BufferAttribute(gridPts, 3));
-      var grid = S.grid = new THREE.LineSegments(gg, new THREE.LineBasicMaterial({ color: '#ffcc29', transparent: true, opacity: 0 }));
+      var grid = S.grid = new THREE.LineSegments(gg, new THREE.LineBasicMaterial({ color: '#e8874a', transparent: true, opacity: 0 }));
       site.add(grid);
-      var fp = new THREE.Mesh(new THREE.PlaneGeometry(BW * 1.8, BW * 1.8), new THREE.MeshBasicMaterial({ color: '#ffcc29', transparent: true, opacity: 0, wireframe: true }));
+      var fp = new THREE.Mesh(new THREE.PlaneGeometry(BW * 1.8, BW * 1.8), new THREE.MeshBasicMaterial({ color: '#e8874a', transparent: true, opacity: 0, wireframe: true }));
       fp.rotation.x = -Math.PI / 2; fp.position.y = 0.01; site.add(fp); S.fp = fp;
       /* floors: glass slabs that fill in one by one */
       S.floors = [];
-      var glass = new THREE.MeshPhysicalMaterial({ color: '#1b2c5a', metalness: 0.2, roughness: 0.15, clearcoat: 1, envMapIntensity: 1.4, emissive: C('#ffcc29'), emissiveIntensity: 0.0 });
+      var glass = new THREE.MeshPhysicalMaterial({ color: '#1b2c5a', metalness: 0.2, roughness: 0.15, clearcoat: 1, envMapIntensity: 1.4, emissive: C('#e8874a'), emissiveIntensity: 0.0 });
       for (f = 0; f < FLOORS; f++) {
         var slab = new THREE.Mesh(new THREE.BoxGeometry(BW * 0.98, BH / FLOORS * 0.9, BW * 0.98), glass.clone());
         slab.position.y = (f + 0.5) * BH / FLOORS; slab.scale.set(1, 0.001, 1); site.add(slab); S.floors.push(slab);
       }
-      var crown = S.crown = AM.glow('#ffcc29', 2.6, 0); crown.position.y = BH + 0.2; site.add(crown);
-      var baseGlow = S.baseGlow = AM.glow('#ffcc29', 3.2, 0); baseGlow.position.y = 0.1; site.add(baseGlow);
+      var crown = S.crown = AM.glow('#e8874a', 2.6, 0); crown.position.y = BH + 0.2; site.add(crown);
+      var baseGlow = S.baseGlow = AM.glow('#e8874a', 3.2, 0); baseGlow.position.y = 0.1; site.add(baseGlow);
 
       /* the plane */
       var plane = S.plane = AM.makePaper({ ticks: 4, stamps: 2, fold: 1, nx: 10, ny: 14, glow: 0.5 });
       plane.scale.setScalar(0.28); scene.add(plane);
-      var pg = S.pglow = AM.glow('#ffcc29', 0.6, 0.4); scene.add(pg);
+      var pg = S.pglow = AM.glow('#e8874a', 0.6, 0.4); scene.add(pg);
 
       scene.add(new THREE.HemisphereLight('#9fb6ff', '#0a1128', 0.8));
-      var key = new THREE.DirectionalLight('#ffd89a', 1.2); key.position.set(-4, 6, 3); scene.add(key);
+      var key = new THREE.DirectionalLight('#ffc79a', 1.2); key.position.set(-4, 6, 3); scene.add(key);
 
       S.rig = AM.rig({
         aerial: { pos: [9, 12, 15], tgt: [0, 0.5, 0] },

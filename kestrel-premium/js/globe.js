@@ -14,7 +14,7 @@
   var C = function (h) { return new THREE.Color(h); };
   var R = 2;
 
-  var HOME = [28.61, 77.21];   // New Delhi (Nova World has an affiliate office in India)
+  var HOME = [28.61, 77.21];   // New Delhi (Kestrel has an affiliate office in India)
   var STUDY = [ // name, lat, lon, arc window
     ['Australia', -33.87, 151.21, 0.1, 0.2],
     ['Germany', 52.52, 13.4, 0.2, 0.3],
@@ -84,7 +84,7 @@
       spin.add(new THREE.Mesh(new THREE.SphereGeometry(R * 0.992, 64, 48), new THREE.MeshBasicMaterial({ color: '#081030' })));
       var atm = new THREE.Mesh(new THREE.SphereGeometry(R * 1.16, 64, 48), new THREE.ShaderMaterial({
         side: THREE.BackSide, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-        uniforms: { uCol: { value: C('#3f6dff') }, uCol2: { value: C('#6fe0c8') } },
+        uniforms: { uCol: { value: C('#3f6dff') }, uCol2: { value: C('#6fd2b4') } },
         vertexShader: 'varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
         fragmentShader: 'uniform vec3 uCol, uCol2; varying vec3 vN; void main(){ float i = pow(max(0., .72 - dot(vN, vec3(0., 0., 1.))), 3.2); gl_FragColor = vec4(mix(uCol, uCol2, .25) * i * 1.1, i * .6); }'
       }));
@@ -113,7 +113,7 @@
       dg.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
       dg.setAttribute('aCan', new THREE.Float32BufferAttribute(can, 1));
       dg.setAttribute('aSeed', new THREE.Float32BufferAttribute(seed, 1));
-      var DU = S.DU = { uCan: { value: 0 }, uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() }, uBase: { value: C('#8aa2e0') }, uGold: { value: C('#ffcc29') } };
+      var DU = S.DU = { uCan: { value: 0 }, uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() }, uBase: { value: C('#8aa2e0') }, uGold: { value: C('#e8874a') } };
       var dots = new THREE.Points(dg, new THREE.ShaderMaterial({
         transparent: true, depthWrite: false, uniforms: DU,
         vertexShader: [
@@ -152,8 +152,8 @@
       /* part a: study arcs from home */
       S.study = STUDY.map(function (d) {
         var cv = arcCurve(HOME[0], HOME[1], d[1], d[2]);
-        var tr = AM.trail(cv, '#ffcc29', 0.0075, 96, 1.2); spin.add(tr);
-        var g = AM.glow('#ffcc29', 0.32, 0); AM.ll2v(d[1], d[2], R * 1.01, g.position); spin.add(g);
+        var tr = AM.trail(cv, '#e8874a', 0.0075, 96, 1.2); spin.add(tr);
+        var g = AM.glow('#e8874a', 0.32, 0); AM.ll2v(d[1], d[2], R * 1.01, g.position); spin.add(g);
         return { tr: tr, g: g, a: d[3], b: d[4], lab: label('a', d[0], d[1], d[2]), curve: cv };
       });
       var hg = S.homeGlow = AM.glow('#ffffff', 0.4, 0.9); AM.ll2v(HOME[0], HOME[1], R * 1.01, hg.position); spin.add(hg);
@@ -162,12 +162,12 @@
       /* part b: converging routes + pulses on Canadian cities */
       S.routes = ROUTES.map(function (d) {
         var c = CITIES[d[2]], cv = arcCurve(d[0], d[1], c[0], c[1]);
-        var tr = AM.trail(cv, d[3] === 'w' ? '#ffcc29' : '#6fe0c8', 0.0065, 96, 1.2); spin.add(tr);
-        var og = AM.glow(d[3] === 'w' ? '#ffcc29' : '#6fe0c8', 0.22, 0); AM.ll2v(d[0], d[1], R * 1.01, og.position); spin.add(og);
+        var tr = AM.trail(cv, d[3] === 'w' ? '#e8874a' : '#6fd2b4', 0.0065, 96, 1.2); spin.add(tr);
+        var og = AM.glow(d[3] === 'w' ? '#e8874a' : '#6fd2b4', 0.22, 0); AM.ll2v(d[0], d[1], R * 1.01, og.position); spin.add(og);
         return { tr: tr, og: og, s: d[4] };
       });
       S.cities = Object.keys(CITIES).map(function (n) {
-        var c = CITIES[n], ring = new THREE.Mesh(new THREE.RingGeometry(0.03, 0.038, 48), new THREE.MeshBasicMaterial({ color: '#ffcc29', transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false }));
+        var c = CITIES[n], ring = new THREE.Mesh(new THREE.RingGeometry(0.03, 0.038, 48), new THREE.MeshBasicMaterial({ color: '#e8874a', transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false }));
         AM.ll2v(c[0], c[1], R * 1.012, ring.position); ring.lookAt(ring.position.clone().multiplyScalar(2)); spin.add(ring);
         return { ring: ring, lab: label('b', n, c[0], c[1]), seed: Math.random() };
       });
@@ -176,7 +176,7 @@
       var plane = S.plane = AM.makePaper({ ticks: 4, stamps: 2, fold: 1, nx: 10, ny: 14, glow: 0.5 });
       plane.scale.setScalar(0.17); spin.add(plane);
       S.planeCurve = S.study[4].curve;
-      var pgl = S.pglow = AM.glow('#ffcc29', 0.35, 0.5); spin.add(pgl);
+      var pgl = S.pglow = AM.glow('#e8874a', 0.35, 0.5); spin.add(pgl);
 
       scene.add(new THREE.HemisphereLight('#c8d6ff', '#0a1128', 1.2));
       var key = new THREE.DirectionalLight('#ffffff', 1.4); key.position.set(2, 3, 5); scene.add(key);

@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════
-   NOVA WORLD — core
+   KESTREL — core
    Helpers shared by every chapter: the paper sheet that folds into a
    plane (and carries the applicant's stamps), a polar-night sky with
    stars + aurora, a studio environment for reflections, gold flight
@@ -42,7 +42,7 @@
   var C = function (h) { return new THREE.Color(h); };
 
   /* ── THE SHEET ──────────────────────────────────────────────
-     The applicant's file, drawn on a canvas: a Nova World assessment
+     The applicant's file, drawn on a canvas: a Kestrel assessment
      worksheet. `ticks` fills in answers, `stamps` adds the journey
      stamps (Assessed, Filed, Landed, Citizen). Cached per state.    */
   var texCache = {};
@@ -69,12 +69,12 @@
     for (var i = 0; i < 1400; i++) { g.fillStyle = 'rgba(40,60,110,' + (r() * 0.035).toFixed(3) + ')'; g.fillRect(r() * PW, r() * PH, 1 + r() * 3, 1); }
     /* header band */
     g.fillStyle = '#101b3a'; g.fillRect(0, 0, PW, 190);
-    g.fillStyle = '#ffcc29'; g.fillRect(0, 190, PW, 8);
+    g.fillStyle = '#e8874a'; g.fillRect(0, 190, PW, 8);
     g.font = '700 58px Montserrat, Arial, sans-serif'; g.textBaseline = 'alphabetic';
     g.fillStyle = '#eef1f6'; g.fillText('NOVA', 64, 108);
-    var w = g.measureText('NOVA').width; g.fillStyle = '#ffcc29'; g.fillText('WORLD', 64 + w + 8, 108);
+    var w = g.measureText('NOVA').width; g.fillStyle = '#e8874a'; g.fillText('WORLD', 64 + w + 8, 108);
     g.font = '500 22px "IBM Plex Mono", monospace'; g.fillStyle = 'rgba(238,241,246,.7)';
-    g.fillText('IMMIGRATION SERVICES INC.  ·  MISSISSAUGA, ON', 64, 150);
+    g.fillText('IMMIGRATION SERVICES INC.  ·  TORONTO, ON', 64, 150);
     /* title */
     g.fillStyle = '#101b3a'; g.font = '600 50px Montserrat, Arial, sans-serif';
     g.fillText('Eligibility Assessment', 64, 290);
@@ -101,8 +101,8 @@
       }
     }
     /* journey stamps */
-    var S = [[760, 340, -0.25, 'ASSESSED', 'NOVA WORLD', '#1b3a8a'], [800, 700, 0.18, 'FILED', 'IRCC', '#1b3a8a'],
-      [690, 1000, -0.1, 'LANDED', 'CANADA', '#b8322f'], [470, 830, 0.12, 'CITIZEN', 'OATH TAKEN', '#b8322f']];
+    var S = [[760, 340, -0.25, 'ASSESSED', 'KESTREL', '#1b3a8a'], [800, 700, 0.18, 'FILED', 'IRCC', '#1b3a8a'],
+      [690, 1000, -0.1, 'LANDED', 'CANADA', '#a8422f'], [470, 830, 0.12, 'CITIZEN', 'OATH TAKEN', '#a8422f']];
     for (i = 0; i < stamps && i < S.length; i++) stamp(g, S[i][0], S[i][1], 118, S[i][2], S[i][3], S[i][4], S[i][5]);
     var t = new THREE.CanvasTexture(c);
     t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
@@ -227,9 +227,9 @@
       m.position.set(x, y, z); m.lookAt(0, 0, 0); env.add(m);
     };
     card('#dfe8ff', 9, 4, -6, 7, 5);     // cool moonlight key, high left
-    card('#6fe0c8', 5, 7, 8, 2, 2);      // aurora fill, right
+    card('#6fd2b4', 5, 7, 8, 2, 2);      // aurora fill, right
     card('#ffffff', 1.2, 10, 0, 8, -4);  // thin white strip for the specular line
-    card('#ffcc29', 12, 1.4, 0, -1, -9); // low gold horizon
+    card('#e8874a', 12, 1.4, 0, -1, -9); // low gold horizon
     card('#101b3a', 14, 3, 0, -8, 3);    // navy floor bounce
     var pm = new THREE.PMREMGenerator(renderer);
     var rt = pm.fromScene(env, 0.03);

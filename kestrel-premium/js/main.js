@@ -158,7 +158,7 @@
       if (!name) { msg.textContent = 'Add your name so the consultant knows who to reply to.'; $('#f-name').focus(); return; }
       if (!/^\S+@\S+\.\S+$/.test(mail)) { msg.textContent = 'Add an email address we can reply to, for example name@example.com.'; $('#f-mail').focus(); return; }
       if (!ok) { msg.textContent = 'Tick the box to confirm you’ve read how we use your details.'; $('#f-ok').focus(); return; }
-      msg.textContent = 'Thanks, ' + name + '. On the live site this request goes to the Nova World team. This prototype doesn’t send anything.';
+      msg.textContent = 'Thanks, ' + name + '. On the live site this request goes to the Kestrel team. This prototype doesn’t send anything.';
     });
   }
 
