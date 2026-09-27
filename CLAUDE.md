@@ -52,6 +52,11 @@ live public site, so check rather than assume.
 After pushing, give him the demo's live URL and tell him Cloudflare takes about a minute,
 then to open it and scroll the whole page.
 
+The link you give him is always the Cloudflare one — `https://demos-1g7.pages.dev/<folder>/`.
+Do not publish demos as claude.ai artifacts. An artifact is fine as a scratch preview while
+designing, but the link he sends to a client is always the pages.dev URL, because that one is
+permanent, unbranded, and needs no sharing settings changed before he sends it.
+
 ### What appears where
 
 Two different things, and it matters:
