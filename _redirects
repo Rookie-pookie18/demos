@@ -1,0 +1,9 @@
+# Demos moved into brand folders. Keep old links that were already shared working.
+/kestrel-premium /kestrel/kestrel-premium/ 301
+/kestrel-premium/* /kestrel/kestrel-premium/:splat 301
+/kestrel-standard /kestrel/kestrel-standard/ 301
+/kestrel-standard/* /kestrel/kestrel-standard/:splat 301
+/ittarbagh-premium /ittarbagh/ittarbagh-premium/ 301
+/ittarbagh-premium/* /ittarbagh/ittarbagh-premium/:splat 301
+/ittarbagh-standard /ittarbagh/ittarbagh-standard/ 301
+/ittarbagh-standard/* /ittarbagh/ittarbagh-standard/:splat 301
