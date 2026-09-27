@@ -1,0 +1,942 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Nova World Concept</title>
+<meta name="description" content="Design concept for the Nova World Immigration Services website. Not the official site.">
+<meta property="og:title" content="Nova World Concept">
+<meta property="og:description" content="Design concept for the Nova World Immigration Services website. Not the official site.">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+</head><body>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --night:#0F1B2D;--navy:#222B3D;--paper:#F7F6F2;--paper2:#EDEBE4;--ink:#1B2433;--muted:#5E6472;
+  --sun:#FFD128;--sun-deep:#C99A00;--red:#D54D4D;--sky:#DCE8F5;
+  --line:rgba(27,36,51,.14);--on-dark:#E8ECF3;--on-dark-muted:#9AA5B8;--line-dark:rgba(232,236,243,.14);
+  --display:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --navh:64px;color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--display);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--sun);color:var(--night);padding:8px 12px;z-index:100}
+.skip:focus{left:8px}
+
+/* concept ribbon */
+.ribbon{background:repeating-linear-gradient(135deg,var(--sun) 0 14px,#f3c400 14px 28px);color:var(--night);text-align:center;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px}
+.ribbon span{background:var(--sun);padding:3px 8px}
+
+/* utility bar */
+.util{background:var(--navy);color:var(--on-dark-muted);font:500 12px/1 var(--mono);letter-spacing:.04em}
+.util .wrap{display:flex;gap:18px;align-items:center;justify-content:flex-end;min-height:34px;flex-wrap:wrap}
+.util a{text-decoration:none;color:var(--on-dark)}
+.util a:hover{color:var(--sun)}
+.util .sep{opacity:.35}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(247,246,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:var(--navh)}
+.logo{display:flex;align-items:center;flex:none}
+.logo img{height:44px;width:auto;display:block}
+.nav ul{list-style:none;display:flex;gap:2px;margin:0 0 0 auto;padding:0;align-items:center}
+.nav li>a{display:block;padding:8px 10px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14.5px;color:var(--ink)}
+.nav li>a:hover,.nav li>a[aria-current="page"]{background:var(--paper2)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;font:700 15px/1 var(--display);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-sun{background:var(--sun);color:var(--night)}
+.btn-ghost{border-color:currentColor;color:inherit;background:transparent}
+.btn-ink{background:var(--night);color:var(--paper)}
+.nav .btn{padding:10px 16px;font-size:14px}
+.menu-btn{display:none;margin-left:auto;background:none;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;font:600 14px var(--display);color:var(--ink)}
+@media (max-width:1100px){.nav ul,.nav .btn-desk{display:none}.menu-btn{display:block}}
+
+/* mega menu */
+.mega{position:absolute;left:0;right:0;top:100%;background:var(--night);color:var(--on-dark);border-top:2px solid var(--sun);box-shadow:0 20px 40px rgba(15,27,45,.35)}
+.mega .wrap{display:grid;grid-template-columns:220px 1fr;gap:32px;padding-block:24px}
+.mega h3{font-size:22px;color:var(--paper)}
+.mega p{color:var(--on-dark-muted);font-size:14px;margin-top:8px}
+.mega .rows{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px}
+.mega .rows a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line-dark);text-decoration:none;font:500 13px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.mega .rows a:hover{color:var(--sun)}
+.mega .rows em{font-style:normal;color:var(--on-dark-muted);font-size:11px;white-space:nowrap}
+
+/* mobile drawer */
+.drawer{position:fixed;inset:0;z-index:60;background:var(--night);color:var(--on-dark);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 20px 100px}
+.drawer .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.drawer button{background:none;border:1px solid var(--line-dark);color:var(--on-dark);border-radius:8px;padding:8px 12px;font:600 14px var(--display)}
+.drawer a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px dashed var(--line-dark);text-decoration:none;font-weight:700;font-size:18px}
+.drawer a small{font:500 11px var(--mono);color:var(--on-dark-muted);letter-spacing:.06em;text-transform:uppercase}
+
+/* bottom bar (phones) */
+.bbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--night);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:8px;border-top:1px solid var(--line-dark)}
+.bbar a{flex:1;text-align:center;text-decoration:none;font:700 13px/1 var(--display);padding:12px 6px;border-radius:10px;color:var(--on-dark);border:1px solid var(--line-dark)}
+.bbar a:first-child{background:var(--sun);color:var(--night);border-color:var(--sun)}
+@media (max-width:760px){.bbar{display:flex}body{padding-bottom:72px}}
+
+/* shared section bits */
+.sec{padding-block:clamp(64px,9vw,120px)}
+.dark{background:var(--night);color:var(--on-dark)}
+.dark .muted{color:var(--on-dark-muted)}
+.muted{color:var(--muted)}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:var(--sun-deep)}
+.dark .eyebrow{color:var(--sun)}
+.eyebrow::before{content:"";width:28px;border-top:2px dashed currentColor}
+.h2{font-size:clamp(30px,4.2vw,50px);font-weight:800}
+.lead{font-size:clamp(17px,1.6vw,19px);max-width:62ch;margin-top:16px}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:4px;background:var(--sky);color:var(--navy)}
+.tag.red{background:var(--red);color:#fff}
+.tag.sample{background:transparent;border:1px dashed currentColor;color:var(--muted)}
+.dark .tag.sample{color:var(--on-dark-muted)}
+.tbd{font-family:var(--mono);font-size:.82em;background:rgba(255,209,40,.28);padding:1px 5px;border-radius:3px;letter-spacing:0;white-space:normal}
+.dark .tbd{background:rgba(255,209,40,.18);color:var(--sun)}
+.ph{position:relative;display:grid;place-items:center;text-align:center;border:1.5px dashed rgba(27,36,51,.35);border-radius:14px;background:radial-gradient(rgba(27,36,51,.16) 1.2px,transparent 1.4px) 0 0/14px 14px,var(--paper2);color:var(--muted);font:500 12px/1.5 var(--mono);letter-spacing:.04em;padding:20px;max-width:100%}
+.dark .ph{border-color:var(--line-dark);background:radial-gradient(rgba(232,236,243,.14) 1.2px,transparent 1.4px) 0 0/14px 14px,rgba(255,255,255,.03);color:var(--on-dark-muted)}
+
+/* map canvases */
+.map{position:absolute;inset:0}
+.map canvas,#oMap canvas,#cMap canvas{width:100%;height:100%;display:block}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lbl{position:absolute;left:0;top:0;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--on-dark);transform:translate(-50%,-50%)}
+.lbl span{position:absolute;left:12px;top:-4px;background:rgba(15,27,45,.72);padding:4px 6px;border-radius:3px}
+.lbl.light span{background:rgba(247,246,242,.85);color:var(--ink)}
+.lbl.pulse::before{content:"";position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--sun);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.3);opacity:1}100%{transform:scale(1.6);opacity:0}}
+
+/* preloader */
+.pre{position:fixed;inset:0;z-index:90;background:var(--night);display:grid;place-items:center;transition:opacity .5s}
+.pre.out{opacity:0;pointer-events:none}
+.pre svg{width:min(560px,86vw);height:auto}
+.pre path{stroke:var(--sun);stroke-width:2;fill:none;stroke-dasharray:6 7}
+.pre .mask{stroke:var(--night);stroke-width:6;stroke-dasharray:900;stroke-dashoffset:0;animation:draw 1.1s linear forwards}
+@keyframes draw{to{stroke-dashoffset:-900}}
+.pre p{color:var(--on-dark-muted);text-align:center;margin-top:18px}
+.pre .tile{display:inline-block;background:var(--paper);border-radius:12px;padding:10px 14px;opacity:0;animation:fade .4s .95s forwards}
+@keyframes fade{to{opacity:1}}
+
+/* HERO */
+.hero{position:relative;min-height:min(86vh,780px);overflow:hidden}
+.hero .scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 0%,rgba(15,27,45,.86) 34%,rgba(15,27,45,0) 62%);pointer-events:none}
+.hero .wrap{position:relative;padding-block:clamp(56px,9vw,110px) 48px;display:flex;flex-direction:column;gap:22px;max-width:1200px}
+.hero-copy{max-width:560px;display:flex;flex-direction:column;gap:20px}
+.hero h1{font-size:clamp(38px,5.6vw,68px);font-weight:800;color:var(--paper)}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.licence{font-size:14.5px;color:var(--on-dark-muted);max-width:52ch}
+.licence strong{color:var(--on-dark)}
+.licence a{color:var(--sun)}
+.picker{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:12px;padding:10px 14px;width:fit-content;max-width:100%}
+.picker label{color:var(--on-dark-muted)}
+.picker select{font:700 15px var(--display);background:var(--night);color:var(--sun);border:1px solid var(--line-dark);border-radius:8px;padding:8px 10px;max-width:100%}
+.picker .code{color:var(--on-dark-muted)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:760px){
+  .hero{min-height:0;display:flex;flex-direction:column}
+  .hero .scrim{background:linear-gradient(180deg,var(--night) 0%,var(--night) 52%,rgba(15,27,45,0) 70%)}
+  .hero .wrap{padding-bottom:300px}
+}
+
+/* trust strip */
+.trust{background:var(--paper2);border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0}
+.trust div{padding:22px 18px 22px 0;border-right:1px dashed var(--line)}
+.trust div:last-child{border-right:0}
+.trust b{display:block;font-size:15px;line-height:1.35;margin-top:6px}
+.trust .mono{color:var(--muted);font-size:11px}
+@media (max-width:760px){.trust div{border-right:0;border-bottom:1px dashed var(--line);padding:16px 0}}
+
+/* JOURNEY */
+.journey{position:relative;height:calc(6 * 100vh)}
+.j-stick{position:sticky;top:var(--navh);height:calc(100vh - var(--navh));overflow:hidden}
+.j-head{position:absolute;left:0;right:0;top:0;z-index:3;padding-top:22px}
+.j-rail{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.j-rail span{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:4px;color:var(--on-dark-muted);border:1px solid var(--line-dark);transition:all .3s}
+.j-rail span.on{background:var(--sun);border-color:var(--sun);color:var(--night)}
+.j-rail span.done{color:var(--on-dark)}
+.j-cards{position:absolute;right:clamp(16px,4vw,40px);bottom:clamp(24px,6vh,64px);width:min(420px,40vw);z-index:3}
+.card{position:absolute;right:0;bottom:0;width:100%;background:var(--paper);color:var(--ink);border-radius:16px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.35);clip-path:inset(0 0 100% 0 round 16px);transition:clip-path .6s cubic-bezier(.22,1,.36,1)}
+.card.on{clip-path:inset(0 0 0 0 round 16px)}
+.card .mono{color:var(--sun-deep)}
+.card h3{font-size:28px;font-weight:800;margin:8px 0 10px}
+.card p{color:var(--muted);font-size:15.5px}
+.card .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.card .links a{font:600 13px var(--display);text-decoration:none;border-bottom:2px solid var(--sun);padding-bottom:2px}
+.j-count{position:absolute;left:clamp(16px,4vw,40px);bottom:clamp(24px,6vh,64px);z-index:3;font:600 13px var(--mono);color:var(--on-dark-muted);letter-spacing:.08em}
+.j-count b{font-size:56px;color:var(--sun);display:block;line-height:1;letter-spacing:0}
+@media (max-width:760px){
+  .journey{height:calc(6 * 80vh)}
+  .j-stick .map{bottom:auto;height:55%}
+  .j-cards{left:16px;right:16px;width:auto;bottom:16px;height:40%}
+  .card{padding:18px;box-shadow:none}
+  .card h3{font-size:22px}
+  .j-count{display:none}
+  .j-head{padding-top:12px}
+  .j-head .h2{font-size:24px}
+  .j-rail span{padding:4px 5px;font-size:10px}
+}
+
+/* BOARD */
+.board-sec{background:var(--navy)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:28px 0 14px}
+.tabs button{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 12px;border-radius:6px;border:1px solid var(--line-dark);background:transparent;color:var(--on-dark-muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--sun);color:var(--night);border-color:var(--sun)}
+.board{background:#0a1422;border-radius:14px;padding:10px;border:1px solid var(--line-dark);overflow-x:auto}
+.bhead,.brow{display:grid;grid-template-columns:minmax(0,22fr) minmax(0,13fr) minmax(0,10fr) minmax(0,7fr) 28px;gap:14px;align-items:center;padding:8px 10px}
+.bhead{font:600 11px var(--mono);letter-spacing:.1em;color:var(--on-dark-muted)}
+.brow{text-decoration:none;border-top:1px solid rgba(255,255,255,.05);border-radius:6px}
+.brow:hover,.brow:focus-visible{background:rgba(255,209,40,.10)}
+.brow:hover .arrow{color:var(--sun)}
+.flaps{display:contents}
+.col{display:flex;gap:2px;overflow:hidden}
+.ch{flex:none;width:1.05em;height:1.6em;display:grid;place-items:center;font:600 14px/1 var(--mono);color:#F4F1E6;background:linear-gradient(#1b2638 0 49%,#0c1523 49% 51%,#172233 51%);border-radius:2px}
+.col.rm .ch{color:var(--red)}
+.col.to .ch{color:var(--sun)}
+.arrow{color:var(--on-dark-muted);font:600 16px var(--mono);text-align:right}
+.bfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.bfoot button{background:none;border:1px solid var(--line-dark);color:var(--on-dark);border-radius:999px;padding:10px 16px;font:600 14px var(--display);cursor:pointer}
+@media (max-width:900px){.bhead,.brow{grid-template-columns:minmax(0,1fr) auto 20px}.col.for,.bhead .for,.col.to,.bhead .to{display:none}.ch{width:.95em;font-size:12.5px}}
+
+/* audience */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+@media (max-width:900px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid3{grid-template-columns:1fr}}
+.aud{display:flex;flex-direction:column;gap:10px;padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.aud:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(27,36,51,.08)}
+.aud::after{content:"";position:absolute;right:-10px;top:-10px;width:90px;height:90px;background:radial-gradient(rgba(27,36,51,.18) 1.3px,transparent 1.5px) 0 0/10px 10px;border-radius:50%}
+.aud h3{font-size:21px;font-weight:800}
+.aud p{color:var(--muted);font-size:15px}
+.aud .go{margin-top:auto;font-weight:700;font-size:14px;border-bottom:2px solid var(--sun);width:fit-content}
+.aud .mono{color:var(--sun-deep)}
+
+/* founder */
+.founder{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,5vw,64px);align-items:start;margin-top:40px}
+@media (max-width:860px){.founder{grid-template-columns:1fr}}
+.mini-route{position:relative;margin-top:8px;padding-left:34px}
+.mini-route::before{content:"";position:absolute;left:10px;top:10px;bottom:10px;border-left:2px dashed var(--sun-deep)}
+.stop{position:relative;padding:0 0 26px}
+.stop::before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--sun-deep)}
+.stop.now::before{background:var(--sun);border-color:var(--night)}
+.stop .mono{color:var(--sun-deep)}
+.stop h4{font-size:19px;font-weight:800;margin:4px 0}
+.stop p{color:var(--muted);font-size:15px}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+/* offices */
+.offices{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:28px;margin-top:40px;align-items:stretch}
+@media (max-width:860px){.offices{grid-template-columns:1fr}}
+.omap{position:relative;min-height:380px;border-radius:16px;border:1px solid var(--line-dark);overflow:hidden}
+.olist{display:flex;flex-direction:column;gap:12px}
+.office{padding:18px;border:1px solid var(--line-dark);border-radius:14px}
+.office h3{font-size:18px;font-weight:800;color:var(--paper);margin:6px 0}
+.office p{font-size:14.5px;color:var(--on-dark-muted)}
+.office .mono{color:var(--sun)}
+
+/* updates */
+.upd{display:flex;flex-direction:column;gap:12px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.upd time{font:600 12px var(--mono);letter-spacing:.06em;color:var(--sun-deep)}
+.upd h3{font-size:20px;font-weight:800}
+.upd p{color:var(--muted);font-size:15px}
+.upd a{font-size:14px;font-weight:700}
+
+/* faq */
+.faq{max-width:820px;margin-top:32px}
+.faq details{border-top:1px solid var(--line);padding:6px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 0;font-weight:700;font-size:18px}
+.faq summary::after{content:"+";font:500 22px var(--mono);color:var(--sun-deep)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 18px;color:var(--muted);max-width:66ch}
+
+/* CTA + footer */
+.cta{position:relative;overflow:hidden}
+.cta .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end}
+@media (max-width:860px){.cta .wrap{grid-template-columns:1fr}}
+.cta h2{font-size:clamp(32px,4.6vw,56px);font-weight:800;color:var(--paper)}
+.contact-lines{display:grid;gap:10px;font:500 14px var(--mono)}
+.contact-lines b{color:var(--sun);font-weight:600;display:inline-block;min-width:92px}
+footer{background:var(--navy);color:var(--on-dark-muted);font-size:14.5px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px;padding-block:56px 32px}
+@media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.fgrid{grid-template-columns:1fr}}
+footer h4{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark);margin-bottom:12px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--sun)}
+.ftile{display:inline-block;background:var(--paper);border-radius:10px;padding:8px 12px;margin-bottom:16px}
+.ftile img{height:40px;display:block}
+.notice{border-top:1px dashed var(--line-dark);padding-block:24px;display:grid;gap:10px;font-size:13.5px;line-height:1.6}
+.notice strong{color:var(--on-dark)}
+.notice a{color:var(--sun)}
+.legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;border-top:1px dashed var(--line-dark);padding-block:18px 28px;font:500 12px var(--mono);letter-spacing:.04em}
+
+/* INNER PAGES */
+.phead{position:relative;background:var(--night);color:var(--on-dark);overflow:hidden}
+.phead .map{opacity:.95}
+.phead .wrap{position:relative;padding-block:44px 30px;display:flex;flex-direction:column;gap:14px}
+.phead .scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 20%,rgba(15,27,45,.2) 75%)}
+.phead h1{font-size:clamp(34px,5vw,58px);font-weight:800;color:var(--paper);max-width:18ch}
+.phead .lead{color:var(--on-dark-muted);margin-top:0}
+.crumbs{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--on-dark-muted)}
+.crumbs a{color:var(--on-dark);text-decoration:none}
+.steps-bc{display:flex;gap:4px;flex-wrap:wrap}
+.steps-bc span{font:600 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 7px;border:1px solid var(--line-dark);border-radius:4px;color:var(--on-dark-muted)}
+.steps-bc span.on{background:var(--sun);color:var(--night);border-color:var(--sun)}
+.pbody{padding-block:48px 96px}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.toc{position:sticky;top:calc(var(--navh) + 20px);display:flex;flex-direction:column;gap:2px;border-left:2px dashed var(--line);padding-left:14px}
+.toc a{text-decoration:none;font-size:14px;padding:5px 0;color:var(--muted)}
+.toc a:hover{color:var(--ink)}
+@media (max-width:900px){.toc{position:static;flex-direction:row;flex-wrap:wrap;gap:8px;border-left:0;padding-left:0}.toc a{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}}
+.sblock{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,36px);margin-bottom:22px;scroll-margin-top:calc(var(--navh) + 20px);position:relative;overflow:hidden}
+.sblock::before{content:"";position:absolute;left:0;top:28px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:1px solid var(--line);transform:translateX(-50%)}
+.sblock::after{content:"";position:absolute;right:0;top:28px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:1px solid var(--line);transform:translateX(50%)}
+.sblock .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sblock h2{font-size:clamp(24px,2.8vw,32px);font-weight:800;margin:12px 0 6px}
+.sblock .for{color:var(--muted)}
+.review{display:flex;flex-wrap:wrap;gap:6px 18px;margin:16px 0;padding:12px 0;border-block:1px dashed var(--line);font:500 12.5px var(--mono);color:var(--muted)}
+.review a{color:var(--ink);font-weight:600}
+.sgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:18px}
+@media (max-width:700px){.sgrid{grid-template-columns:1fr}}
+.sgrid h4,.fblock h3{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--sun-deep);margin-bottom:8px}
+.sgrid ul,.fblock ul,.fblock ol{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:4px;font-size:15px}
+.sgrid p{color:var(--muted);font-size:15px}
+.status{margin-top:14px;padding:12px 14px;border-radius:10px;background:rgba(213,77,77,.08);border:1px solid rgba(213,77,77,.35);font-size:14.5px}
+.more{display:inline-block;margin-top:18px;font-weight:700;border-bottom:2px solid var(--sun);text-decoration:none}
+.fblock{padding-block:26px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--navh) + 20px)}
+.fblock:first-child{border-top:0;padding-top:0}
+.fblock p{color:var(--muted);max-width:66ch}
+.fblock .ph{min-height:220px;margin-top:8px}
+.aside{display:flex;flex-direction:column;gap:14px}
+.box{border:1px solid var(--line);border-radius:16px;padding:22px;background:#fff}
+.box.darkbox{background:var(--night);color:var(--on-dark);border-color:var(--night)}
+.box h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.twocol{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:start}
+@media (max-width:900px){.twocol{grid-template-columns:1fr}}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:14px}
+.team .ph{aspect-ratio:4/5}
+form.f{display:grid;gap:14px}
+form.f label{display:grid;gap:6px;font-weight:600;font-size:14px}
+form.f input,form.f textarea,form.f select{font:500 15px var(--display);padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);width:100%}
+form.f .note{font-size:13px;color:var(--muted)}
+.okmsg{padding:12px 14px;border-radius:10px;background:var(--sky);font-size:14px}
+
+/* route-hop transition */
+.hop{position:fixed;inset:0;z-index:80;pointer-events:none}
+.hop line{stroke:var(--sun);stroke-width:3;stroke-dasharray:8 8}
+.view-enter{animation:enter .45s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+html.rm .journey{height:auto}
+html.rm .j-stick{position:relative;top:0;height:auto;overflow:visible}
+html.rm .j-stick .map{position:relative;height:60vh}
+html.rm .j-cards{position:relative;inset:auto;width:auto;height:auto;display:grid;gap:14px;padding:16px clamp(16px,4vw,40px) 60px}
+html.rm .card{position:relative;clip-path:none}
+html.rm .j-head{position:relative}
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="pre" id="pre" aria-hidden="true">
+  <div>
+    <svg viewBox="0 0 560 120"><path d="M10 100 C 160 10, 360 10, 540 70"/><path class="mask" d="M10 100 C 160 10, 360 10, 540 70"/></svg>
+    <p><span class="tile"><img src="logo.png" alt="" width="150" height="60"></span></p>
+    <p class="mono">Plotting your route…</p>
+  </div>
+</div>
+
+<div class="ribbon"><span>Design concept · not the official site · sample content is marked</span></div>
+<div class="util"><div class="wrap">
+  <a href="https://casecloud.ca/Login/Login?siteId=CCP2020967" target="_blank" rel="noopener">Client login ↗</a><span class="sep">/</span>
+  <a href="https://admin.caseeasy.ca/Login/Login?siteId=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Agent login ↗</a><span class="sep">/</span>
+  <a href="tel:+16474046682">1 647 404 6682</a><span class="sep">/</span>
+  <a href="https://wa.me/14372300005" target="_blank" rel="noopener">WhatsApp</a>
+</div></div>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#home" data-hop aria-label="Nova World Immigration, home"><img src="logo.png" alt="Nova World Immigration" width="110" height="44"></a>
+    <ul id="navlist"></ul>
+    <a class="btn btn-sun btn-desk" href="#assessment" data-hop>Start your assessment</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false">Menu</button>
+  </div>
+  <div class="mega" id="mega" hidden></div>
+</header>
+<div class="drawer" id="drawer" hidden></div>
+
+<main id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <span class="ftile"><img src="logo.png" alt="Nova World Immigration" width="100" height="40"></span>
+        <p>Nova World Immigration Services Inc.<br>Unit 4 – 2780 Slough Street<br>Mississauga, ON L4T 1G3, Canada</p>
+      </div>
+      <div><h4>Services</h4><ul id="fserv"></ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="#about" data-hop>About &amp; team</a></li><li><a href="#updates" data-hop>Updates</a></li><li><a href="#faq" data-hop>FAQ</a></li><li><a href="#partners" data-hop>Partner agents</a></li><li><a href="#contact" data-hop>Contact</a></li>
+      </ul></div>
+      <div><h4>Reach us</h4><ul>
+        <li>info@nwimmigration.ca</li><li>1 647 404 6682</li><li>1 647 403 6682</li><li>Toll-free +1 (877) 412-9959</li><li><a href="https://wa.me/14372300005" target="_blank" rel="noopener">WhatsApp +1 437 230 0005</a></li>
+        <li><a href="https://casecloud.ca/Login/Login?siteId=CCP2020967" target="_blank" rel="noopener">Client login ↗</a> · <a href="https://admin.caseeasy.ca/Login/Login?siteId=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Agent login ↗</a></li>
+      </ul></div>
+    </div>
+    <div class="notice">
+      <p><strong>Regulated Canadian Immigration Consultant.</strong> Nova World Immigration Services Inc. is led by Rajan Chugh, RCIC <span class="tbd">[TBD: licence no.]</span>, licensed by the College of Immigration and Citizenship Consultants (CICC). Check any consultant on the <a href="https://register.college-ic.ca/Public-Register-EN/Public-Register-EN/RCIC_Search.aspx" target="_blank" rel="noopener">CICC public register ↗</a>.</p>
+      <p><strong>Not a government office.</strong> We are a private firm. We are not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or any government. Information on this site is general and is not advice for your case. Programme rules change often, so each service page links to the official source and shows when we last reviewed it.</p>
+    </div>
+    <div class="legal">
+      <span>© 2026 Nova World Immigration Services Inc.</span>
+      <span><a href="#privacy" data-hop>Privacy</a> · <a href="#terms" data-hop>Terms</a> · <a href="#disclaimer" data-hop>Disclaimer</a></span>
+      <span><a href="https://www.facebook.com/nwiservices" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/nwiservices" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.linkedin.com/company/nwimmigration" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://twitter.com/nwimmigration" target="_blank" rel="noopener">X</a></span>
+    </div>
+  </div>
+</footer>
+
+<nav class="bbar" aria-label="Quick actions">
+  <a href="#assessment" data-hop>Assessment</a>
+  <a href="https://wa.me/14372300005" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="tel:+16474046682">Call</a>
+</nav>
+<svg class="hop" id="hop" aria-hidden="true" hidden><line id="hopLine" x1="0" y1="0" x2="0" y2="0"/></svg>
+
+<script>
+(()=>{
+"use strict";
+const DOTS="AAAAAAAAAABMAZgB/w////////wAAAAAPGAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA8AAAgf+Af////////AAAAAGAAAAAAAAQAAAAB+AAAAAAAAAAAAAAAAAAAAAHHzT8DAAAAA//////8AAAAAAAAAAAAA/AAAAHv/+AAAA0AAAAAAAAAAAAAAAAAPgBz/8AAAP/////wAAAAAAAAAAAAPAAAAH///+AAAA+HgAAAAAAAAAAAAAP4AAEeAAAAAD/////wAAAAAAAAAAAAcAAAAH///gAAAAIAAAAAAAAAAAAAAAf3A5M8d7wAAD/////gAAAAAAAAAAABwAAIH//////H4AAAAAAAAAAAAAAAAA/f/YOA//0AABf////gAAAAAAAAAAADgAHi7///////4AP3AAAAAgAABAAAAAAP/8A4T//gAAP///8wAEAAAAAEAAAA4Afvd///////8///xwAABAAB///gASQH//g8A6/+ABr////wAAAAAAT+AAAABAfv/////////////8AEAAAD////v//w/nfOxwf8AAH///8AAAAAAE///gAwAfPh///////////////n/8AH///////+A+Hf3wf/AAf//8AAAAAAAH///8OP///m/////////////////+wA/////////f///wB/4A///wAAAAAAAP//3+M////P/////////////////f8f////////////8AD+4Af/7AAoYAAAAf//+B///////////////////////Dwf////////////7g3+AAP/gAAf8AAAA/4f+T///////////////////////AAAf//////////3HYB/gAP/gAAPwAAAD/5//P//////////////////////8AAH///////////+AAAcgAH/AAAAAAAAf/H/////////////////////////+AAP///////////4AC+BAAB/AAAAAAAB/+H///////////////////////v/gAAH/9/////////wAA/4AAA+AAAAAAAB/+H//////////////////////CP8AAAS/74F///////gAAfgQAACAAAAAAAB//hA////////////////////+ByAAAAArwAA///////gAA/44AAAAAAAAAAA9/C///////////////////8AYDoAAAAADgAAf//////4AAf/8AAAAAAAABQAA+A///////////////////4AAPAAAAAAGAAAD///////AAf/+AAAAAAAAC8AM8H///////////////////gAA/gAAAAAYAAAA///////4Cf/+AAAAAAAAA4AMwH//////////////////+AAA/AAAAACAAAABf///////x///gAAAAAAADeAEgH//////////////////5AAA/AAAAAAAAAABf///////x///4AAAAAAAPHAG3////////////////////QAA8AAAAAAAAAAAD///////5///8AAAAAAAHPB//////////////////////6AAwAAAAAAAAAAAD///////7///8AAAAAAAMfj//////////////////////6AAwAAEAAAAAAAAA///////////kAAAAAAAAPv//////////////////////7AAAAAAAAAAAAAAB/////////+AIAAAAAAAAAf//////////////////////7AAAAAAAAAAAAAAA3////////5wPAAAAAAAAD///////////////////////ygAAAAAAAAAAAAAAf////////3QfAAAAAAAAf///////////////////////yAAAAAAAAAAAAAAAP/////////hCgAAAAAAAD//////n/7//////////////iAAAAAAAAAAAAAAAP/////////1AAAAAAAAAB/////CP/h//////////////AAAAAAAAAAAAAAAAP////////+cAAAAAAAAAB//H//Cf+H/////////////+CEAAAAAAAAAAAAAAP////////4gAAAAAAAAAB/zn/+AH+H/////////////8DAAAAAAAAAAAAAAAP////////gAAAAAAAAAH/4Bx/8AB+D/////////////wPgAAAAAAAAAAAAAAP////////gAAAAAAAAAH/4A4f8EA/C////////////8AIAAAAAAAAAAAAAAAP///////9AAAAAAAAAAH/gEOf9/3/gf///////////8AIAAAAAAAAAAAAAAAP///////8AAAAAAAAAAH/AMCPP///h///////////PwAMAAAAAAAAAAAAAAAP///////oAAAAAAAAAAH/QACGP///g//////////8RwAMAAAAAAAAAAAAAAAH///////4AAAAAAAAAAH+AAYGn///g//////////+B4A4AAAAAAAAAAAAAAAD///////gAAAAAAAAAAB8A0ICT///4///////////44A4AAAAAAAAAAAAAAAD///////gAAAAAAAAAAAA/+AAAA//////////////AcD4AAAAAAAAAAAAAAAB///////gAAAAAAAAAAA//+AAQM/////////////+Aw/gAAAAAAAAAAAAAAAAP//////AAAAAAAAAAAB//8AAAA//////////////AAMAAAAAAAAAAAAAAAAAH/////8AAAAAAAAAAAH///AAAB//////////////gDgAAAAAAAAAAAAAAAAAH/////4AAAAAAAAAAAH///4PAB//////////////wDAAAAAAAAAAAAAAAAAACf////4AAAAAAAAAAAP////P+///////////////wAAAAAAAAAAAAAAAAAAACf///j4AAAAAAAAAAAP/////////v///////////wAAAAAAAAAAAAAAAAAAABf//gAYAAAAAAAAAACf/////////H///////////wAAAAAAAAAAAAAAAAAAAAn/+AAYAAAAAAAAAAJ///////5//n///////////gAAAAAAAAAAAAAAAAAAAAz/8AAMAAAAAAAAAAB///////8//x3//////////AAAAAAAAAAAAAAAAAAAAAJ/+AAMAAAAAAAAAAH///////8f/4H//////////AAAAAAAAAAAAAAAAAAAAAI/8AAAAAAAAAAAAAH///////+f/8QAf///////+QAAAAAAAAAAAAAAAAAAAAEf8AAAEAAAAAAAAAP////////P//4Af///////8wAAAAAAAAAAAAAAAAAAAAAP8AAYAAAAAAAAAAP////////H//+AF///f//+4gAAAAAAAAAAAAIAAAAAAAAP8ABDAAAAAAAAAAf////////n///AHf//P//+AAAAAAAAAAAAAAAAAAAAAAAH+A4AyAAAAAAAAAf////////n//+ADf/4P/+IAAAAAAAAAAAAAAAgAAAAAAAH+A4A4AAAAAAAAAP////////j//8AAf/wH/8IAAAAAAAAAAAAAAAAAAAAAAAD/BwAB4AAAAAAAAP////////h//8AAf/gD/8YAAAAAAAAAAAAAAAAAAAAAAAA//wAwhAAAAAAAAP////////4//wAAf/AD/8AAwAAAAAAAAAAAAAAAAAAAAAAP/wAAAAAAAAAAAP////////4f/AAAf8AD/+AAwAAAAAAAAAAAAAAAAAAAAAADvgAAAAAAAAAAAf////////4f8AAAP4ADP/AAwAAAAAAAAAAAAAAAAAAAAAAAH/gAAAAAAAAAgf////////8fwAAAPwAAP/gAwAAAAAAAAAAAAAAAAAAAAAAAB/gAAAAAAAAAAf/////////fAAAAHwAAP/gAYAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAf/////////4AAAAHwAAF/gAEAAAAAAAAAAAAAAAAAAAAAAAAHAAgAAAAAAAAP/////////gAAAAHwAAMfgAAAAAAAAAAAAAAAAAAAAAAAAAADAHcAAAAAAAAH/////////x4AAADwAAMPABKAAAAAAAAAAAAAAAAAAAAAAAADgPf8AAAAAAAD//////////4AAADgAAAGAAGAAAAAAAAAAAAAAAAAAAAAAAAA3P/+AAAAAAAB//////////4AAABIAAMAAABAAAAAAAAAAAAAAAAAAAAAAAAAM///gAAAAAAB//////////wAAAAMAAEAAAPAAAAAAAAAAAAAAAAAAAAAAAAAA///gAAAAAAA//////////gAAAAMAACAAADAAAAAAAAAAAAAAAAAAAAAAAAAAf//4AAAAAAAP/h///////gAAAAIAADAAMBAAAAAAAAAAAAAAAAAAAAAAAAAAf///wAAAAAAHEB///////AAAAAAABzgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAf///4AAAAAAAAAH//////AAAAAAAA5gA8AAAAAAAAAAAAAAAAAAAAAAAAAAA////4AAAAAAAAAD/////+AAAAAAAAdgD8AAAAAAAAAAAAAAAAAAAAAAAAAAB////4AAAAAAAAAD/////4AAAAAAAAPQH8AAAAAAAAAAAAAAAAAAAAAAAAAAD////8AAAAAAAAAD/////wAAAAAAAAXof+SYAAAAAAAAAAAAAAAAAAAAAACAD////6AAAAAAAAAH/////gAAAAAAAADwf4AAAAAAAAAAAAAAAAAAAAAAAAAAH////+gAAAAAAAAH/////AAAAAAAAADwf5YBwAAAAAAAAAAAAAAAAAAAAAAAH/////4AAAAAAAAH////+AAAAAAAAAB8PxiAxgAAAAAAAAAAAAAAAAAAAAAAD/////7wAAAAAAAD////8AAAAAAAAAB+DxQM78AQAAAAAAAAAAAAAAAAAAAAH//////8AAAAAAAB////8AAAAAAAAAA8AAYAH/gAAAAAAAAAAAAAAAAAAAAAH//////+AAAAAAAA////4AAAAAAAAAAMABIAB/wQAAAAAAAAAAAAAAAAAAAAH///////gAAAAAAA////4AAAAAAAAAAAAAgAI/5gAAAAAAAAAAAAAAAAAAAAD///////gAAAAAAAf///8AAAAAAAAAAD/AAAAf4AAAAAAAAAAAAAAAAAAAAAB///////gAAAAAAAf///4AAAAAAAAAAAPAAAA/MAQAAAAAAAAAAAAAAAAAAAB///////gAAAAAAAf///4AAAAAAAAAAAAEBAAGGAAAAAAAAAAAAAAAAAAAAAA///////AAAAAAAAf///8AAAAAAAAAAAAAiAAADAAAAAAAAAAAAAAAAAAAAAA//////+AAAAAAAAP///+AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAf/////8AAAAAAAAP///+AAAAAAAAAAAAAAASCAAAAAAAAAAAAAAAAAAAAAAAP/////4AAAAAAAAf///+AQAAAAAAAAAAAAD+CAAAAAAAIAAAAAAAAAAAAAAAP/////4AAAAAAAA////+AwAAAAAAAAAAAAD+DAAAAAAAAAAAAAAAAAAAAAAAH/////4AAAAAAAA////+AwAAAAAAAAAAAB/8DgAAAAAAAAAAAAAAAAAAAAAAD/////4AAAAAAAA////8HwAAAAAAAAAAAB/+HgAAAAAAAAAAAAAAAAAAAAAAA/////4AAAAAAAA////4PwAAAAAAAAAAAL//3wAAAAAAAAAAAAAAAAAAAAAAAf////4AAAAAAAA////gPgAAAAAAAAAAAP///wAAAAGAAAAAAAAAAAAAAAAAAP////wAAAAAAAA////APgAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAP////wAAAAAAAAf//+APgAAAAAAAAAAA////8AAAAAAAAAAAAAAAAAAAAAAAP////gAAAAAAAAP//+APAQAAAAAAAAAP////+AAAAAAAAAAAAAAAAAAAAAAAP////gAAAAAAAAP//+AfAAAAAAAAAAAf/////AACAAAAAAAAAAAAAAAAAAAAP///+AAAAAAAAAP///AfAAAAAAAAAAA//////gAAAAAAAAAAAAAAAAAAAAAAf///wAAAAAAAAAP///AOAAAAAAAAAAB//////gAAAAAAAAAAAAAAAAAAAAAAP///AAAAAAAAAAH//8AOAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAH//4AAAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAH//4AAAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAD//4AAAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAA///+AAAAAAAAAAB//wAAAAAAAAAAAAAf/////4AAAAAAAAAAAAAAAAAAAAAAf//8AAAAAAAAAAB//gAAAAAAAAAAAAAf/////4AAAAAAAAAAAAAAAAAAAAAA///4AAAAAAAAAAA//AAAAAAAAAAAAAAf/////4AAAAAAAAAAAAAAAAAAAAAA///wAAAAAAAAAAA/+AAAAAAAAAAAAAAP/wf//4AAAAAAAAAAAAAAAAAAAAAA///gAAAAAAAAAAA/8AAAAAAAAAAAAAAP8AP//wAAAAAAAAAAAAAAAAAAAAAA///AAAAAAAAAAAA/wAAAAAAAAAAAAAAfAAE//gAAAAAAAAAAAAAAAAAAAAAA//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABf/gAABAAAAAAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABf/AAAAgAAAAAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/AAAAAAAAAAAAAAAAAAAAAAB//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH8AAAAcAAAAAAAAAAAAAAAAAB/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAD/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAD/oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAACQAAAAAAAAAAAAAAAAAA/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAHAAAAAAAAAAAAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAGAEAAAAAAAAAAAAAAAAB/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAB/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (RM) document.documentElement.classList.add('rm');
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- data ---------- */
+const STEPS=["Assess","Pathway","Documents","Apply","Arrive","Settle"];
+const IRCC="https://www.canada.ca/en/services/immigration-citizenship.html";
+const C="https://www.canada.ca/en/immigration-refugees-citizenship/services/";
+const CATS=[
+ {id:"immigrate",name:"Immigrate",line:"Permanent residence pathways for skilled workers and their families."},
+ {id:"study",name:"Study",line:"Study permits and admissions help for Canada, the USA, the UK, Australia and Germany."},
+ {id:"work",name:"Work",line:"Work permits for newcomers, graduates and employers hiring from abroad."},
+ {id:"visit",name:"Visit",line:"Visitor visas, the Super Visa for parents and grandparents, and eTAs."},
+ {id:"business",name:"Business",line:"Business and entrepreneur routes. Several federal programmes are paused or closed; we'll tell you what is open."},
+ {id:"sponsor",name:"Sponsor",line:"Bring your spouse, partner, children, parents or grandparents to Canada."},
+ {id:"other",name:"Other services",line:"Citizenship, credential evaluation, documents, settlement and more."}
+];
+// s slug, c cat, t title, f for, st step, to destination, fl flagship, x status, n status note, o official link
+const S=[
+ {s:"express-entry",c:"immigrate",t:"Express Entry",f:"Skilled workers",st:3,to:"Canada",fl:1,o:C+"immigrate-canada/express-entry.html"},
+ {s:"federal-skilled-worker",c:"immigrate",t:"Federal Skilled Worker",f:"Skilled workers",st:3,to:"Canada"},
+ {s:"federal-skilled-trades",c:"immigrate",t:"Federal Skilled Trades",f:"Tradespeople",st:3,to:"Canada"},
+ {s:"canadian-experience-class",c:"immigrate",t:"Canadian Experience Class",f:"Workers in Canada",st:3,to:"Canada"},
+ {s:"provincial-nominee-program",c:"immigrate",t:"Provincial Nominee Program",f:"Skilled workers",st:3,to:"Canada",fl:1,o:C+"immigrate-canada/provincial-nominees.html"},
+ {s:"atlantic-immigration-program",c:"immigrate",t:"Atlantic Immigration Program",f:"Job offer holders",st:3,to:"Canada",n:"Replaced the Atlantic Immigration Pilot in 2022."},
+ {s:"rural-community-immigration-pilot",c:"immigrate",t:"Rural Community Immigration Pilot",f:"Job offer holders",st:3,to:"Canada",n:"Replaced the Rural and Northern Immigration Pilot, which is closed."},
+ {s:"quebec-immigration",c:"immigrate",t:"Québec immigration",f:"Québec-bound",st:3,to:"Québec",x:"tbd",n:"[TBD: MIFI registration needed to act for Québec applicants — confirm with client.]"},
+ {s:"caregivers",c:"immigrate",t:"Home care worker pilots",f:"Caregivers",st:3,to:"Canada",x:"paused",n:"IRCC has paused intake for the Home Care Worker Immigration pilots."},
+ {s:"study-canada",c:"study",t:"Study in Canada",f:"Students",st:3,to:"Canada",fl:1,o:C+"study-canada.html"},
+ {s:"study-usa",c:"study",t:"Study in the USA",f:"Students",st:1,to:"USA",x:"tbd",n:"[TBD: confirm this service is still offered.]"},
+ {s:"study-uk",c:"study",t:"Study in the UK",f:"Students",st:1,to:"UK",x:"tbd",n:"[TBD: confirm this service is still offered.]"},
+ {s:"study-australia",c:"study",t:"Study in Australia",f:"Students",st:1,to:"Australia",x:"tbd",n:"[TBD: confirm this service is still offered.]"},
+ {s:"study-germany",c:"study",t:"Study in Germany",f:"Students",st:1,to:"Germany",x:"tbd",n:"[TBD: confirm this service is still offered.]"},
+ {s:"lmia",c:"work",t:"Labour Market Impact Assessment",f:"Employers",st:3,to:"Canada",fl:1,o:"https://www.canada.ca/en/employment-social-development/services/foreign-workers.html"},
+ {s:"post-graduation-work-permit",c:"work",t:"Post-Graduation Work Permit",f:"Graduates",st:3,to:"Canada",fl:1,o:C+"study-canada/work/after-graduation.html"},
+ {s:"open-work-permit",c:"work",t:"Open work permit",f:"Workers",st:3,to:"Canada"},
+ {s:"bridging-open-work-permit",c:"work",t:"Bridging open work permit",f:"PR applicants",st:3,to:"Canada"},
+ {s:"international-experience-canada",c:"work",t:"International Experience Canada",f:"Young people",st:3,to:"Canada"},
+ {s:"visitor-visa",c:"visit",t:"Visitor visa",f:"Visitors",st:3,to:"Canada",fl:1,o:C+"visit-canada.html"},
+ {s:"super-visa",c:"visit",t:"Super Visa",f:"Parents, grandparents",st:3,to:"Canada",fl:1,o:C+"visit-canada/parent-grandparent-super-visa.html"},
+ {s:"eta",c:"visit",t:"Electronic Travel Authorization",f:"Visa-exempt travellers",st:3,to:"Canada"},
+ {s:"buy-a-business",c:"business",t:"Buy a business",f:"Business owners",st:1,to:"Canada",x:"tbd",n:"[TBD: confirm which route the client uses today.]"},
+ {s:"entrepreneur-programs",c:"business",t:"Provincial entrepreneur streams",f:"Entrepreneurs",st:1,to:"Canada",x:"tbd",n:"[TBD: the federal Entrepreneur and Investor programmes ended in 2014 — confirm which provincial streams the client handles.]"},
+ {s:"start-up-visa",c:"business",t:"Start-up Visa",f:"Founders",st:1,to:"Canada",x:"closed",n:"Closed to new applications from 1 January 2026. IRCC has announced a new entrepreneur pilot."},
+ {s:"self-employed",c:"business",t:"Self-employed persons",f:"Artists, athletes",st:1,to:"Canada",x:"paused",n:"Intake paused by IRCC."},
+ {s:"spousal-sponsorship",c:"sponsor",t:"Spouse & partner sponsorship",f:"Couples",st:3,to:"Canada",fl:1,o:C+"immigrate-canada/family-sponsorship/spouse-partner-children.html"},
+ {s:"parents-grandparents",c:"sponsor",t:"Parents & grandparents",f:"Families",st:3,to:"Canada",fl:1,o:C+"immigrate-canada/family-sponsorship/sponsor-parents-grandparents.html"},
+ {s:"child-dependent",c:"sponsor",t:"Dependent children",f:"Families",st:3,to:"Canada"},
+ {s:"citizenship",c:"other",t:"Citizenship application",f:"Permanent residents",st:5,to:"Canada",fl:1,o:C+"canadian-citizenship.html"},
+ {s:"evaluation",c:"other",t:"Credential evaluation",f:"Applicants",st:0,to:"Canada"},
+ {s:"document-services",c:"other",t:"Document services",f:"Applicants",st:2,to:"Canada"},
+ {s:"consular-services",c:"other",t:"Consular services",f:"Travellers",st:2,to:"Canada"},
+ {s:"inadmissibility",c:"other",t:"Inadmissibility issues",f:"Applicants",st:1,to:"Canada"},
+ {s:"humanitarian-compassionate",c:"other",t:"H&C assessment",f:"Applicants",st:1,to:"Canada"},
+ {s:"immigration-appeal",c:"other",t:"Immigration appeal",f:"Refused applicants",st:3,to:"Canada",x:"tbd",n:"[TBD: IRB representation needs the RCIC-IRB licence class — confirm.]"},
+ {s:"pre-arrival",c:"other",t:"Pre-arrival services",f:"Newcomers",st:4,to:"Canada"},
+ {s:"settlement-support",c:"other",t:"Settlement support",f:"Newcomers",st:5,to:"Canada"},
+ {s:"employment-support",c:"other",t:"Employment support",f:"Newcomers",st:5,to:"Canada",x:"tbd",n:"[TBD: confirm what this service includes.]"},
+ {s:"consulting-advisory",c:"other",t:"Consulting & advisory",f:"Businesses",st:1,to:"Canada",x:"tbd",n:"[TBD: confirm what this service includes.]"},
+ {s:"value-added",c:"other",t:"Value-added services",f:"Clients",st:5,to:"Canada"}
+];
+const bySlug=Object.fromEntries(S.map(x=>[x.s,x]));
+const catOf=id=>CATS.find(c=>c.id===id);
+const hrefOf=x=>x.fl?"#"+x.s:"#"+x.c+"."+x.s;
+
+const ORIGINS=[
+ {id:"del",label:"India · Delhi",city:"Delhi",lon:77.2,lat:28.6,tz:["Asia/Kolkata","Asia/Calcutta"]},
+ {id:"chd",label:"India · Chandigarh",city:"Chandigarh",lon:76.8,lat:30.7,tz:[]},
+ {id:"dxb",label:"UAE · Dubai",city:"Dubai",lon:55.3,lat:25.2,tz:["Asia/Dubai"]},
+ {id:"pnh",label:"Cambodia · Phnom Penh",city:"Phnom Penh",lon:104.9,lat:11.6,tz:["Asia/Phnom_Penh"]}
+];
+const TOR={city:"Toronto",lon:-79.38,lat:43.65}, MIS={city:"Mississauga",lon:-79.64,lat:43.59};
+const STUDY_DEST=[{city:"Canada",lon:-79.4,lat:43.7},{city:"USA",lon:-74,lat:40.7},{city:"UK",lon:-1.3,lat:51.8},{city:"Germany",lon:10,lat:51},{city:"Australia",lon:151.2,lat:-33.9}];
+
+let origin=ORIGINS[0];
+try{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;const m=ORIGINS.find(o=>o.tz.includes(tz));if(m)origin=m;}catch(e){}
+try{const saved=localStorage.getItem("nw-origin");const m=ORIGINS.find(o=>o.id===saved);if(m)origin=m;}catch(e){}
+
+/* ---------- dot map ---------- */
+const DOT=(()=>{const bin=atob(DOTS);const li=[],la=[];const rows=135,bpr=45;
+  for(let r=0;r<rows;r++)for(let i=0;i<360;i++){if(bin.charCodeAt(r*bpr+(i>>3))&(1<<(7-(i&7)))){li.push(i);la.push(r);}}
+  return {li:Int16Array.from(li),la:Int16Array.from(la),n:li.length};})();
+const lerp=(a,b,t)=>a+(b-a)*t, ease=t=>-(Math.cos(Math.PI*t)-1)/2;
+function arc(o,d,n=64){const dl=d.lon-o.lon,dd=d.lat-o.lat,dist=Math.hypot(dl,dd),b=dist*.17;const pts=[];
+  for(let i=0;i<=n;i++){const t=i/n;pts.push([lerp(o.lon,d.lon,t),lerp(o.lat,d.lat,t)+Math.sin(Math.PI*t)*b]);}return pts;}
+function makeMap(host,theme){
+  const canvas=document.createElement("canvas"),labels=document.createElement("div");labels.className="labels";
+  host.append(canvas,labels);
+  const m={canvas,ctx:canvas.getContext("2d"),w:0,h:0,cam:{lon:0,lat:30,ppd:3},cx:.5,cy:.5,routes:[],cities:[],theme,els:[]};
+  m.resize=()=>{const r=host.getBoundingClientRect();m.w=r.width;m.h=r.height;const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(m.w*d));canvas.height=Math.max(1,Math.round(m.h*d));m.ctx.setTransform(d,0,0,d,0,0);};
+  m.proj=(lon,lat)=>[m.w*m.cx+(lon-m.cam.lon)*m.cam.ppd,m.h*m.cy-(lat-m.cam.lat)*m.cam.ppd*1.18];
+  m.fit=(pts,box)=>{let a=180,b=-180,c=90,d=-90;for(const [x,y] of pts){a=Math.min(a,x);b=Math.max(b,x);c=Math.min(c,y);d=Math.max(d,y);}
+    const bw=m.w*box.w,bh=m.h*box.h;m.cx=box.x;m.cy=box.y;m.cam={lon:(a+b)/2,lat:(c+d)/2,ppd:Math.min(bw/Math.max(b-a,8),bh/(Math.max(d-c,6)*1.18))};return m.cam;};
+  m.setCities=list=>{m.cities=list;labels.innerHTML="";m.els=list.map(c=>{const e=document.createElement("div");e.className="lbl"+(c.pulse?" pulse":"")+(m.theme==="light"?" light":"");e.innerHTML=c.label?`<span>${esc(c.label)}</span>`:"";labels.append(e);return e;});};
+  m.draw=()=>{const {ctx,w,h}=m;if(!w)return;ctx.clearRect(0,0,w,h);const ppd=m.cam.ppd;
+    const sparse=ppd<2.6&&w<700;const r=Math.max(.75,Math.min(ppd*.26,5.5));
+    ctx.fillStyle=m.theme==="light"?"rgba(27,36,51,.2)":"rgba(232,236,243,.2)";ctx.beginPath();
+    const big=r>1.4;
+    for(let i=0;i<DOT.n;i++){const li=DOT.li[i],la=DOT.la[i];if(sparse&&(li&1||la&1))continue;
+      const [x,y]=m.proj(-179.5+li,78-la);if(x<-r||x>w+r||y<-r||y>h+r)continue;
+      if(big){ctx.moveTo(x+r,y);ctx.arc(x,y,r,0,6.2832);}else ctx.rect(x-r,y-r,r*2,r*2);}
+    ctx.fill();
+    const accent=m.theme==="light"?"#C99A00":"#FFD128";
+    for(const rt of m.routes){const pts=rt.pts.map(p=>m.proj(p[0],p[1]));
+      ctx.setLineDash([5,6]);ctx.lineWidth=1.4;ctx.strokeStyle=m.theme==="light"?"rgba(201,154,0,.45)":"rgba(255,209,40,.3)";
+      ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.stroke();ctx.setLineDash([]);
+      const p=Math.max(0,Math.min(1,rt.p));if(p<=0)continue;const k=p*(pts.length-1),ki=Math.floor(k),kf=k-ki;
+      ctx.lineWidth=2.6;ctx.strokeStyle=accent;ctx.lineCap="round";ctx.beginPath();
+      for(let i=0;i<=ki;i++){i?ctx.lineTo(pts[i][0],pts[i][1]):ctx.moveTo(pts[i][0],pts[i][1]);}
+      let hx=pts[ki][0],hy=pts[ki][1];if(ki<pts.length-1){hx=lerp(pts[ki][0],pts[ki+1][0],kf);hy=lerp(pts[ki][1],pts[ki+1][1],kf);ctx.lineTo(hx,hy);}ctx.stroke();
+      if(rt.head!==false&&p<1){ctx.fillStyle=m.theme==="light"?"rgba(201,154,0,.2)":"rgba(255,209,40,.22)";ctx.beginPath();ctx.arc(hx,hy,11,0,6.2832);ctx.fill();
+        ctx.fillStyle=accent;ctx.beginPath();ctx.arc(hx,hy,4.5,0,6.2832);ctx.fill();}}
+    m.cities.forEach((c,i)=>{const [x,y]=m.proj(c.lon,c.lat);ctx.fillStyle=accent;ctx.beginPath();ctx.arc(x,y,c.small?3:5,0,6.2832);ctx.fill();
+      ctx.strokeStyle=accent;ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(x,y,c.small?6:9,0,6.2832);ctx.stroke();
+      const e=m.els[i];if(e){const vis=x>-40&&x<w+40&&y>-20&&y<h+20;e.style.display=vis?"":"none";e.style.transform=`translate(${x}px,${y}px)`;}});
+  };
+  return m;
+}
+
+/* ---------- nav, mega, drawer ---------- */
+function buildNav(){
+  const ul=$("#navlist");
+  ul.innerHTML=CATS.map(c=>`<li><a href="#${c.id}" data-hop data-cat="${c.id}">${c.id==="other"?"Other":c.name}</a></li>`).join("")+
+    `<li><a href="#about" data-hop>About</a></li><li><a href="#contact" data-hop>Contact</a></li>`;
+  const mega=$("#mega");let t;
+  const open=id=>{const c=catOf(id);clearTimeout(t);
+    mega.innerHTML=`<div class="wrap"><div><p class="mono" style="color:var(--sun)">Departures · ${esc(c.name)}</p><h3>${esc(c.name)}</h3><p>${esc(c.line)}</p><p style="margin-top:14px"><a class="btn btn-sun" href="#${c.id}" data-hop style="padding:9px 14px;font-size:13px">All ${esc(c.name.toLowerCase())} →</a></p></div>
+    <div class="rows">${S.filter(x=>x.c===id).map(x=>`<a href="${hrefOf(x)}" data-hop><span>${esc(x.t)}</span><em>${x.x==="paused"?"Paused":x.x==="closed"?"Closed":x.fl?"Page →":"→"}</em></a>`).join("")}</div></div>`;
+    mega.hidden=false;};
+  const close=()=>{t=setTimeout(()=>mega.hidden=true,140);};
+  $$("[data-cat]",ul).forEach(a=>{a.addEventListener("mouseenter",()=>open(a.dataset.cat));a.addEventListener("mouseleave",close);a.addEventListener("focus",()=>open(a.dataset.cat));});
+  mega.addEventListener("mouseenter",()=>clearTimeout(t));mega.addEventListener("mouseleave",close);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){mega.hidden=true;closeDrawer();}});
+  const dr=$("#drawer");
+  dr.innerHTML=`<div class="top"><img src="logo.png" alt="" width="100" height="40" style="background:var(--paper);border-radius:8px;padding:4px 8px;height:40px;width:auto"><button id="drClose">Close</button></div>`+
+    CATS.map(c=>`<a href="#${c.id}" data-hop>${esc(c.name)}<small>${S.filter(x=>x.c===c.id).length} services</small></a>`).join("")+
+    `<a href="#about" data-hop>About &amp; team</a><a href="#updates" data-hop>Updates</a><a href="#faq" data-hop>FAQ</a><a href="#partners" data-hop>Partner agents</a><a href="#contact" data-hop>Contact</a>
+     <a href="https://casecloud.ca/Login/Login?siteId=CCP2020967" target="_blank" rel="noopener">Client login<small>↗</small></a><a href="https://admin.caseeasy.ca/Login/Login?siteId=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Agent login<small>↗</small></a>
+     <p style="margin-top:20px"><a class="btn btn-sun" href="#assessment" data-hop style="display:inline-flex;font-size:15px;border:0">Start your assessment</a></p>`;
+  $("#menuBtn").onclick=()=>{dr.hidden=false;$("#menuBtn").setAttribute("aria-expanded","true");$("#drClose").focus();};
+  $("#drClose").onclick=closeDrawer;
+  $("#fserv").innerHTML=CATS.map(c=>`<li><a href="#${c.id}" data-hop>${esc(c.name)}</a></li>`).join("");
+}
+function closeDrawer(){$("#drawer").hidden=true;$("#menuBtn").setAttribute("aria-expanded","false");}
+
+/* ---------- views ---------- */
+const sample=`<span class="tag sample">Sample copy</span>`;
+function homeHTML(){
+  const pick=`<select id="origin">${ORIGINS.map(o=>`<option value="${o.id}"${o.id===origin.id?" selected":""}>${esc(o.label)}</option>`).join("")}</select>`;
+  return `
+<section class="hero dark" aria-labelledby="h1">
+  <div class="map" id="heroMap"></div><div class="scrim"></div>
+  <div class="wrap"><div class="hero-copy">
+    <p class="mono eyebrow">RCIC-led · Mississauga, Ontario</p>
+    <h1 id="h1">Your move to Canada, <em>one clear step</em> at a time.</h1>
+    <p class="licence"><strong>Nova World Immigration Services Inc.</strong>, led by <strong>Rajan Chugh, Regulated Canadian Immigration Consultant</strong> <span class="tbd">[TBD: licence no.]</span>. Check any consultant on the <a href="https://register.college-ic.ca/Public-Register-EN/Public-Register-EN/RCIC_Search.aspx" target="_blank" rel="noopener">CICC public register ↗</a></p>
+    <div class="picker"><label class="mono" for="origin">Starting from</label>${pick}<span class="mono code" id="routeCode"></span></div>
+    <div class="ctas"><a class="btn btn-sun" href="#assessment" data-hop>Start your eligibility assessment</a><a class="btn btn-ghost" href="#contact" data-hop>Book a consultation</a></div>
+  </div></div>
+</section>
+<section class="trust" aria-label="Credentials">
+  <div class="wrap">
+    <div><span class="mono">Licensed with</span><b>CICC · RCIC <span class="tbd">[TBD: no.]</span></b></div>
+    <div><span class="mono">RCIC since</span><b>2019</b></div>
+    <div><span class="mono">Also</span><b>Commissioner for Taking Affidavits, Ontario</b></div>
+    <div><span class="mono">Also</span><b>Licensed Foreign Worker Recruitment Agent, Manitoba</b></div>
+    <div><span class="mono">Offices &amp; affiliates</span><b>Canada · India · UAE · Cambodia</b></div>
+  </div>
+</section>
+<section class="journey dark" id="journey" aria-labelledby="jh">
+  <div class="j-stick">
+    <div class="map" id="jMap"></div>
+    <div class="j-head"><div class="wrap">
+      <p class="mono eyebrow">The journey <span class="tag sample" style="margin-left:6px">Sample copy</span></p>
+      <h2 class="h2" id="jh" style="font-size:clamp(26px,3.2vw,40px)">Six steps. We're with you at every one.</h2>
+      <div class="j-rail" id="jRail">${STEPS.map((s,i)=>`<span>0${i+1} ${s}</span>`).join("")}</div>
+    </div></div>
+    <div class="j-count" aria-hidden="true">STEP<b id="jNum">01</b></div>
+    <div class="j-cards" id="jCards">${JCARDS.map((c,i)=>`<article class="card${i?"":" on"}"><p class="mono">Step 0${i+1} · ${STEPS[i]}</p><h3>${c.h}</h3><p>${c.p}</p><div class="links">${c.l.map(([t,h])=>`<a href="${h}" data-hop>${t} →</a>`).join("")}</div></article>`).join("")}</div>
+  </div>
+</section>
+<section class="sec dark board-sec" aria-labelledby="bh">
+  <div class="wrap">
+    <p class="mono eyebrow">Departures</p>
+    <h2 class="h2" id="bh">Every pathway we handle.</h2>
+    <p class="lead muted">Pick a category. Paused or closed programmes stay on the board, clearly marked, so nothing is hidden.</p>
+    <div class="tabs" role="tablist" id="tabs">${CATS.map((c,i)=>`<button role="tab" aria-selected="${i?"false":"true"}" data-tab="${c.id}">${c.id==="other"?"Other":c.name}</button>`).join("")}</div>
+    <div class="board"><div class="bhead" aria-hidden="true"><span>PATHWAY</span><span class="for">FOR</span><span class="to">TO</span><span>REMARK</span><span></span></div><div id="rows"></div></div>
+    <div class="bfoot"><span class="mono muted" id="bcount"></span><button id="showAll">Show all</button></div>
+  </div>
+</section>
+<section class="sec" aria-labelledby="wh">
+  <div class="wrap">
+    <p class="mono eyebrow">Who we help</p>
+    <h2 class="h2" id="wh">Start from where you are.</h2>
+    <div class="grid3">${AUD.map(a=>`<a class="aud" href="${a.h}" data-hop><span class="mono">${a.k}</span><h3>${a.t}</h3><p>${a.p}</p><span class="go">${a.g} →</span></a>`).join("")}</div>
+  </div>
+</section>
+<section class="sec" style="background:var(--paper2)" aria-labelledby="fh">
+  <div class="wrap">
+    <p class="mono eyebrow">Our story</p>
+    <h2 class="h2" id="fh">Our founder made this journey himself.</h2>
+    <div class="founder">
+      <div class="ph" style="aspect-ratio:4/5">[T1 · Portrait of Rajan Chugh — real photo from the client]</div>
+      <div>
+        <div class="mini-route">
+          <div class="stop"><p class="mono">2004</p><h4>Arrives in Canada as an international student</h4><p>From <span class="tbd">[TBD: home city]</span>. He went through admission and immigration himself, with all its struggles.</p></div>
+          <div class="stop"><p class="mono">While studying</p><h4>Starts helping other students</h4><p>He helps other students get admission to Canadian institutions. Over time, that help grows into an immigration business.</p></div>
+          <div class="stop"><p class="mono">2019</p><h4>Licensed as an RCIC and founds Nova World</h4><p>Rajan becomes a Regulated Canadian Immigration Consultant and starts Nova World Immigration Services in Canada.</p></div>
+          <div class="stop now"><p class="mono">Today</p><h4>Offices and affiliates abroad</h4><p>India, UAE, Cambodia and others <span class="tbd">[TBD: which are own offices, which are affiliates]</span>. Built on three values: trust, integrity and honesty.</p></div>
+        </div>
+        <div class="creds"><span class="tag">Commissioner for Taking Affidavits · Ontario</span><span class="tag">Licensed Foreign Worker Recruitment Agent · Manitoba</span></div>
+        <p style="margin-top:20px"><a class="more" href="#about" data-hop>About us and the team →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec dark" aria-labelledby="oh">
+  <div class="wrap">
+    <p class="mono eyebrow">Offices &amp; network</p>
+    <h2 class="h2" id="oh">Head office in Mississauga. Help near you.</h2>
+    <div class="offices">
+      <div class="omap" id="oMap"></div>
+      <div class="olist">
+        <div class="office"><p class="mono">Head office · Canada</p><h3>Mississauga, Ontario</h3><p>Unit 4 – 2780 Slough Street, Mississauga, ON L4T 1G3<br>1 647 404 6682 · 1 647 403 6682<br>info@nwimmigration.ca</p></div>
+        <div class="office"><p class="mono">India</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
+        <div class="office"><p class="mono">UAE</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
+        <div class="office"><p class="mono">Cambodia</p><h3><span class="tbd">[TBD: city]</span></h3><p><span class="tbd">[TBD: office or affiliate, address, phone]</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec" aria-labelledby="uh">
+  <div class="wrap">
+    <p class="mono eyebrow">Updates</p>
+    <h2 class="h2" id="uh">What changed recently.</h2>
+    <p class="lead muted">Dated notes on programme changes, each linked to the official source. <span class="tag sample">Draft · for client review</span></p>
+    <div class="grid3">${UPD.map(u=>`<article class="upd"><time>${u.d}</time><h3>${u.t}</h3><p>${u.p}</p><a href="${u.h}" target="_blank" rel="noopener">Official notice ↗</a></article>`).join("")}</div>
+    <p style="margin-top:24px"><a class="more" href="#updates" data-hop>All updates →</a></p>
+  </div>
+</section>
+<section class="sec" style="padding-top:0" aria-labelledby="qh">
+  <div class="wrap">
+    <p class="mono eyebrow">FAQ</p>
+    <h2 class="h2" id="qh">Straight answers.</h2>
+    <div class="faq">${FAQ.map(q=>`<details><summary>${q.q}</summary><p>${q.a}</p></details>`).join("")}</div>
+  </div>
+</section>
+${ctaHTML()}`;
+}
+const JCARDS=[
+ {h:"Find out where you stand.",p:"Start with an eligibility assessment in our secure client system. We look at your profile and your education credentials. <span class='tbd'>[TBD: free or paid?]</span>",l:[["Start your assessment","#assessment"],["Credential evaluation","#other.evaluation"]]},
+ {h:"Choose the right pathway.",p:"A consultation with a licensed consultant. We compare the options that fit your situation: skilled worker, provincial, study, work or family.",l:[["Book a consultation","#contact"],["Immigrate","#immigrate"]]},
+ {h:"Get your documents in order.",p:"Document review, certified true copies and affidavits (our founder is a Commissioner for Taking Affidavits in Ontario), plus help dealing with consulates and embassies.",l:[["Document services","#other.document-services"],["Consular services","#other.consular-services"]]},
+ {h:"Apply with a licensed consultant.",p:"We prepare your application with you and act as your authorised representative. We tell you honestly what to expect. Nobody can promise the outcome.",l:[["Express Entry","#express-entry"],["Spousal sponsorship","#spousal-sponsorship"]]},
+ {h:"Arrive prepared.",p:"Before you fly: what to bring, what to do in your first weeks, and next steps for your credentials. <span class='tbd'>[TBD: confirm scope]</span>",l:[["Pre-arrival services","#other.pre-arrival"]]},
+ {h:"Settle in, then plan what's next.",p:"Settlement support after you land, employment support <span class='tbd'>[TBD: confirm scope]</span>, and help with your citizenship application when the time comes.",l:[["Settlement support","#other.settlement-support"],["Citizenship","#citizenship"]]}
+];
+const AUD=[
+ {k:"Students",t:"Study abroad",p:"Study permits and admissions help for Canada, plus the USA, UK, Australia and Germany.",h:"#study",g:"Study options"},
+ {k:"Skilled workers",t:"Move permanently",p:"Express Entry, provincial nomination and other permanent residence pathways.",h:"#immigrate",g:"Immigrate"},
+ {k:"Families",t:"Bring family together",p:"Sponsor a spouse, partner, child, parent or grandparent, or invite them on a Super Visa.",h:"#sponsor",g:"Sponsorship"},
+ {k:"Already in Canada",t:"Your next step here",p:"Post-graduation work permits, bridging permits, the Canadian Experience Class and citizenship.",h:"#work",g:"Work options"},
+ {k:"Entrepreneurs",t:"Business routes",p:"Several federal business programmes are paused or closed. We'll tell you what is actually open.",h:"#business",g:"Business"},
+ {k:"Employers",t:"Hire from abroad",p:"Labour Market Impact Assessments and work permits for the people you want to hire.",h:"#lmia",g:"LMIA"}
+];
+const UPD=[
+ {d:"2026-01-01",t:"Start-up Visa closed to new applications",p:"IRCC stopped accepting new Start-up Visa applications and announced a new entrepreneur pilot for 2026.",h:"https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/immigration-measures-entrepreneurs.html"},
+ {d:"2025-01-30",t:"Rural Community Immigration Pilot opens",p:"It follows the Rural and Northern Immigration Pilot, which is now closed. Participating communities recommend candidates with job offers.",h:C+"immigrate-canada/rural-franco-pilots/rural-immigration.html"},
+ {d:"2024-11-08",t:"Student Direct Stream ended",p:"Study permit applicants now apply through the regular process. Applications received before the cut-off keep their stream.",h:"https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/operational-bulletins-manuals/updates/2024-student-direct-stream.html"}
+];
+const FAQ=[
+ {q:"Are you licensed?",a:"Yes. Nova World is led by Rajan Chugh, a Regulated Canadian Immigration Consultant licensed by the College of Immigration and Citizenship Consultants (CICC) <span class='tbd'>[TBD: licence no.]</span>. You can check any consultant on the CICC public register."},
+ {q:"Are you part of the government or IRCC?",a:"No. We are a private firm and are not affiliated with IRCC or any government. Government decisions are made by government officers."},
+ {q:"Can you guarantee my visa or permanent residence?",a:"No, and nobody honest can. We assess your options carefully, prepare a complete application and explain the risks before you apply."},
+ {q:"How does the eligibility assessment work?",a:"You fill in the assessment form in our secure client system (CaseCloud). <span class='tbd'>[TBD: what happens next, who replies, and how soon]</span>"},
+ {q:"Do you have offices outside Canada?",a:"Our head office is in Mississauga, Ontario. We also work through offices and affiliates in India, the UAE, Cambodia and other countries. <span class='tbd'>[TBD: addresses]</span>"}
+];
+function ctaHTML(){return `
+<section class="sec dark cta" aria-labelledby="ch">
+  <div class="wrap">
+    <div><p class="mono eyebrow">Plan your route</p><h2 id="ch">Tell us where you're starting from.</h2>
+      <div class="ctas" style="margin-top:24px"><a class="btn btn-sun" href="#assessment" data-hop>Start your eligibility assessment</a><a class="btn btn-ghost" href="#contact" data-hop>Book a consultation</a><a class="btn btn-ghost" href="https://wa.me/14372300005" target="_blank" rel="noopener">WhatsApp us</a></div></div>
+    <div class="contact-lines"><div><b>Phone</b>1 647 404 6682 · 1 647 403 6682</div><div><b>Toll-free</b>+1 (877) 412-9959</div><div><b>WhatsApp</b>+1 437 230 0005</div><div><b>Email</b>info@nwimmigration.ca</div><div><b>Office</b>Unit 4 – 2780 Slough St, Mississauga, ON</div></div>
+  </div>
+</section>`;}
+
+function pageHead(o){ // {crumbs, title, lead, step, routes:'origin'|'study'|'office', tags}
+  return `<section class="phead"><div class="map" id="pMap"></div><div class="scrim"></div><div class="wrap">
+  <p class="crumbs"><a href="#home" data-hop>Home</a> / ${o.crumbs}</p>
+  ${o.tags||""}
+  <h1>${o.title}</h1>${o.lead?`<p class="lead">${o.lead}</p>`:""}
+  ${o.step!=null?`<div class="steps-bc" aria-label="Journey step">${STEPS.map((s,i)=>`<span class="${i===o.step?"on":""}">0${i+1} ${s}</span>`).join("")}</div>`:""}
+  </div></section>`;}
+function statusBox(x){if(!x.n)return "";const cls=x.x==="paused"||x.x==="closed"?"":" style=\"background:rgba(255,209,40,.12);border-color:rgba(201,154,0,.45)\"";return `<p class="status"${cls}>${x.x==="paused"?"<b>Intake paused.</b> ":x.x==="closed"?"<b>Closed.</b> ":""}${esc(x.n).replace(/\[TBD:([^\]]*)\]/g,"<span class='tbd'>[TBD:$1]</span>")}</p>`;}
+function tagsOf(x){return `<div class="meta"><span class="tag">${esc(catOf(x.c).name)}</span><span class="tag">Step 0${x.st+1} · ${STEPS[x.st]}</span>${x.x==="paused"?`<span class="tag red">Intake paused</span>`:x.x==="closed"?`<span class="tag red">Closed</span>`:""}${x.fl?`<span class="tag" style="background:var(--sun)">Full page</span>`:""}</div>`;}
+function reviewLine(x){return `<div class="review"><span>Last reviewed: <span class="tbd">[TBD: date]</span></span><span>Official source: <a href="${x.o||IRCC}" target="_blank" rel="noopener">canada.ca ↗</a></span></div>`;}
+function blockHTML(x){ // category page (C): full block
+  return `<article class="sblock" id="b-${x.s}">${tagsOf(x)}<h2>${esc(x.t)}</h2><p class="for">For: ${esc(x.f)}</p>${statusBox(x)}${reviewLine(x)}
+  <div class="sgrid">
+   <div><h4>Overview</h4><p>${sample} A short, plain-language overview of ${esc(x.t)} goes here: what it is and who it is for, checked against the official page before launch.</p></div>
+   <div><h4>Who may qualify</h4><ul><li>General criteria from the official page <span class="tbd">[TBD]</span></li><li>An assessment confirms your options. We never give a verdict online.</li></ul></div>
+   <div><h4>How we help</h4><ul><li>Assess your profile</li><li>Plan the application and document checklist</li><li>Prepare and submit as your representative</li></ul></div>
+   <div><h4>Timelines &amp; fees</h4><p>Processing times: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-processing-times.html" target="_blank" rel="noopener">official tool ↗</a>. Our fee: <span class="tbd">[TBD: set by client]</span>.</p></div>
+  </div>
+  <p style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">${x.fl?`<a class="more" href="#${x.s}" data-hop>Read the full ${esc(x.t)} page →</a>`:""}<a class="more" href="#assessment" data-hop>Start your assessment →</a></p></article>`;}
+function categoryHTML(c,focus){
+  const list=S.filter(x=>x.c===c.id);
+  return pageHead({crumbs:esc(c.name),title:esc(c.name),lead:esc(c.line),step:null,tags:`<p class="mono" style="color:var(--sun)">Category · ${list.length} services</p>`})+
+  `<div class="pbody"><div class="wrap layout"><nav class="toc" aria-label="On this page">${list.map(x=>`<a href="#${c.id}.${x.s}" data-local>${esc(x.t)}</a>`).join("")}</nav>
+  <div>${c.id==="study"?`<div class="ph" style="min-height:200px;margin-bottom:22px">[H5 · Canadian campus in autumn · ChatGPT image]&nbsp;&nbsp;[H6–H9 · USA, UK, Australia, Germany]</div>`:c.id==="immigrate"||c.id==="work"?`<div class="ph" style="min-height:200px;margin-bottom:22px">[H4 · Toronto skyline at golden hour · ChatGPT image]</div>`:""}
+  ${list.map(blockHTML).join("")}</div></div></div>`+ctaHTML();}
+function flagshipHTML(x){
+  const c=catOf(x.c);const rel=S.filter(y=>y.c===x.c&&y.s!==x.s).slice(0,4);
+  const secs=[["overview","Overview"],["qualify","Who may qualify"],["help","How we help"],["documents","Documents"],["timelines","Timelines"],["fees","Fees"],["faqs","FAQs"]];
+  return pageHead({crumbs:`<a href="#${c.id}" data-hop>${esc(c.name)}</a> / ${esc(x.t)}`,title:esc(x.t),lead:"For: "+esc(x.f),step:x.st,tags:`<p class="mono" style="color:var(--sun)">Pathway · ${esc(c.name)}</p>`})+
+  `<div class="pbody"><div class="wrap"><div class="twocol"><div>
+    ${reviewLine(x)}
+    <nav class="toc" style="position:static;flex-direction:row;flex-wrap:wrap;gap:8px;border:0;padding:0;margin-bottom:26px" aria-label="On this page">${secs.map(([id,t])=>`<a href="#${x.s}.${id}" data-local style="border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px">${t}</a>`).join("")}</nav>
+    <section class="fblock" id="b-overview"><h3>Overview</h3><p>${sample} Two or three short paragraphs explain ${esc(x.t)} in plain language: what it is, who it suits, and how it connects to your longer-term plans in Canada. Checked against the official page, with the review date above.</p>
+      <div class="ph">[P · Page banner · destination mood image, optional]</div></section>
+    <section class="fblock" id="b-qualify"><h3>Who may qualify</h3><ul><li>General criterion 1 from the official page <span class="tbd">[TBD]</span></li><li>General criterion 2 <span class="tbd">[TBD]</span></li><li>General criterion 3 <span class="tbd">[TBD]</span></li></ul><p style="margin-top:10px"><b>An assessment confirms your options.</b> This page is general information, not a verdict on your case.</p></section>
+    <section class="fblock" id="b-help"><h3>How we help</h3><ol><li>Eligibility assessment and consultation</li><li>A pathway plan and document checklist</li><li>Document review, certified copies and affidavits</li><li>Application prepared and submitted as your authorised representative</li><li>Updates until a decision, then next steps</li></ol></section>
+    <section class="fblock" id="b-documents"><h3>Documents typically needed</h3><ul><li>Document 1 <span class="tbd">[TBD]</span></li><li>Document 2 <span class="tbd">[TBD]</span></li><li>Document 3 <span class="tbd">[TBD]</span></li></ul><p style="margin-top:10px">Please send documents only through our secure client system, never by the contact form.</p></section>
+    <section class="fblock" id="b-timelines"><h3>Timelines</h3><p>Processing times change often, so we don't quote them here. See the current times on the <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-processing-times.html" target="_blank" rel="noopener">official processing-times tool ↗</a>.</p></section>
+    <section class="fblock" id="b-fees"><h3>Fees</h3><p>Our professional fee: <span class="tbd">[TBD: set by client, or "quoted after consultation"]</span>. Government fees are paid to the government: see the <a href="https://ircc.canada.ca/english/information/fees/fees.asp" target="_blank" rel="noopener">official fee list ↗</a>.</p></section>
+    <section class="fblock" id="b-faqs"><h3>FAQs</h3><div class="faq" style="margin-top:0">${[1,2,3].map(i=>`<details><summary>Common question ${i} about ${esc(x.t)} <span class="tbd">[TBD]</span></summary><p>${sample} A short, factual answer checked against the official page.</p></details>`).join("")}</div></section>
+  </div>
+  <aside class="aside">
+    <div class="box darkbox"><p class="mono" style="color:var(--sun)">Step 0${x.st+1} · ${STEPS[x.st]}</p><h3 style="color:var(--paper);margin-top:6px">Not sure this is your pathway?</h3><p class="muted" style="font-size:15px;margin-bottom:16px">An assessment shows which options fit your profile.</p><a class="btn btn-sun" href="#assessment" data-hop>Start your assessment</a></div>
+    <div class="box"><h3>Related pathways</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px">${rel.map(y=>`<li><a href="${hrefOf(y)}" data-hop>${esc(y.t)}</a></li>`).join("")}</ul></div>
+    <div class="box"><h3>Talk to us</h3><p class="muted" style="font-size:14.5px">1 647 404 6682<br>WhatsApp +1 437 230 0005<br>info@nwimmigration.ca</p></div>
+  </aside></div></div></div>`+ctaHTML();}
+function aboutHTML(){return pageHead({crumbs:"About",title:"About Nova World",lead:"RCIC-led immigration services from Mississauga, Ontario.",step:null})+
+ `<div class="pbody"><div class="wrap twocol"><div>
+  <section class="fblock"><h3>Vision</h3><p style="font-size:22px;font-weight:700;color:var(--ink);max-width:30ch">“To be a trusted partner and assist in achieving the dreams of aspiring students, individuals, and businesses.”</p></section>
+  <section class="fblock"><h3>How we work</h3><p>We take time to understand each client's needs and recommend the most appropriate option. Our core values are trust, integrity and honesty. We keep client information confidential and use it only for the client's application.</p></section>
+  <section class="fblock"><h3>Founder</h3><p>Rajan Chugh came to Canada in 2004 as an international student and went through admission and immigration himself. While studying, he helped other students get admission to Canadian institutions, and that help grew into an immigration business. He became a Regulated Canadian Immigration Consultant in 2019 and started Nova World Immigration Services. The firm now works with offices and affiliates in India, the UAE, Cambodia and other countries. Rajan is also a Commissioner for Taking Affidavits in Ontario and a Licensed Foreign Worker Recruitment Agent for Manitoba.</p></section>
+  <section class="fblock"><h3>Team</h3><div class="team"><div class="ph">[T1 · Rajan Chugh, RCIC]</div><div class="ph">[T2 · Team member · TBD]</div><div class="ph">[T3 · Team member · TBD]</div><div class="ph">[T4 · Team member · TBD]</div></div></section>
+  <section class="fblock"><h3>Our office</h3><div class="ph" style="min-height:240px">[H1 · Mississauga office, real photo]&nbsp;·&nbsp;[H2 · Consultation room]</div></section>
+ </div><aside class="aside">
+  <div class="box darkbox"><h3 style="color:var(--paper)">Credentials</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px;color:var(--on-dark-muted);font-size:14.5px"><li>RCIC, licensed with CICC <span class="tbd">[TBD: no.]</span></li><li>RCIC since 2019</li><li>Commissioner for Taking Affidavits, Ontario</li><li>Licensed Foreign Worker Recruitment Agent, Manitoba <span class="tbd">[TBD: no.]</span></li><li>CAPIC member <span class="tbd">[TBD: confirm current]</span></li></ul><p style="margin-top:14px"><a style="color:var(--sun)" href="https://register.college-ic.ca/Public-Register-EN/Public-Register-EN/RCIC_Search.aspx" target="_blank" rel="noopener">Verify on the CICC register ↗</a></p></div>
+  <div class="box"><h3>Testimonials</h3><p class="muted" style="font-size:14.5px">Shown only with each client's written approval (CICC Code s.45). <span class="tbd">[TBD: approved testimonials]</span></p></div>
+ </aside></div></div>`+ctaHTML();}
+function contactHTML(){return pageHead({crumbs:"Contact",title:"Contact us",lead:"Call, WhatsApp, email or visit our Mississauga office.",step:null})+
+ `<div class="pbody"><div class="wrap twocol"><div>
+   <div class="box"><h3>Send a message</h3>
+   <form class="f" id="cform" novalidate>
+     <label for="cf-name">Full name<input id="cf-name" name="name" autocomplete="name" required></label>
+     <label for="cf-email">Email<input id="cf-email" name="email" type="email" autocomplete="email" required></label>
+     <label for="cf-phone">Phone or WhatsApp<input id="cf-phone" name="phone" type="tel" autocomplete="tel"></label>
+     <label for="cf-msg">How can we help?<textarea id="cf-msg" name="message" rows="5"></textarea></label>
+     <p class="note">Please don't include passport numbers, immigration history or documents here. We collect those only through our secure client system. See our <a href="#privacy" data-hop>privacy policy</a>.</p>
+     <button class="btn btn-ink" type="submit" style="width:fit-content">Send message</button>
+     <p class="okmsg" id="cok" hidden>Preview only: this form isn't connected yet. In the final site it goes to the inbox the client chooses.</p>
+   </form></div>
+ </div><aside class="aside">
+   <div class="box darkbox"><p class="mono" style="color:var(--sun)">Head office</p><h3 style="color:var(--paper);margin-top:6px">Mississauga, Ontario</h3><p style="color:var(--on-dark-muted);font-size:14.5px">Nova World Immigration Services Inc.<br>Unit 4 – 2780 Slough Street<br>Mississauga, ON L4T 1G3, Canada</p>
+   <div style="position:relative;height:200px;margin:14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line-dark)" id="cMap"></div>
+   <a style="color:var(--sun)" href="https://www.google.com/maps/search/?api=1&amp;query=2780+Slough+Street+Mississauga+ON+L4T+1G3" target="_blank" rel="noopener">Open in Google Maps ↗</a></div>
+   <div class="box"><h3>Phone &amp; email</h3><p class="muted" style="font-size:14.5px;font-family:var(--mono)">1 647 404 6682<br>1 647 403 6682<br>Toll-free +1 (877) 412-9959<br>WhatsApp +1 437 230 0005<br>info@nwimmigration.ca</p><p class="muted" style="font-size:14px;margin-top:8px">Hours: <span class="tbd">[TBD]</span></p></div>
+   <div class="box"><h3>Offices abroad</h3><p class="muted" style="font-size:14.5px">India · UAE · Cambodia <span class="tbd">[TBD: addresses, and office or affiliate]</span></p></div>
+ </aside></div></div>`;}
+function assessHTML(){return pageHead({crumbs:"Assessment",title:"Eligibility assessment",lead:"Tell us about your education, work and family. We'll look at which pathways fit.",step:0})+
+ `<div class="pbody"><div class="wrap twocol"><div>
+  <div class="ph" style="min-height:420px">[Assessment form · the client's existing CaseCloud form is embedded here in the final site.<br>Preview can't embed other sites.]</div>
+  <p style="margin-top:16px"><a class="btn btn-sun" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Open the assessment form ↗</a></p>
+ </div><aside class="aside">
+  <div class="box"><h3>What this is</h3><p class="muted" style="font-size:14.5px">A review of your profile by our licensed team. It is not a government decision and not a guarantee. <span class="tbd">[TBD: free or paid, and who replies and when]</span></p></div>
+  <div class="box"><h3>Your information</h3><p class="muted" style="font-size:14.5px">The form runs in our secure case-management system. We are not affiliated with IRCC or any government.</p></div>
+ </aside></div></div>`;}
+function updatesHTML(){return pageHead({crumbs:"Updates",title:"Programme updates",lead:"Dated notes on immigration changes, with links to the official source.",step:null})+
+ `<div class="pbody"><div class="wrap"><div class="grid3" style="margin-top:0">${UPD.map(u=>`<article class="upd"><time>${u.d}</time><h3>${u.t}</h3><p>${u.p}</p><a href="${u.h}" target="_blank" rel="noopener">Official notice ↗</a></article>`).join("")}${[1,2,3].map(()=>`<article class="upd"><time>YYYY-MM-DD</time><h3>Update title <span class="tbd">[TBD]</span></h3><p>${sample} Two lines on what changed and who it affects.</p></article>`).join("")}</div></div></div>`;}
+function faqHTML(){return pageHead({crumbs:"FAQ",title:"Frequently asked questions",lead:"Straight answers to common questions.",step:null})+
+ `<div class="pbody"><div class="wrap"><div class="faq" style="margin-top:0">${FAQ.map(q=>`<details><summary>${q.q}</summary><p>${q.a}</p></details>`).join("")}${[1,2,3].map(i=>`<details><summary>More question ${i} <span class="tbd">[TBD]</span></summary><p>${sample} Answer.</p></details>`).join("")}</div></div></div>`+ctaHTML();}
+function partnersHTML(){return pageHead({crumbs:"Partner agents",title:"Partner agent programme",lead:"For agents and firms outside Canada who want to work with an RCIC-led team.",step:null})+
+ `<div class="pbody"><div class="wrap twocol"><div>
+  <section class="fblock"><h3>The programme</h3><p>${sample} How the partnership works, what partners do and what Nova World does, written in plain terms. <span class="tbd">[TBD: terms pending a check against CICC Code s.13 on referral payments and agent registration]</span></p></section>
+  <section class="fblock"><h3>Who can apply</h3><ul><li>Individual agents</li><li>Companies</li></ul></section>
+ </div><aside class="aside"><div class="box"><h3>Enquire</h3><form class="f" id="pform"><label for="pf-type">I am<select id="pf-type"><option>An individual</option><option>A company</option></select></label><label for="pf-name">Name<input id="pf-name"></label><label for="pf-email">Email<input id="pf-email" type="email"></label><label for="pf-country">Country<input id="pf-country"></label><button class="btn btn-ink" type="submit" style="width:fit-content">Send enquiry</button><p class="okmsg" hidden>Preview only: form not connected.</p></form></div>
+ <div class="box"><p class="muted" style="font-size:14.5px">Already a partner? <a href="https://admin.caseeasy.ca/Login/Login?siteId=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Agent login ↗</a></p></div></aside></div></div>`;}
+function legalHTML(t){return pageHead({crumbs:t,title:t,step:null})+`<div class="pbody"><div class="wrap"><section class="fblock"><p>${sample} <span class="tbd">[TBD: ${t.toLowerCase()} text to be drafted for the client${t==="Privacy policy"?", following PIPEDA":""}]</span></p></section></div></div>`;}
+function notFoundHTML(){return pageHead({crumbs:"Not found",title:"This route doesn't exist.",lead:"The page may have moved. Old addresses from the previous site redirect here automatically in the final build.",step:null})+`<div class="pbody"><div class="wrap"><a class="btn btn-ink" href="#home" data-hop>Back to home</a></div></div>`;}
+
+/* ---------- router ---------- */
+let maps={};let homeState=null;
+function route(){
+  const h=(location.hash||"#home").slice(1)||"home";
+  const [base,sub]=h.split(".");
+  const main=$("#main");maps={};homeState=null;
+  let html,after=null,page=base;
+  const cat=catOf(base);
+  if(base==="home"||base==="journey"){html=homeHTML();after=initHome;}
+  else if(cat){html=categoryHTML(cat);after=()=>{initPageMap(cat.id==="study"?"study":"origin");if(sub){const el=$("#b-"+sub);if(el)el.scrollIntoView();}};}
+  else if(bySlug[base]&&bySlug[base].fl){const x=bySlug[base];html=flagshipHTML(x);after=()=>{initPageMap(x.c==="study"?"study":"origin");if(sub){const el=$("#b-"+sub);if(el)el.scrollIntoView();}};}
+  else if(base==="about"){html=aboutHTML();after=()=>initPageMap("founder");}
+  else if(base==="contact"){html=contactHTML();after=()=>{initPageMap("office");initContactMap();};}
+  else if(base==="assessment"){html=assessHTML();after=()=>initPageMap("origin");}
+  else if(base==="updates"){html=updatesHTML();after=()=>initPageMap("origin");}
+  else if(base==="faq"){html=faqHTML();after=()=>initPageMap("origin");}
+  else if(base==="partners"){html=partnersHTML();after=()=>initPageMap("network");}
+  else if(base==="privacy"){html=legalHTML("Privacy policy");after=()=>initPageMap("origin");}
+  else if(base==="terms"){html=legalHTML("Terms of use");after=()=>initPageMap("origin");}
+  else if(base==="disclaimer"){html=legalHTML("Disclaimer");after=()=>initPageMap("origin");}
+  else {html=notFoundHTML();after=()=>initPageMap("origin");}
+  main.innerHTML=html;main.classList.remove("view-enter");void main.offsetWidth;main.classList.add("view-enter");
+  $$("#navlist a").forEach(a=>a.getAttribute("href")==="#"+base?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+  const title={home:"Nova World Concept"}[base];document.title=title||("Nova World Concept · "+(cat?cat.name:bySlug[base]?bySlug[base].t:base));
+  if(!sub)window.scrollTo(0,0);
+  after&&after();
+  $$("form").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();const ok=$(".okmsg",f);if(ok)ok.hidden=false;}));
+}
+function initPageMap(kind){
+  const host=$("#pMap");if(!host)return;const m=makeMap(host,"dark");m.resize();maps.p=m;
+  const wide=m.w>760;const box=wide?{x:.7,y:.55,w:.52,h:.72}:{x:.5,y:.5,w:.9,h:.8};
+  if(kind==="study"){m.routes=STUDY_DEST.map(d=>({pts:arc(origin,d),p:0,head:true}));m.setCities([{...origin,label:origin.city,pulse:1},...STUDY_DEST.map(d=>({...d,label:d.city,small:1}))]);m.fit([...STUDY_DEST.map(d=>[d.lon,d.lat]),[origin.lon,origin.lat]],box);}
+  else if(kind==="office"||kind==="founder"){m.routes=kind==="founder"?[{pts:arc(origin,MIS),p:0}]:[];m.setCities([{...MIS,label:"Mississauga",pulse:1}]);m.cam={lon:-79.64,lat:43.59,ppd:wide?22:14};m.cx=wide?.72:.6;m.cy=.5;if(kind==="founder"){m.fit([[origin.lon,origin.lat],[MIS.lon,MIS.lat]],box);m.setCities([{...MIS,label:"Canada · 2004"}]);}}
+  else if(kind==="network"){const pts=[[MIS.lon,MIS.lat],[78.9,22],[54.4,24.3],[105,12.5]];m.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:0,head:false}));m.setCities([{...MIS,label:"Mississauga"},{lon:78.9,lat:22,label:"India",small:1},{lon:54.4,lat:24.3,label:"UAE",small:1},{lon:105,lat:12.5,label:"Cambodia",small:1}]);m.fit(pts,box);}
+  else {const pts=arc(origin,TOR);m.routes=[{pts,p:0}];m.setCities([{...origin,label:origin.city,pulse:1},{...TOR,label:"Toronto"}]);m.fit([[origin.lon,origin.lat],[TOR.lon,TOR.lat],...pts],box);}
+  m.draw();
+  if(RM){m.routes.forEach(r=>r.p=1);m.draw();return;}
+  const t0=performance.now();const tick=now=>{const p=Math.min(1,(now-t0)/1100);m.routes.forEach(r=>r.p=ease(p));m.draw();if(p<1&&maps.p===m)requestAnimationFrame(tick);};requestAnimationFrame(tick);
+}
+function initContactMap(){const host=$("#cMap");if(!host)return;const m=makeMap(host,"dark");m.resize();m.cam={lon:-79.64,lat:43.8,ppd:36};m.setCities([{...MIS,label:"Head office",pulse:1}]);m.draw();maps.c=m;}
+
+/* ---------- home ---------- */
+function initHome(){
+  // hero
+  const hm=makeMap($("#heroMap"),"dark");maps.hero=hm;
+  const setHero=()=>{hm.resize();const wide=hm.w>760;const pts=arc(origin,TOR);hm.routes=[{pts,p:hm.routes[0]?hm.routes[0].p:0}];
+    hm.setCities([{...origin,label:origin.city,pulse:1},{...TOR,label:"Toronto"}]);
+    hm.fit([[origin.lon,origin.lat],[TOR.lon,TOR.lat],...pts],wide?{x:.68,y:.56,w:.5,h:.62}:{x:.5,y:.83,w:.86,h:.22});
+    $("#routeCode").textContent=origin.city.slice(0,3).toUpperCase()+" → TOR";};
+  setHero();
+  const animateHero=()=>{if(RM){hm.routes[0].p=1;hm.draw();return;}const t0=performance.now();const tick=n=>{const p=Math.min(1,(n-t0)/1400);hm.routes[0].p=ease(p);hm.draw();if(p<1&&maps.hero===hm)requestAnimationFrame(tick);};requestAnimationFrame(tick);};
+  hm.routes[0].p=0;animateHero();
+  $("#origin").addEventListener("change",e=>{origin=ORIGINS.find(o=>o.id===e.target.value)||origin;try{localStorage.setItem("nw-origin",origin.id);}catch(err){}hm.routes=[];setHero();hm.routes[0].p=0;animateHero();setupJourney();updateJourney();drawOffices();});
+  // journey
+  const jm=makeMap($("#jMap"),"dark");maps.j=jm;
+  function setupJourney(){jm.resize();const mobile=jm.w<=760;const pts=arc(origin,TOR);jm.routes=[{pts,p:0}];
+    jm.setCities([{...origin,label:origin.city,pulse:1},{...TOR,label:"Toronto"},{...MIS,label:"Mississauga · head office",small:1}]);
+    const base=jm.fit([[origin.lon,origin.lat],[TOR.lon,TOR.lat],...pts],mobile?{x:.5,y:.62,w:.9,h:.6}:{x:.42,y:.58,w:.62,h:.6}).ppd;
+    const at=t=>pts[Math.round(t*(pts.length-1))];const mid=at(.5),q=at(.7);
+    homeState={jm,keys:[
+      {lon:origin.lon,lat:origin.lat,ppd:base*3,p:0},
+      {lon:mid[0],lat:mid[1]-6,ppd:base,p:.4},
+      {lon:q[0],lat:q[1]-4,ppd:base*1.5,p:.68},
+      {lon:-70,lat:46,ppd:base*2.6,p:.95},
+      {lon:TOR.lon,lat:TOR.lat,ppd:base*6,p:1},
+      {lon:MIS.lon,lat:MIS.lat,ppd:base*11,p:1}]};
+    if(RM){jm.cam={lon:mid[0],lat:mid[1]-6,ppd:base};jm.routes[0].p=1;$$("#jCards .card").forEach(c=>c.classList.add("on"));jm.draw();}
+  }
+  setupJourney();
+  // board
+  initBoard();
+  // offices
+  const om=makeMap($("#oMap"),"dark");maps.o=om;
+  function drawOffices(){om.resize();const pts=[[MIS.lon,MIS.lat],[78.9,22],[54.4,24.3],[105,12.5]];om.routes=pts.slice(1).map(p=>({pts:arc({lon:p[0],lat:p[1]},MIS),p:1,head:false}));
+    om.setCities([{...MIS,label:"Mississauga",pulse:1},{lon:78.9,lat:22,label:"India · TBD",small:1},{lon:54.4,lat:24.3,label:"UAE · TBD",small:1},{lon:105,lat:12.5,label:"Cambodia · TBD",small:1}]);
+    om.fit(pts,{x:.5,y:.5,w:.84,h:.62});om.draw();}
+  drawOffices();
+  updateJourney();
+}
+function updateJourney(){
+  if(!homeState||RM)return;const {jm,keys}=homeState;const sec=$("#journey");if(!sec)return;
+  const r=sec.getBoundingClientRect();const total=sec.offsetHeight-(innerHeight-64);
+  const P=Math.max(0,Math.min(1,-r.top/Math.max(total,1)));
+  const seg=P*(keys.length-1);const i=Math.min(keys.length-2,Math.floor(seg));const t=ease(seg-i);const a=keys[i],b=keys[i+1];
+  const lz=Math.exp(lerp(Math.log(a.ppd),Math.log(b.ppd),t));
+  jm.cam={lon:lerp(a.lon,b.lon,t),lat:lerp(a.lat,b.lat,t),ppd:lz};jm.routes[0].p=lerp(a.p,b.p,t);jm.draw();
+  const step=Math.min(5,Math.floor(P*6));
+  $$("#jCards .card").forEach((c,k)=>c.classList.toggle("on",k===step));
+  $$("#jRail span").forEach((s,k)=>{s.classList.toggle("on",k===step);s.classList.toggle("done",k<step);});
+  const n=$("#jNum");if(n)n.textContent="0"+(step+1);
+}
+window.__nwj=updateJourney;
+let ticking=false;
+addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{ticking=false;updateJourney();});}},{passive:true});
+let rz,lastW=innerWidth;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(Math.abs(innerWidth-lastW)<2)return;lastW=innerWidth;const y=scrollY;route();scrollTo(0,y);},200);});
+
+/* ---------- departures board ---------- */
+const GLY="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·→";
+function cells(txt,n){txt=(txt||"").toUpperCase();if(txt.length>n)txt=txt.slice(0,n-1)+"…";return txt.padEnd(n," ");}
+function initBoard(){
+  let cat="immigrate",all=false,seen=false;const rowsEl=$("#rows");
+  const render=flip=>{const list=S.filter(x=>x.c===cat);const narrow=innerWidth<900;const lim=narrow?6:8;const show=all?list:list.slice(0,lim);
+    const W=narrow?[22,0,0,7]:[26,16,10,7];
+    rowsEl.innerHTML=show.map(x=>{const rm=x.x==="paused"?"PAUSED":x.x==="closed"?"CLOSED":x.x==="tbd"?"TBD":"";
+      const col=(t,n,cls)=>n?`<span class="col ${cls}">${[...cells(t,n)].map(ch=>`<span class="ch" data-t="${esc(ch)}">${flip?" ":esc(ch)}</span>`).join("")}</span>`:"";
+      return `<a class="brow" href="${hrefOf(x)}" data-hop><span class="sr">${esc(x.t)}, for ${esc(x.f)}, to ${esc(x.to)}${rm?", "+rm.toLowerCase():""}</span><span class="flaps" aria-hidden="true">${col(x.t,W[0],"t")}${col(x.f,W[1],"for")}${col(x.to,W[2],"to")}${col(rm,W[3],"rm")}</span><span class="arrow" aria-hidden="true">→</span></a>`;}).join("");
+    $("#bcount").textContent=`${list.length} ${catOf(cat).name.toUpperCase()} · SHOWING ${show.length}`;
+    $("#showAll").hidden=list.length<=lim;$("#showAll").textContent=all?"Show fewer":"Show all "+list.length;
+    if(flip&&!RM)flipAll();else $$(".ch",rowsEl).forEach(c=>c.textContent=c.dataset.t);};
+  const flipAll=()=>{const chs=$$(".ch",rowsEl).map(c=>({c,t:c.dataset.t,n:c.dataset.t===" "?0:2+Math.floor(Math.random()*7)}));let k=0;
+    const iv=setInterval(()=>{k++;let live=0;for(const o of chs){if(k<o.n){o.c.textContent=GLY[(Math.random()*GLY.length)|0];live++;}else o.c.textContent=o.t;}if(!live)clearInterval(iv);},50);};
+  $$("#tabs button").forEach(b=>b.onclick=()=>{cat=b.dataset.tab;all=false;$$("#tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));render(true);});
+  $("#showAll").onclick=()=>{all=!all;render(false);};
+  render(false);
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)&&!seen){seen=true;render(true);io.disconnect();}},{threshold:.3});io.observe(rowsEl);
+}
+
+/* ---------- route-hop transition ---------- */
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a[href^='#']");if(!a)return;
+  const href=a.getAttribute("href");
+  if(a.hasAttribute("data-local")){e.preventDefault();const [,sub]=href.slice(1).split(".");const el=$("#b-"+sub);if(el)el.scrollIntoView({behavior:RM?"auto":"smooth"});history.replaceState(null,"",href);return;}
+  if(href==="#main")return;
+  e.preventDefault();closeDrawer();$("#mega").hidden=true;
+  if(RM){location.hash=href;return;}
+  const hop=$("#hop"),ln=$("#hopLine");hop.setAttribute("viewBox",`0 0 ${innerWidth} ${innerHeight}`);hop.setAttribute("width",innerWidth);hop.setAttribute("height",innerHeight);
+  const x=e.clientX||innerWidth/2,y=e.clientY||innerHeight/2;ln.setAttribute("x1",x);ln.setAttribute("y1",y);ln.setAttribute("x2",x);ln.setAttribute("y2",y);hop.hidden=false;
+  const t0=performance.now();const tx=innerWidth+20,ty=y-innerHeight*.25;
+  const step=n=>{const p=Math.min(1,(n-t0)/300);const q=1-Math.pow(1-p,3);ln.setAttribute("x2",x+(tx-x)*q);ln.setAttribute("y2",y+(ty-y)*q);
+    if(p<1)requestAnimationFrame(step);else{hop.hidden=true;if(location.hash===href)route();else location.hash=href;}};
+  requestAnimationFrame(step);
+});
+addEventListener("hashchange",route);
+
+/* ---------- boot ---------- */
+buildNav();route();
+const pre=$("#pre");setTimeout(()=>pre.classList.add("out"),RM?0:1500);setTimeout(()=>pre.remove(),RM?50:2100);
+})();
+</script>
+
+</body></html>

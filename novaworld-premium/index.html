@@ -1,0 +1,861 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Nova World Immigration</title>
+<meta name="description" content="Nova World Immigration Services: follow one application from a free assessment to the citizenship oath.">
+<meta property="og:title" content="Nova World Immigration">
+<meta property="og:description" content="Nova World Immigration Services: follow one application from a free assessment to the citizenship oath.">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+</head><body>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One committed look: a polar night for the 3D chapters, cool paper for the forms between them. */
+:root {
+  color-scheme: dark;
+  --night: #060a18;
+  --navy: #101b3a;
+  --navy-2: #1b2a55;
+  --ink: #0c1430;
+  --paper: #e9edf5;
+  --paper-2: #d9dfeb;
+  --paper-line: rgba(16,27,58,.16);
+  --text: #edf1f8;
+  --text-2: rgba(237,241,248,.74);
+  --text-3: rgba(237,241,248,.5);
+  --gold: #ffcc29;
+  --gold-ink: #8a6a00;
+  --aurora: #7be3c6;
+  --maple: #d54d4d;
+  --slate: #4c5877;
+  --wa: #1fa855;
+  --display: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gut: clamp(16px, 6vw, 104px);
+}
+* { box-sizing: border-box; }
+html { background: var(--night); }
+body { margin: 0; background: var(--night); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.55; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* ── stage ── */
+#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.veil { position: fixed; inset: 0; z-index: 1; background: #03050c; opacity: 0; pointer-events: none; }
+.film { position: fixed; inset: -50%; z-index: 2; pointer-events: none; opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+html.no-gl #gl { display: none; }
+html.no-gl body { background: radial-gradient(120% 80% at 70% 20%, #1b2a55, var(--night) 70%) fixed; }
+
+/* ── HUD ── */
+.hud { position: fixed; z-index: 30; left: 0; right: 0; top: 0; padding: calc(16px + env(safe-area-inset-top, 0px)) var(--gut) 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--text); pointer-events: none; transition: color .4s var(--ease); }
+.hud a, .hud button { pointer-events: auto; }
+.brand { text-decoration: none; display: grid; line-height: 1; gap: 5px; }
+.brand b { font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: .02em; }
+.brand b span { color: var(--gold); transition: color .4s; }
+.brand small { font-family: var(--mono); font-size: 9.5px; letter-spacing: .32em; opacity: .7; }
+.hud__ch { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; margin-right: auto; margin-left: clamp(16px, 5vw, 80px); opacity: .85; }
+.hud__ch b { font-weight: 400; opacity: .5; margin-right: 10px; }
+.hud__nav { display: flex; align-items: center; gap: 20px; font-size: 14px; }
+.hud__nav .lnk { text-decoration: none; opacity: .8; }
+.hud__nav .lnk:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.pill { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14px; padding: 11px 18px; border-radius: 999px; transition: background .3s, color .3s; white-space: nowrap; }
+.pill:hover { background: #fff; }
+.hud::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .4s var(--ease); background: rgba(16,27,58,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.hud.is-light::before { background: rgba(233,237,245,.88); }
+.hud.is-over::before { opacity: 1; }
+.hud { padding-bottom: 14px; }
+.hud.is-light { color: var(--navy); }
+.hud.is-light .brand b span { color: var(--gold-ink); }
+.hud.is-light .pill { background: var(--navy); color: var(--paper); }
+.hud.is-light .pill:hover { background: var(--ink); }
+.rail { position: fixed; z-index: 30; right: 20px; top: 50%; transform: translateY(-50%); width: 1px; height: 180px; background: rgba(255,255,255,.18); mix-blend-mode: difference; pointer-events: none; }
+.rail i { position: absolute; inset: 0; background: #fff; transform-origin: top; transform: scaleY(0); }
+.rail span { position: absolute; left: -3px; width: 7px; height: 1px; background: #fff; opacity: .6; }
+.wa { position: fixed; z-index: 31; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 10px; background: var(--wa); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; padding: 12px 16px 12px 13px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.wa svg { width: 22px; height: 22px; flex: none; }
+
+/* ── pinned 3D chapters ── */
+.ch { position: relative; z-index: 3; height: var(--len, 500vh); }
+.pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.panel { position: absolute; left: var(--gut); bottom: 13vh; width: min(34rem, calc(100% - 2 * var(--gut))); pointer-events: none; }
+.panel.is-on a, .panel.is-on button { pointer-events: auto; }
+.panel--first { width: min(46rem, calc(100% - 2 * var(--gut))); }
+.panel::before { content: ''; position: absolute; inset: -30% -35% -30% -40%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(4,7,18,.78), rgba(4,7,18,.45) 55%, transparent); opacity: 0; transition: opacity .8s var(--ease); }
+.panel.is-on::before { opacity: 1; }
+.panel--top { bottom: auto; top: 20vh; }
+.panel--right { left: auto; right: var(--gut); width: min(29rem, calc(100% - 2 * var(--gut))); }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin: 0 0 20px; }
+.h { font-family: var(--display); font-weight: 300; line-height: 1.04; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
+.h em { font-style: italic; font-weight: 300; color: var(--gold); }
+.h--xl { font-size: clamp(42px, 6.4vw, 104px); }
+.h--l { font-size: clamp(34px, 4.4vw, 70px); }
+.h--m { font-size: clamp(26px, 2.6vw, 40px); }
+.sub { margin: 22px 0 0; font-size: clamp(15px, 1.12vw, 18px); color: var(--text-2); max-width: 33em; }
+.meta { margin: 20px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--aurora); }
+.cue { margin-top: 30px; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); }
+.cue span { display: flex !important; gap: 12px; align-items: center; }
+.cue i { display: block; width: 1px; height: 34px; background: linear-gradient(var(--text), transparent); animation: cue 2.2s var(--ease) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 55% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.acts { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; }
+.ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--text); text-decoration: none; font-weight: 500; font-size: 14px; padding: 10px 2px; border-bottom: 1px solid rgba(237,241,248,.4); }
+.ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+.ln { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.ln > span { display: block; will-change: clip-path, transform; }
+html.js .panel:not(.panel--first) .ln > span, html.js .panel:not(.panel--first) .rv { clip-path: inset(0 0 100% 0); }
+
+/* CRS gauge readout */
+.crs { position: absolute; right: var(--gut); top: 19vh; width: min(21rem, 40vw); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); pointer-events: none; }
+.crs__num { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid rgba(237,241,248,.18); padding-bottom: 12px; }
+.crs__num b { font-family: var(--display); font-weight: 300; font-size: clamp(40px, 4.2vw, 64px); letter-spacing: -.03em; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1; }
+.crs__cats { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.crs__cats li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; transition: color .5s var(--ease); }
+.crs__cats li em { font-style: normal; font-variant-numeric: tabular-nums; }
+.crs__cats li i { grid-column: 1 / -1; display: block; height: 2px; background: rgba(237,241,248,.12); position: relative; overflow: hidden; }
+.crs__cats li i::after { content: ''; position: absolute; inset: 0; background: var(--c, var(--gold)); transform-origin: left; transform: scaleX(var(--f, 0)); }
+.crs__cats li.is-on { color: var(--text); }
+.crs__note { margin-top: 12px; text-transform: none; letter-spacing: .02em; font-size: 11.5px; color: var(--text-3); }
+
+/* globe labels */
+.glabel { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text); white-space: nowrap; }
+.glabel::before { content: ''; position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+.glabel span { position: absolute; left: 12px; top: -8px; padding: 2px 7px; background: rgba(6,10,24,.7); border-left: 1px solid var(--gold); }
+
+.dest { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 0; font-size: 15px; color: var(--text-2); max-width: 26rem; }
+.dest li { display: flex; justify-content: space-between; gap: 18px; border-bottom: 1px solid rgba(237,241,248,.12); padding: 9px 0; }
+.dest li span:last-child { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); text-align: right; }
+
+/* ── sheets (DOM breathers between flights) ── */
+.sheet { position: relative; z-index: 4; padding-block: clamp(84px, 13vh, 150px); padding-inline: var(--gut); }
+.sheet--light { background: var(--paper); color: var(--navy); }
+.sheet--light .eyebrow { color: var(--gold-ink); }
+.sheet--light .h em { color: var(--navy-2); font-weight: 400; }
+.sheet--light .sub { color: var(--slate); }
+.sheet--dark { background: var(--navy); color: var(--text); }
+.sheet--dark .sub { color: var(--text-2); }
+.sheet-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 32px 8vw; align-items: end; }
+.formno { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 16px; border-top: 2px solid currentColor; padding-top: 10px; margin-bottom: clamp(40px, 7vh, 72px); opacity: .7; }
+.block { margin-top: clamp(52px, 8vh, 88px); }
+
+/* fact sheet (form fields) */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--paper-line); }
+.facts div { padding: 16px 20px 16px 0; border-bottom: 1px solid var(--paper-line); }
+.facts div:nth-child(odd) { border-right: 1px solid var(--paper-line); }
+.facts div:nth-child(even) { padding-left: 20px; }
+.facts dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--slate); }
+.facts dd { margin: 6px 0 0; font-size: 16px; }
+.about-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 40px 6vw; align-items: start; }
+.slot { margin: 0; }
+.slot div { aspect-ratio: 4 / 5; max-width: 100%; background: repeating-linear-gradient(135deg, var(--paper-2) 0 1px, transparent 1px 11px), #dde3ee; display: grid; place-items: center; text-align: center; padding: 20px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); }
+.slot figcaption { margin-top: 10px; font-size: 13px; color: var(--slate); }
+.values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--navy); }
+.values div { padding: 22px 24px 0 0; }
+.values div + div { padding-left: 24px; border-left: 1px solid var(--paper-line); }
+.values h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.02em; }
+.values p { margin: 8px 0 0; color: var(--slate); font-size: 15px; max-width: 26em; }
+.badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.badges span { border: 1px solid currentColor; padding: 7px 12px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* placeholder markers — anything invented is visibly marked */
+.ph { display: inline-block; vertical-align: middle; font-family: var(--mono); font-size: 9.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; background: #ffe58a; color: #3a2d00; padding: 2px 6px; border-radius: 3px; margin-left: 6px; line-height: 1.4; }
+.ph::before { content: '◆ '; }
+
+/* program index */
+.index { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(237,241,248,.2); }
+.index li { border-bottom: 1px solid rgba(237,241,248,.14); padding: 22px 22px 24px 0; }
+.index li:not(:nth-child(3n+1)) { padding-left: 22px; border-left: 1px solid rgba(237,241,248,.14); }
+.index a { text-decoration: none; display: grid; gap: 8px; }
+.index code { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; color: var(--gold); }
+.index b { font-family: var(--display); font-weight: 500; font-size: 20px; letter-spacing: -.01em; }
+.index a:hover b { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 5px; }
+.index span { color: var(--text-2); font-size: 14.5px; }
+.table-wrap { overflow-x: auto; }
+.crs-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 15px; }
+.crs-table th, .crs-table td { text-align: left; padding: 14px 0; border-bottom: 1px solid rgba(237,241,248,.14); font-weight: 400; vertical-align: top; }
+.crs-table th { width: 42%; }
+.crs-table td:last-child { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; color: var(--gold); white-space: nowrap; }
+.crs-table small { display: block; color: var(--text-3); font-size: 13px; margin-top: 2px; }
+.src { margin-top: 16px; font-size: 13px; color: var(--text-3); }
+.src a { color: var(--text-2); }
+
+/* services (study / work / visit) */
+.svc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--navy); }
+.svc > div { padding: 24px 28px 8px 0; }
+.svc > div + div { padding-left: 28px; border-left: 1px solid var(--paper-line); }
+.svc h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 500; font-size: 26px; letter-spacing: -.02em; }
+.svc p { margin: 0 0 14px; color: var(--slate); font-size: 15px; }
+.svc ul { list-style: none; margin: 0; padding: 0; }
+.svc li a { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--paper-line); text-decoration: none; font-size: 15.5px; }
+.svc li a:hover { color: var(--navy-2); }
+.svc li a::after { content: '↗'; font-size: 13px; opacity: .45; }
+
+/* how we work */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(237,241,248,.2); counter-reset: s; }
+.steps li { padding: 22px 22px 0 0; counter-increment: s; }
+.steps li + li { padding-left: 22px; border-left: 1px solid rgba(237,241,248,.14); }
+.steps li::before { content: counter(s, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--gold); margin-bottom: 14px; }
+.steps h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 20px; letter-spacing: -.01em; }
+.steps p { margin: 8px 0 0; font-size: 14.5px; color: var(--text-2); }
+.callout { margin-top: 30px; padding: 18px 20px; border: 1px solid rgba(255,204,41,.35); font-size: 14.5px; color: var(--text-2); max-width: 52rem; }
+.callout b { color: var(--text); font-weight: 600; }
+
+/* testimonials slots */
+.quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.quote { margin: 0; padding: 24px; background: repeating-linear-gradient(135deg, var(--paper-2) 0 1px, transparent 1px 11px), #dfe4ee; min-height: 200px; display: grid; align-content: space-between; gap: 18px; }
+.quote p { margin: 0; font-family: var(--display); font-weight: 400; font-size: 18px; line-height: 1.4; color: var(--slate); }
+.quote footer { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); }
+
+/* start here (dark close) */
+.enquire { position: relative; z-index: 4; background: var(--night); padding-block: clamp(90px, 14vh, 160px) 40px; padding-inline: var(--gut); border-top: 1px solid rgba(237,241,248,.08); }
+.ctas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.cta { display: grid; gap: 10px; align-content: start; padding: 26px 24px 24px; border: 1px solid rgba(237,241,248,.16); text-decoration: none; transition: border-color .3s, background .3s; }
+.cta:hover { border-color: var(--gold); background: rgba(255,204,41,.05); }
+.cta code { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.cta b { font-family: var(--display); font-weight: 500; font-size: 24px; letter-spacing: -.02em; }
+.cta span { color: var(--text-2); font-size: 14.5px; }
+.cta--gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.cta--gold code { color: var(--ink); opacity: .7; }
+.cta--gold span { color: rgba(12,20,48,.78); }
+.cta--gold:hover { background: #ffd84f; }
+.enq-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px 7vw; margin-top: clamp(64px, 10vh, 110px); }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 24px; }
+.field { display: grid; gap: 8px; }
+.field--full { grid-column: 1 / -1; }
+.field label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+.field input, .field select, .field textarea { background: transparent; border: 0; border-bottom: 1px solid rgba(237,241,248,.28); padding: 8px 0 10px; font-size: 16px; border-radius: 0; width: 100%; }
+.field select option { background: var(--night); }
+.field textarea { resize: vertical; min-height: 90px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--gold); }
+.check { grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: var(--text-2); }
+.check input { margin-top: 3px; accent-color: var(--gold); width: 16px; height: 16px; flex: none; }
+.send { grid-column: 1 / -1; justify-self: start; display: inline-flex; gap: 14px; align-items: center; background: var(--text); color: var(--night); border: 0; padding: 15px 24px; border-radius: 999px; cursor: pointer; font-weight: 600; transition: background .3s; }
+.send:hover { background: var(--gold); }
+.form-msg { grid-column: 1 / -1; font-size: 14px; color: var(--aurora); min-height: 1.4em; margin: 0; }
+.contact { font-size: 15px; color: var(--text-2); display: grid; gap: 22px; align-content: start; }
+.contact b { display: block; font-family: var(--mono); font-weight: 400; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+.num { font-family: var(--mono); font-size: 15px; color: var(--text); user-select: all; }
+.copy { margin-left: 8px; background: none; border: 1px solid rgba(237,241,248,.25); color: var(--text-2); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; cursor: pointer; }
+.copy:hover { border-color: var(--gold); color: var(--gold); }
+.contact a { color: var(--text); }
+
+.faq { margin-top: clamp(80px, 12vh, 130px); display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px 7vw; }
+.faq details { border-bottom: 1px solid rgba(237,241,248,.14); }
+.faq details:first-child { border-top: 1px solid rgba(237,241,248,.14); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 18px; padding: 18px 0; font-family: var(--display); font-weight: 400; font-size: 18px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-family: var(--mono); color: var(--gold); }
+.faq details[open] summary::after { content: '–'; }
+.faq details p { margin: 0 0 20px; color: var(--text-2); font-size: 15px; max-width: 40em; }
+
+.notes { margin-top: clamp(80px, 12vh, 130px); padding: 28px; border: 1px dashed rgba(255,229,138,.5); }
+.notes h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 500; font-size: 22px; }
+.notes > p { margin: 0 0 18px; color: var(--text-2); font-size: 14.5px; }
+.notes ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; font-size: 14.5px; color: var(--text-2); }
+.notes li { padding-left: 22px; position: relative; }
+.notes li::before { content: ''; position: absolute; left: 0; top: 5px; width: 11px; height: 11px; border: 1px solid #ffe58a; }
+
+.foot { margin-top: clamp(80px, 13vh, 140px); display: grid; gap: 22px; font-size: 13px; color: var(--text-3); }
+.foot .big { font-family: var(--display); font-weight: 700; letter-spacing: -.045em; font-size: clamp(64px, 15.5vw, 250px); line-height: .85; color: var(--text); }
+.foot .big span { color: var(--gold); }
+.foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; border-top: 1px solid rgba(237,241,248,.14); padding-top: 18px; }
+.foot-row a { color: var(--text-2); }
+.licence { color: var(--text); }
+.disclaim { max-width: 60em; line-height: 1.6; }
+
+/* ── preloader ── */
+.pre { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; }
+.pre__in { display: grid; justify-items: center; gap: 22px; }
+.pre__star { width: 64px; height: 64px; position: relative; }
+.pre__star svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pre__fill { position: absolute; inset: 0; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); overflow: hidden; }
+.pre__fill i { position: absolute; inset: 0; background: var(--gold); transform-origin: bottom; transform: scaleY(0); transition: transform .4s var(--ease); }
+.pre__meta { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); display: flex; gap: 14px; }
+.pre__meta b { color: var(--text); font-weight: 400; font-variant-numeric: tabular-nums; }
+.pre.is-done { clip-path: inset(0 0 100% 0); transition: clip-path 1.1s var(--ease) .15s; }
+
+/* ── cursor ── */
+.cur, .cur-ring { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; opacity: 0; }
+.cur { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--gold); }
+.cur-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 1px solid rgba(237,241,248,.5); display: grid; place-items: center; transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .35s; mix-blend-mode: difference; }
+.cur-ring.is-hot { width: 68px; height: 68px; margin: -34px 0 0 -34px; background: rgba(255,255,255,.1); }
+.cur-ring span { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #fff; opacity: 0; }
+.cur-ring.is-hot span { opacity: 1; }
+@media (hover: none), (pointer: coarse) { .cur, .cur-ring { display: none; } }
+
+/* ── narrow ── */
+@media (max-width: 1100px) {
+  .index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .index li:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+  .index li:nth-child(even) { padding-left: 22px; border-left: 1px solid rgba(237,241,248,.14); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps li + li { padding-left: 0; border-left: 0; }
+  .steps li:nth-child(even) { padding-left: 22px; border-left: 1px solid rgba(237,241,248,.14); }
+  .steps li:nth-child(n+3) { padding-top: 30px; }
+}
+@media (max-width: 900px) {
+  .panel, .panel--right { left: var(--gut); right: auto; bottom: 8vh; top: auto; width: calc(100% - 2 * var(--gut)); }
+  .pin::after { content: ''; position: absolute; inset: auto 0 0 0; height: 64%; background: linear-gradient(to top, rgba(4,7,18,.92), rgba(4,7,18,.55) 55%, transparent); pointer-events: none; z-index: -1; }
+  .panel { z-index: 1; }
+  .crs { top: calc(76px + env(safe-area-inset-top, 0px)); left: var(--gut); right: auto; width: calc(100% - 2 * var(--gut)); }
+  .crs__cats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .crs__cats li span { display: none; }
+  .crs__note { display: none; }
+  .rail, .hud__ch, .hud__nav .lnk { display: none; }
+  .sheet-head, .about-grid, .enq-grid, .faq { grid-template-columns: minmax(0, 1fr); }
+  .svc, .quotes, .ctas { grid-template-columns: minmax(0, 1fr); }
+  .svc > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--paper-line); padding-top: 26px; margin-top: 12px; }
+  .values { grid-template-columns: minmax(0, 1fr); }
+  .values div + div { padding-left: 0; border-left: 0; }
+  .form, .notes ul { grid-template-columns: minmax(0, 1fr); }
+  .slot div { aspect-ratio: 4 / 3; }
+  .wa b { display: none; }
+  .wa { padding: 13px; }
+}
+@media (max-width: 600px) {
+  .index, .steps, .facts { grid-template-columns: minmax(0, 1fr); }
+  .index li:nth-child(even), .steps li:nth-child(even) { padding-left: 0; border-left: 0; }
+  .steps li + li { padding-top: 26px; }
+  .facts div:nth-child(odd) { border-right: 0; }
+  .facts div:nth-child(even) { padding-left: 0; }
+  .pill { padding: 10px 14px; font-size: 13px; }
+  .brand b { font-size: 18px; }
+  .h--xl { font-size: clamp(38px, 11vw, 56px); }
+  .h--l { font-size: clamp(31px, 9vw, 44px); }
+  .sub { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cue i { animation: none; }
+}
+</style>
+
+<script>document.documentElement.classList.add('js'); setTimeout(function(){ var p = document.getElementById('pre'); if (p && !p.classList.contains('is-done')) p.classList.add('is-done'); }, 14000);</script>
+
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="pre__in">
+    <div class="pre__star">
+      <div class="pre__fill"><i id="preFill"></i></div>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 0 L38.4 25.6 L64 32 L38.4 38.4 L32 64 L25.6 38.4 L0 32 L25.6 25.6 Z" fill="none" stroke="rgba(237,241,248,.55)" stroke-width="1"/></svg>
+    </div>
+    <div class="pre__meta"><b id="preNum">00</b><span id="preLabel">Opening the file</span></div>
+  </div>
+</div>
+
+<div class="cur" id="cur" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"><span id="curLabel"></span></div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="veil" id="veil" aria-hidden="true"></div>
+<div class="film" aria-hidden="true"></div>
+
+<header class="hud" id="hud">
+  <a class="brand" href="#top" data-cur="top" aria-label="Nova World Immigration, back to top"><b>NOVA<span>WORLD</span></b><small>IMMIGRATION</small></a>
+  <div class="hud__ch" id="hudCh" aria-hidden="true"><b>01</b><span>Assess</span></div>
+  <nav class="hud__nav" aria-label="Quick links">
+    <a class="lnk" href="https://casecloud.ca/Login/Login?siteId=CCP2020967" target="_blank" rel="noopener">Client login</a>
+    <a class="lnk" href="#start">Contact</a>
+    <a class="pill" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NOVAWORLDIMMIGRATION" target="_blank" rel="noopener" data-cur="free">Free assessment <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<div class="rail" aria-hidden="true"><i id="railFill"></i></div>
+<a class="wa" href="https://api.whatsapp.com/send?phone=14372300005&amp;text=Hi%2C%20I%27m%20interested%20in%20your%20immigration%20services." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-cur="chat">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+  <b>WhatsApp</b>
+</a>
+
+<main id="top">
+
+<!-- ═══ 1 · SKY: the assessment sheet folds into a plane ═══ -->
+<section class="ch" data-scene="sky" data-label="Assess" style="--len: 680vh" aria-label="Assess">
+  <div class="pin">
+    <div class="panel panel--first" data-r="-1,0.06">
+      <p class="eyebrow ln"><span>Regulated Canadian Immigration Consultants · Mississauga, Ontario</span></p>
+      <h1 class="h h--xl"><span class="ln"><span>Every new life</span></span><span class="ln"><span>in Canada starts</span></span><span class="ln"><span>on <em>one page.</em></span></span></h1>
+      <p class="sub"><span class="ln"><span>Whether you want to study, work, visit, invest, sponsor family or settle for good, we map the route with you: from a first assessment to the citizenship oath.</span></span></p>
+      <div class="acts ln"><span style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center">
+        <a class="pill" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NOVAWORLDIMMIGRATION" target="_blank" rel="noopener" data-cur="free">Start your free assessment <span aria-hidden="true">↗</span></a>
+        <a class="ghost" href="#start" data-cur="book">Book a consultation</a>
+      </span></div>
+      <p class="cue ln"><span><i></i>Scroll to follow one application</span></p>
+    </div>
+    <div class="panel" data-r="0.15,0.31">
+      <p class="eyebrow ln"><span>Step one · Eligibility assessment</span></p>
+      <h2 class="h h--l"><span class="ln"><span>First, an <em>honest</em></span></span><span class="ln"><span>read of where</span></span><span class="ln"><span>you stand.</span></span></h2>
+      <p class="sub"><span class="ln"><span>Age, education, language results, work history, family, funds. We look at the whole profile and tell you which routes are realistic, and which aren’t.</span></span></p>
+      <p class="meta ln"><span>Free online assessment · no obligation</span></p>
+    </div>
+    <div class="panel" data-r="0.4,0.56">
+      <p class="eyebrow ln"><span>Step two · Strategy</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Then the paperwork</span></span><span class="ln"><span>becomes <em>a plan.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>One route, one checklist, one timeline you can follow. We prepare and review every form, file it with IRCC on your behalf, and tell you plainly what could slow it down.</span></span></p>
+    </div>
+    <div class="panel panel--top panel--right" data-r="0.67,0.8">
+      <p class="eyebrow ln"><span>What we won’t say</span></p>
+      <h2 class="h h--l"><span class="ln"><span>No one can</span></span><span class="ln"><span>promise <em>a visa.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Decisions belong to Immigration, Refugees and Citizenship Canada. What a licensed consultant can promise is a complete, honest, well-argued application.</span></span></p>
+      <p class="meta ln"><span>Licensed by the College of Immigration and Citizenship Consultants</span></p>
+    </div>
+    <div class="panel" data-r="0.88,2">
+      <h2 class="h h--l"><span class="ln"><span>Now it has</span></span><span class="ln"><span><em>somewhere to go.</em></span></span></h2>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · who we are ═══ -->
+<section class="sheet sheet--light" id="about" aria-labelledby="about-h">
+  <div class="formno"><span>Who we are</span><span>Nova World Immigration Services Inc.</span></div>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Founded by someone who’s done it</p>
+      <h2 class="h h--l" id="about-h">Licensed to advise.<br><em>Lived it first.</em></h2>
+    </div>
+    <p class="sub">Rajan Chugh came to Canada as an international student in 2004 and went through admission and immigration himself. While studying, he started helping other students apply. He became a Regulated Canadian Immigration Consultant in 2019 and founded Nova World Immigration Services.</p>
+  </div>
+  <div class="about-grid block">
+    <div>
+      <dl class="facts">
+        <div><dt>Founder</dt><dd>Rajan Chugh, RCIC</dd></div>
+        <div><dt>Licence</dt><dd>CICC · R000000 <span class="ph">Placeholder</span></dd></div>
+        <div><dt>Head office</dt><dd>Unit 4, 2780 Slough Street, Mississauga, ON L4T 1G3</dd></div>
+        <div><dt>Offices &amp; affiliates</dt><dd>India · UAE · Cambodia</dd></div>
+        <div><dt>Also</dt><dd>Commissioner for Taking Affidavits, Ontario</dd></div>
+        <div><dt>Also</dt><dd>Licensed foreign-worker recruitment agent, Manitoba</dd></div>
+      </dl>
+      <div class="badges"><span>CICC licensed</span><span>RCIC</span><span>CAPIC member <span class="ph">Confirm</span></span></div>
+    </div>
+    <figure class="slot"><div>Photo slot · portrait of Rajan Chugh</div><figcaption>Client to supply a portrait they own the rights to. <span class="ph">Placeholder</span></figcaption></figure>
+  </div>
+  <div class="values block">
+    <div><h3>Trust</h3><p>We spend time understanding what you need before recommending anything.</p></div>
+    <div><h3>Integrity</h3><p>Your information stays confidential and is shared only with IRCC to process your application.</p></div>
+    <div><h3>Honesty</h3><p>You hear what’s realistic, including when a route isn’t right for you.</p></div>
+  </div>
+</section>
+
+<!-- ═══ 2 · CRS: Express Entry points gauge ═══ -->
+<section class="ch" data-scene="crs" data-label="Immigrate" style="--len: 560vh" aria-label="Immigrate: Express Entry">
+  <div class="pin">
+    <div class="crs" aria-hidden="true">
+      <div class="crs__num"><b id="crsNum">0</b><span>of 1,200<br>CRS points</span></div>
+      <ol class="crs__cats" id="crsCats">
+        <li style="--c:#ffcc29"><span>A · Core human capital</span><em>500</em><i></i></li>
+        <li style="--c:#7be3c6"><span>B · Spouse or partner</span><em>40</em><i></i></li>
+        <li style="--c:#8fb2ff"><span>C · Skill transferability</span><em>100</em><i></i></li>
+        <li style="--c:#f08a6c"><span>D · Additional points</span><em>600</em><i></i></li>
+      </ol>
+      <p class="crs__note">Category maximums, not a score.</p>
+    </div>
+    <div class="panel" data-r="0.03,0.18">
+      <p class="eyebrow ln"><span>Immigrate · Express Entry</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Express Entry</span></span><span class="ln"><span>runs on <em>points.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Candidates for the Federal Skilled Worker, Federal Skilled Trades and Canadian Experience Class programs are ranked in one pool by the Comprehensive Ranking System. In each draw, IRCC invites the highest-ranked profiles.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.22,0.36">
+      <p class="eyebrow ln"><span>A · Core human capital · up to 500</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Who you are,</span></span><span class="ln"><span><em>on paper.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Age, education, official-language ability and Canadian work experience. Up to 460 if a spouse or partner is coming with you.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.4,0.52">
+      <p class="eyebrow ln"><span>B · Spouse or partner · up to 40</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Who comes</span></span><span class="ln"><span><em>with you.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Your partner’s education, language results and Canadian work experience.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.56,0.68">
+      <p class="eyebrow ln"><span>C · Skill transferability · up to 100</span></p>
+      <h2 class="h h--l"><span class="ln"><span>How your strengths</span></span><span class="ln"><span><em>combine.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Strong language results with a degree, or foreign work experience alongside Canadian experience, add up to more than either alone.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.72,0.84">
+      <p class="eyebrow ln"><span>D · Additional points · up to 600</span></p>
+      <h2 class="h h--l"><span class="ln"><span>The factors that</span></span><span class="ln"><span><em>move a profile.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>A provincial nomination adds 600 on its own. French ability, study in Canada and a brother or sister living here also count.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.88,2">
+      <p class="eyebrow ln"><span>Before you enter the pool</span></p>
+      <h2 class="h h--l"><span class="ln"><span>We model your score</span></span><span class="ln"><span><em>before</em> you file.</span></span></h2>
+      <p class="sub"><span class="ln"><span>Cut-off scores change with every draw, so we don’t quote one. We show you which factors you can still improve.</span></span></p>
+      <div class="acts ln"><span style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center">
+        <a class="pill" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NOVAWORLDIMMIGRATION" target="_blank" rel="noopener">Free assessment <span aria-hidden="true">↗</span></a>
+        <a class="ghost" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score.html" target="_blank" rel="noopener">IRCC’s official CRS tool ↗</a>
+      </span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · immigrate index ═══ -->
+<section class="sheet sheet--dark" id="immigrate" aria-labelledby="imm-h">
+  <div class="formno"><span>Immigrate</span><span>Permanent residence</span></div>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Routes to permanent residence</p>
+      <h2 class="h h--l" id="imm-h">Nine ways in.<br><em>One of them fits.</em></h2>
+    </div>
+    <p class="sub">Express Entry is the best known, but it’s not the only door. Provinces, regions and Quebec each run their own selection. We compare them against your profile before you commit to one.</p>
+  </div>
+  <ul class="index block">
+    <li><a href="https://nwimmigration.ca/express-entry.php" target="_blank" rel="noopener"><code>Federal</code><b>Express Entry</b><span>The online system that manages the three federal economic programs below.</span></a></li>
+    <li><a href="https://nwimmigration.ca/federal-skilled-worker.php" target="_blank" rel="noopener"><code>Federal</code><b>Federal Skilled Worker</b><span>For skilled workers with foreign work experience, language results and education.</span></a></li>
+    <li><a href="https://nwimmigration.ca/federal-skilled-trades.php" target="_blank" rel="noopener"><code>Federal</code><b>Federal Skilled Trades</b><span>For qualified tradespeople with a job offer or a Canadian certificate of qualification.</span></a></li>
+    <li><a href="https://nwimmigration.ca/candian-experience-class.php" target="_blank" rel="noopener"><code>Federal</code><b>Canadian Experience Class</b><span>For people who already have skilled work experience in Canada.</span></a></li>
+    <li><a href="https://nwimmigration.ca/provincial-immigration.php" target="_blank" rel="noopener"><code>Provincial</code><b>Provincial Nominee Programs</b><span>Provinces and territories nominate people who fit their labour market.</span></a></li>
+    <li><a href="https://nwimmigration.ca/quebec-immigration.php" target="_blank" rel="noopener"><code>Quebec</code><b>Quebec Immigration</b><span>Quebec runs its own selection before the federal permanent-residence stage.</span></a></li>
+    <li><a href="https://nwimmigration.ca/atlantic-immigration.php" target="_blank" rel="noopener"><code>Regional</code><b>Atlantic Immigration <span class="ph">Name to confirm</span></b><span>Employer-driven route to Nova Scotia, New Brunswick, PEI, and Newfoundland and Labrador.</span></a></li>
+    <li><a href="https://nwimmigration.ca/rural-immigration-pilot.php" target="_blank" rel="noopener"><code>Regional</code><b>Rural &amp; Northern Immigration <span class="ph">Name to confirm</span></b><span>Community-driven routes into smaller towns and regions.</span></a></li>
+    <li><a href="https://nwimmigration.ca/caregiver-program.php" target="_blank" rel="noopener"><code>Caregivers</code><b>Caregiver Programs <span class="ph">Name to confirm</span></b><span>Routes for home child-care and home support workers.</span></a></li>
+  </ul>
+  <div class="block">
+    <p class="eyebrow">How the 1,200 CRS points break down</p>
+    <div class="table-wrap">
+      <table class="crs-table">
+        <tbody>
+          <tr><th>A · Core human capital<small>age, education, language, Canadian work experience</small></th><td>Up to 460 with a partner, and 500 without</td><td>500</td></tr>
+          <tr><th>B · Spouse or common-law partner<small>their education, language, Canadian work experience</small></th><td>Only when a partner comes with you</td><td>40</td></tr>
+          <tr><th>C · Skill transferability<small>education, language and experience in combination</small></th><td>Capped regardless of combinations</td><td>100</td></tr>
+          <tr><th>D · Additional points<small>provincial nomination, French, Canadian study, sibling in Canada</small></th><td>Provincial nomination alone is 600</td><td>600</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Source: IRCC’s Comprehensive Ranking System criteria. Points rules change; check <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html" target="_blank" rel="noopener">canada.ca</a> for the current version. <span class="ph">RCIC to verify before launch</span></p>
+  </div>
+</section>
+
+<!-- ═══ 3 · GLOBE A: study ═══ -->
+<section class="ch" data-scene="globe" data-part="a" data-label="Study" style="--len: 520vh" aria-label="Study">
+  <div class="pin">
+    <div class="panel" data-r="0.05,0.3">
+      <p class="eyebrow ln"><span>Study</span></p>
+      <h2 class="h h--l"><span class="ln"><span>A campus</span></span><span class="ln"><span><em>anywhere.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Through our partner network we help students apply to colleges and universities in Canada, the USA, the UK, Australia and Germany, and plan for what comes after graduation.</span></span></p>
+    </div>
+    <div class="panel panel--right" data-r="0.38,0.6">
+      <p class="eyebrow ln"><span>Study in Canada</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Study here,</span></span><span class="ln"><span><em>stay on?</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>A Canadian credential can lead to a Post-Graduation Work Permit, and skilled work in Canada counts toward permanent residence. We plan the whole arc, not only the admission.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.7,0.96">
+      <p class="eyebrow ln"><span>Five destinations</span></p>
+      <ul class="dest rv">
+        <li><span>Canada</span><span>Admission · study permit · PGWP</span></li>
+        <li><span>United States</span><span>Admission · student visa</span></li>
+        <li><span>United Kingdom</span><span>Admission · student visa</span></li>
+        <li><span>Australia</span><span>Admission · student visa</span></li>
+        <li><span>Germany</span><span>Admission · student visa</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · GLOBE B: work & visit ═══ -->
+<section class="ch" data-scene="globe" data-part="b" data-label="Work &amp; visit" style="--len: 460vh" aria-label="Work and visit">
+  <div class="pin">
+    <div class="panel" data-r="0.08,0.36">
+      <p class="eyebrow ln"><span>Work</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Every route</span></span><span class="ln"><span><em>lands here.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Employer-specific permits backed by an LMIA, open work permits, bridging permits while your PR application is processed, post-graduation permits and International Experience Canada.</span></span></p>
+    </div>
+    <div class="panel panel--top panel--right" data-r="0.44,0.68">
+      <p class="eyebrow ln"><span>Visit</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Some trips are</span></span><span class="ln"><span><em>just visits.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Visitor visas, the Super Visa for parents and grandparents, and the Electronic Travel Authorization for visa-exempt travellers.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.8,2">
+      <h2 class="h h--l"><span class="ln"><span>Canada,</span></span><span class="ln"><span><em>up close.</em></span></span></h2>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · study / work / visit ═══ -->
+<section class="sheet sheet--light" id="services" aria-labelledby="svc-h">
+  <div class="formno"><span>Study · Work · Visit</span><span>Temporary residence</span></div>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Temporary routes</p>
+      <h2 class="h h--l" id="svc-h">Here for a degree,<br>a job, or <em>a wedding.</em></h2>
+    </div>
+    <p class="sub">Not every journey is permanent from day one. Many of our clients start with a study or work permit, and some simply need to visit. Each service below links to the full details on our current site.</p>
+  </div>
+  <div class="svc block">
+    <div>
+      <h3>Study</h3>
+      <p>Admissions and student visas in five countries.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/study-canada.php" target="_blank" rel="noopener">Study in Canada</a></li>
+        <li><a href="https://nwimmigration.ca/study-usa.php" target="_blank" rel="noopener">Study in the USA</a></li>
+        <li><a href="https://nwimmigration.ca/study-uk.php" target="_blank" rel="noopener">Study in the UK</a></li>
+        <li><a href="https://nwimmigration.ca/study-australia.php" target="_blank" rel="noopener">Study in Australia</a></li>
+        <li><a href="https://nwimmigration.ca/study-german.php" target="_blank" rel="noopener">Study in Germany</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Work</h3>
+      <p>Permits for employers, graduates and young travellers.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/labour-market-impact.php" target="_blank" rel="noopener">Labour Market Impact Assessment</a></li>
+        <li><a href="https://nwimmigration.ca/open-work-permit.php" target="_blank" rel="noopener">Open Work Permit</a></li>
+        <li><a href="https://nwimmigration.ca/bridging-open-work.php" target="_blank" rel="noopener">Bridging Open Work Permit</a></li>
+        <li><a href="https://nwimmigration.ca/post-graduate-work-permit.php" target="_blank" rel="noopener">Post-Graduation Work Permit</a></li>
+        <li><a href="https://nwimmigration.ca/international-experience-canada.php" target="_blank" rel="noopener">International Experience Canada</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Visit</h3>
+      <p>Short stays, family visits and travel authorization.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/visitor-visa.php" target="_blank" rel="noopener">Visitor Visa</a></li>
+        <li><a href="https://nwimmigration.ca/super-visa.php" target="_blank" rel="noopener">Super Visa for parents &amp; grandparents</a></li>
+        <li><a href="https://nwimmigration.ca/electronic-travel-authorisartion.php" target="_blank" rel="noopener">Electronic Travel Authorization (eTA)</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · CITY: invest ═══ -->
+<section class="ch" data-scene="city" data-label="Invest" style="--len: 540vh" aria-label="Invest">
+  <div class="pin">
+    <div class="panel" data-r="0.05,0.26">
+      <p class="eyebrow ln"><span>Invest</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Build something</span></span><span class="ln"><span><em>of your own.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>For founders, entrepreneurs, self-employed people and investors, the route to Canada can run through a business.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.33,0.5">
+      <p class="eyebrow ln"><span>Start-up Visa</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Start with</span></span><span class="ln"><span><em>the blueprint.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>The Start-up Visa needs support from a designated Canadian organization: a venture capital fund, an angel investor group or a business incubator.</span></span></p>
+    </div>
+    <div class="panel panel--top panel--right" data-r="0.57,0.75">
+      <p class="eyebrow ln"><span>Entrepreneur &amp; investor streams</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Or buy a business</span></span><span class="ln"><span><em>that’s running.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Several provinces run entrepreneur streams, each with its own investment, experience and residency rules. We compare them against your capital and plans.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.84,2">
+      <h2 class="h h--l"><span class="ln"><span>Planned on paper.</span></span><span class="ln"><span><em>Built in Canada.</em></span></span></h2>
+      <p class="meta ln"><span>Start-up Visa · Entrepreneur · Self-employed · Investor · Buy a business</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · invest + how we work ═══ -->
+<section class="sheet sheet--dark" id="invest" aria-labelledby="inv-h">
+  <div class="formno"><span>Invest · How we work</span><span>Business immigration</span></div>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Business immigration</p>
+      <h2 class="h h--l" id="inv-h">Capital, experience<br>and <em>a plan.</em></h2>
+    </div>
+    <p class="sub">Business routes ask for more than money. They ask for a credible plan, documented experience and, often, a commitment to a particular province. We help you choose the stream before you spend on it.</p>
+  </div>
+  <ul class="index block">
+    <li><a href="https://nwimmigration.ca/federal-startup.php" target="_blank" rel="noopener"><code>Federal</code><b>Start-up Visa</b><span>For founders backed by a designated Canadian organization.</span></a></li>
+    <li><a href="https://nwimmigration.ca/entrepreneur-program.php" target="_blank" rel="noopener"><code>Provincial</code><b>Entrepreneur Programs</b><span>Provincial streams for people who will start or run a business.</span></a></li>
+    <li><a href="https://nwimmigration.ca/self-employed.php" target="_blank" rel="noopener"><code>Federal</code><b>Self-employed Programs</b><span>For people with relevant self-employed experience.</span></a></li>
+    <li><a href="https://nwimmigration.ca/investor-program.php" target="_blank" rel="noopener"><code>Investor</code><b>Investor Programs</b><span>Routes for experienced investors.</span></a></li>
+    <li><a href="https://nwimmigration.ca/buy-business.php" target="_blank" rel="noopener"><code>Business</code><b>Buy a Business</b><span>Due diligence and immigration planning around an acquisition.</span></a></li>
+    <li><a href="https://nwimmigration.ca/consulting.php" target="_blank" rel="noopener"><code>Advisory</code><b>Consulting &amp; Advisory</b><span>Strategy sessions before you commit to a route.</span></a></li>
+  </ul>
+  <div class="block">
+    <p class="eyebrow">How we work</p>
+    <ol class="steps">
+      <li><h3>Assessment</h3><p>Complete the free online eligibility assessment. We review your profile and identify realistic routes.</p></li>
+      <li><h3>Consultation &amp; agreement</h3><p>A consultation to agree the strategy, followed by a written service agreement that sets out fees and scope.</p></li>
+      <li><h3>Documents &amp; filing</h3><p>We build your checklist, review every document and submit the application to IRCC on your behalf.</p></li>
+      <li><h3>Decision &amp; arrival</h3><p>We follow the file through to a decision, then help with pre-arrival planning and settling in.</p></li>
+    </ol>
+    <p class="callout"><b>Outcomes are decided by IRCC.</b> Processing times vary by program and country, and no consultant can guarantee an approval. Anyone who does is a red flag.</p>
+  </div>
+</section>
+
+<!-- ═══ 6 · HOME A: sponsor & settle ═══ -->
+<section class="ch" data-scene="home" data-part="a" data-label="Sponsor &amp; settle" style="--len: 520vh" aria-label="Sponsor and settle">
+  <div class="pin">
+    <div class="panel" data-r="0.05,0.3">
+      <p class="eyebrow ln"><span>Sponsor</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Some journeys are</span></span><span class="ln"><span>about <em>who comes next.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Canadian citizens and permanent residents can sponsor a spouse or partner, dependent children, and parents and grandparents.</span></span></p>
+    </div>
+    <div class="panel panel--top panel--right" data-r="0.38,0.6">
+      <p class="eyebrow ln"><span>Family reunification</span></p>
+      <h2 class="h h--l"><span class="ln"><span>One light at a time,</span></span><span class="ln"><span><em>the house fills.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Sponsorship applications rest on two things: evidence of the relationship, and the sponsor’s financial commitment. We help you document both.</span></span></p>
+    </div>
+    <div class="panel" data-r="0.68,0.92">
+      <p class="eyebrow ln"><span>Settle</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Landing is</span></span><span class="ln"><span><em>day one,</em> not the end.</span></span></h2>
+      <p class="sub"><span class="ln"><span>Pre-arrival planning, settlement support and help finding work, so your first months in Canada don’t feel like starting from zero.</span></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · family, settlement, other ═══ -->
+<section class="sheet sheet--light" id="family" aria-labelledby="fam-h">
+  <div class="formno"><span>Sponsor · Settle · Other services</span><span>Family &amp; beyond</span></div>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Family and what comes after</p>
+      <h2 class="h h--l" id="fam-h">Bring them here.<br><em>Help them stay.</em></h2>
+    </div>
+    <p class="sub">Family sponsorship, settlement support and the harder cases: appeals, inadmissibility and humanitarian applications. Each service links to its page on our current site.</p>
+  </div>
+  <div class="svc block">
+    <div>
+      <h3>Sponsor</h3>
+      <p>Reunite with the people who matter.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/spousal-sponsorship.php" target="_blank" rel="noopener">Spouse or partner</a></li>
+        <li><a href="https://nwimmigration.ca/parents-sponsorship.php" target="_blank" rel="noopener">Parents &amp; grandparents</a></li>
+        <li><a href="https://nwimmigration.ca/child-dependent.php" target="_blank" rel="noopener">Children &amp; dependants</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Settle</h3>
+      <p>Before you land and after.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/pre-arrival-services.php" target="_blank" rel="noopener">Pre-arrival services</a></li>
+        <li><a href="https://nwimmigration.ca/settlement-support.php" target="_blank" rel="noopener">Settlement support</a></li>
+        <li><a href="https://nwimmigration.ca/employment-support.php" target="_blank" rel="noopener">Employment support</a></li>
+        <li><a href="https://nwimmigration.ca/document-services.php" target="_blank" rel="noopener">Document services</a></li>
+        <li><a href="https://nwimmigration.ca/consular-services.php" target="_blank" rel="noopener">Consular services</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Other services</h3>
+      <p>Citizenship and the harder files.</p>
+      <ul>
+        <li><a href="https://nwimmigration.ca/citizenship-application.php" target="_blank" rel="noopener">Citizenship application</a></li>
+        <li><a href="https://nwimmigration.ca/immigration-appeal.php" target="_blank" rel="noopener">Immigration appeals</a></li>
+        <li><a href="https://nwimmigration.ca/inadmissibility-issues.php" target="_blank" rel="noopener">Inadmissibility issues</a></li>
+        <li><a href="https://nwimmigration.ca/h-c-assessment.php" target="_blank" rel="noopener">Humanitarian &amp; compassionate</a></li>
+        <li><a href="https://nwimmigration.ca/evaluation.php" target="_blank" rel="noopener">Evaluation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="block">
+    <p class="eyebrow">In our clients’ words</p>
+    <div class="quotes">
+      <figure class="quote"><p>Testimonial slot. Real, consented client review to be supplied by Nova World.</p><footer>Client name · program <span class="ph">Placeholder</span></footer></figure>
+      <figure class="quote"><p>Testimonial slot. Real, consented client review to be supplied by Nova World.</p><footer>Client name · program <span class="ph">Placeholder</span></footer></figure>
+      <figure class="quote"><p>Testimonial slot. Real, consented client review to be supplied by Nova World.</p><footer>Client name · program <span class="ph">Placeholder</span></footer></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 · HOME B: citizenship ═══ -->
+<section class="ch" data-scene="home" data-part="b" data-label="Citizenship" style="--len: 600vh" aria-label="Citizenship">
+  <div class="pin">
+    <div class="panel" data-r="0.06,0.3">
+      <p class="eyebrow ln"><span>Citizenship</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Years later,</span></span><span class="ln"><span><em>one more form.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>Permanent residents who have lived in Canada long enough can apply for citizenship. Before you file, we check your days in Canada, your tax filings and your test preparation.</span></span></p>
+      <p class="meta ln"><span>At least 1,095 days in Canada in the five years before you apply</span></p>
+    </div>
+    <div class="panel" data-r="0.4,0.66">
+      <p class="eyebrow ln"><span>The ceremony</span></p>
+      <h2 class="h h--l"><span class="ln"><span>Then you raise</span></span><span class="ln"><span>your hand and</span></span><span class="ln"><span><em>take the oath.</em></span></span></h2>
+      <p class="sub"><span class="ln"><span>The citizenship ceremony is the last step. You take the Oath of Citizenship and leave as a Canadian citizen.</span></span></p>
+    </div>
+    <div class="panel panel--first" data-r="0.78,2">
+      <h2 class="h h--xl"><span class="ln"><span>One application.</span></span><span class="ln"><span>One flight.</span></span><span class="ln"><span><em>A new home.</em></span></span></h2>
+      <div class="acts ln"><span style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center">
+        <a class="pill" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NOVAWORLDIMMIGRATION" target="_blank" rel="noopener" data-cur="free">Start your free assessment <span aria-hidden="true">↗</span></a>
+        <a class="ghost" href="#start">Book a consultation</a>
+      </span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOM · start here ═══ -->
+<section class="enquire" id="start" aria-labelledby="start-h">
+  <p class="eyebrow">Start here</p>
+  <h2 class="h h--l" id="start-h">Where are you<br><em>starting from?</em></h2>
+  <div class="ctas">
+    <a class="cta cta--gold" href="https://casecloud.ca/login/assessmentembed?siteID=CCP2020967&amp;company=NOVAWORLDIMMIGRATION" target="_blank" rel="noopener" data-cur="free"><code>Free · online</code><b>Eligibility assessment ↗</b><span>Answer a few questions about your profile. We’ll come back with the routes that fit.</span></a>
+    <a class="cta" href="#consult" data-cur="book"><code>One-to-one</code><b>Book a consultation</b><span>Talk your options through with a licensed consultant.</span></a>
+    <a class="cta" href="https://api.whatsapp.com/send?phone=14372300005&amp;text=Hi%2C%20I%27m%20interested%20in%20your%20immigration%20services." target="_blank" rel="noopener" data-cur="chat"><code>Quick question</code><b>WhatsApp us ↗</b><span>+1 (437) 230-0005 <span class="ph">Confirm</span></span></a>
+  </div>
+
+  <div class="enq-grid" id="consult">
+    <form class="form" id="form" novalidate>
+      <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-phone">Phone or WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="f-country">Country you live in</label><input id="f-country" name="country" autocomplete="country-name"></div>
+      <div class="field field--full"><label for="f-goal">I’m interested in</label>
+        <select id="f-goal" name="goal"><option>Immigrating permanently</option><option>Studying abroad</option><option>Working in Canada</option><option>Visiting Canada</option><option>Investing or starting a business</option><option>Sponsoring family</option><option>Citizenship</option><option>Something else</option></select></div>
+      <div class="field field--full"><label for="f-msg">Tell us a little more</label><textarea id="f-msg" name="message" placeholder="Your situation, timeline and any questions"></textarea></div>
+      <label class="check" for="f-ok"><input type="checkbox" id="f-ok" name="consent"> I understand this form starts a conversation, not a client relationship, and that my details are used only to reply to me.</label>
+      <button class="send" type="submit" data-cur="send">Request a consultation <span aria-hidden="true">→</span></button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+    <div class="contact">
+      <div><b>Toll-free</b><span class="num">+1 (877) 412-9959</span><button class="copy" type="button" data-copy="+18774129959">Copy</button></div>
+      <div><b>Office</b><span class="num">+1 (647) 404-6682</span> · <span class="num">+1 (647) 403-6682</span> <span class="ph">Confirm</span></div>
+      <div><b>Email</b><span class="num">info@nwimmigration.ca</span><button class="copy" type="button" data-copy="info@nwimmigration.ca">Copy</button></div>
+      <div><b>Head office</b>Nova World Immigration Services Inc.<br>Unit 4, 2780 Slough Street<br>Mississauga, ON L4T 1G3, Canada</div>
+      <div><b>Already a client?</b><a href="https://casecloud.ca/Login/Login?siteId=CCP2020967" target="_blank" rel="noopener">Client login ↗</a> · <a href="https://admin.caseeasy.ca/Login/Login?siteId=CCP2020967&amp;company=NovaWorldImmigration" target="_blank" rel="noopener">Agent login ↗</a></div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div>
+      <p class="eyebrow">Questions</p>
+      <h2 class="h h--m">What people ask first</h2>
+      <p class="sub" style="font-size:14.5px">Answers adapted from our current site. <span class="ph">RCIC to review</span> Some details may be out of date and must be checked before launch.</p>
+    </div>
+    <div>
+      <details><summary>Who can be included in a permanent residence application?</summary><p>Usually the main applicant, their spouse, common-law or conjugal partner, and dependent children. Older children may qualify in some circumstances. Age limits and definitions are set by IRCC and change over time.</p></details>
+      <details><summary>Where is the application submitted?</summary><p>Most economic applications are now filed online with IRCC. Depending on the program, parts of the file may be handled by an office inside or outside Canada.</p></details>
+      <details><summary>Do I need to travel to Canada during the process?</summary><p>Generally no. Some programs value familiarity with the province or community you plan to live in.</p></details>
+      <details><summary>Will I have to attend an interview?</summary><p>Most applicants are not interviewed, but IRCC can request an interview with the applicant and, sometimes, family members.</p></details>
+      <details><summary>How does permanent residence affect my taxes?</summary><p>Canada taxes on residency, not citizenship. Once you become a resident for tax purposes, you are generally taxed on your worldwide income. Speak to a tax professional about your situation.</p></details>
+    </div>
+  </div>
+
+  <aside class="notes" aria-labelledby="notes-h">
+    <h3 id="notes-h">Prototype notes: what we need from Nova World</h3>
+    <p>Everything marked <span class="ph">Placeholder</span> or <span class="ph">Confirm</span> on this page is waiting on one of these.</p>
+    <ul>
+      <li>RCIC licence number(s) from the CICC register, for the footer and the About section</li>
+      <li>Logo as an SVG (the header wordmark is typed text in brand colours)</li>
+      <li>Portrait of Rajan Chugh and any office or team photos you hold the rights to</li>
+      <li>Rights confirmed for current site images you want to reuse (slider-1 to slider-4, Immigration-2, document, consular, value-added, affiliate, blog1–3)</li>
+      <li>Real, consented client testimonials (the current site has none)</li>
+      <li>CAPIC membership and any other badges to show</li>
+      <li>Current program names: Atlantic, Rural &amp; Northern, and Caregiver pages use pilot-era names</li>
+      <li>FAQ answers reviewed by an RCIC</li>
+      <li>Which numbers to publish: WhatsApp 437-230-0005, toll-free 877-412-9959, office 647-404-6682 / 647-403-6682</li>
+      <li>Where consultation requests should go (email, CRM or CaseCloud); this form sends nothing</li>
+      <li>Privacy policy link and consent wording</li>
+      <li>Addresses of the India, UAE and Cambodia offices, if they should be listed</li>
+    </ul>
+  </aside>
+
+  <footer class="foot">
+    <div class="big" aria-hidden="true">Nova<span>World</span></div>
+    <div class="foot-row">
+      <span class="licence">Rajan Chugh, RCIC · CICC licence no. R000000 <span class="ph">Placeholder</span></span>
+      <span>Nova World Immigration Services Inc. · Mississauga, ON</span>
+    </div>
+    <div class="foot-row">
+      <span><a href="https://www.facebook.com/nwiservices" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/nwiservices" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.linkedin.com/company/nwimmigration" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://twitter.com/nwimmigration" target="_blank" rel="noopener">X / Twitter</a></span>
+      <span><a href="https://www.nwimmigration.ca/privacy-policy.php" target="_blank" rel="noopener">Privacy policy</a> · <a href="#top">Back to top ↑</a></span>
+    </div>
+    <p class="disclaim">The information on this site is general and is not legal advice. Immigration decisions are made by Immigration, Refugees and Citizenship Canada and other government authorities. Program rules, fees and processing times change; confirm current requirements before you apply. Design prototype: 3D scenes are illustrative.</p>
+  </footer>
+</section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/sky.js"></script>
+<script src="js/crs.js"></script>
+<script src="js/globe.js"></script>
+<script src="js/city.js"></script>
+<script src="js/home.js"></script>
+<script src="js/main.js"></script>
+
+</body></html>
