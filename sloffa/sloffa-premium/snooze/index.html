@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Snooze — SLOFFA</title>
+<meta name="description" content="The Snooze, a low-top from SLOFFA (a fictional brand). For people who still technically own laces. A premium demo website.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4EEE2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233D5AFE'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial Black,sans-serif' font-size='40' font-weight='900' fill='%23E8FF4F'%3Ez%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body data-model="snooze">
+<header class="nav">
+  <a class="logo" href="../" aria-label="SLOFFA home">SLOFFA<i>z</i></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="../#ch-box">The box</a>
+    <a href="../#ch-layers">Layers</a>
+    <a href="../#build">Build yours</a>
+    <a href="../#lineup">Lineup</a>
+  </nav>
+  <div class="nav__right">
+    <button class="lazy-tg" type="button" aria-pressed="false" title="Runs everything at half speed">Lazy mode <span class="sw" aria-hidden="true"></span></button>
+  </div>
+</header>
+<main id="p"></main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="logo">SLOFFA<i>z</i></div><p style="color:rgba(244,238,226,.7);max-width:26em">Ultra-light comfort sneakers for people with better things to not do.</p></div>
+      <div><h4>The lineup</h4><ul><li><a href="../snooze/">The Snooze</a></li><li><a href="../couch/">The Couch</a></li><li><a href="../nope/">The Nope</a></li><li><a href="../#build">Build your own</a></li></ul></div>
+      <div><h4>Say hello (eventually)</h4><ul><li><a href="mailto:hello@sloffa.example">hello@sloffa.example</a></li><li>Replies within 3–5 business naps</li></ul></div>
+    </div>
+    <div class="fict">
+      <span>SLOFFA is a fictional brand made for a design demo. No shoes were sold, mostly because nobody could be bothered.</span>
+      <span>Prototype · placeholder brand, prices and contacts · © 2026</span>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="../js/product.js"></script>
+</body>
+</html>
