@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SLOFFA — Don't Do It.</title>
+<meta name="description" content="SLOFFA (a fictional brand): ultra-light comfort sneakers for people who would rather not. Open the box, take the shoe apart, build your own. A premium demo website.">
+<meta property="og:title" content="SLOFFA — Don't Do It.">
+<meta property="og:description" content="SLOFFA (a fictional brand): the world's laziest sneaker. A premium demo website.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4EEE2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233D5AFE'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial Black,sans-serif' font-size='40' font-weight='900' fill='%23E8FF4F'%3Ez%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<div id="pre" role="status" aria-live="polite">
+  <div class="in">
+    <div class="logo">SLOFFA<i>z</i></div>
+    <p>Loading… or not. No pressure.</p>
+    <div class="bar"><i></i></div>
+    <button class="skip" type="button">Skip. We get it.</button>
+  </div>
+</div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="SLOFFA home">SLOFFA<i>z</i></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#ch-box">The box</a>
+    <a href="#ch-layers">Layers</a>
+    <a href="#build">Build yours</a>
+    <a href="#lineup">Lineup</a>
+  </nav>
+  <div class="nav__right">
+    <button class="lazy-tg" type="button" aria-pressed="false" title="Runs everything at half speed">Lazy mode <span class="sw" aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<canvas id="gl" aria-label="A 3D SLOFFA shoebox opening, and the shoe inside floating out and coming apart into its layers" role="img"></canvas>
+
+<div id="labels" aria-hidden="true">
+  <svg></svg>
+  <div class="plabel" data-k="laces"><b>Laces</b><span class="t">Optional. Like effort.</span></div>
+  <div class="plabel" data-k="tongue"><b>Tongue</b><span class="t">Puffy. Says nothing. Respect.</span></div>
+  <div class="plabel" data-k="upper"><b>Knit upper</b><span class="t">Breathes so you don't have to.</span></div>
+  <div class="plabel" data-k="insole"><b>Insole</b><span class="t">Memory foam. Forgets your bad decisions.</span></div>
+  <div class="plabel" data-k="midsole"><b>CloudNap sole</b><span class="t">38% air, 62% excuses.</span></div>
+  <div class="plabel" data-k="outsole"><b>Outsole</b><span class="t">Grips the floor so you don't have to.</span></div>
+</div>
+
+<main id="top">
+
+  <!-- 01 the box -->
+  <section class="pin" id="ch-box" data-ch="01" data-name="The box">
+    <div class="pin-in">
+      <div class="copy" id="hero-copy">
+        <p class="lbl">01 — The box</p>
+        <h1><span class="lm"><span>Don't</span></span><span class="lm"><span><em>Do</em> It.</span></span></h1>
+        <p class="lede" data-rev>The world's laziest sneaker is in this box. Probably. Scroll to open it, or don't. We're not your mum.</p>
+        <div class="meta" data-rev><span>212 g</span><span>Zero effort</span><span>UK 5–12</span></div>
+      </div>
+      <div class="peek-tip"><span class="stk paper" style="--r:6deg">Hover the box. It peeks.</span></div>
+      <div class="later" data-at="0.62"><span class="stk pink" style="--r:-5deg">The lid did most of the work.</span></div>
+      <div class="hint" id="hint"><span>Scroll (gently)</span><i></i></div>
+    </div>
+  </section>
+
+  <!-- 02 the rise -->
+  <section class="pin" id="ch-rise" data-ch="02" data-name="The Snooze">
+    <div class="pin-in">
+      <div class="copy low" data-at="0.45">
+        <p class="lbl">02 — The Snooze</p>
+        <h2><span class="lm"><span>It got out</span></span><span class="lm"><span>of the <em>box.</em></span></span></h2>
+        <p class="lede">That's its workout for the week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 weight -->
+  <section class="pin" id="ch-weight" data-ch="03" data-name="Weight">
+    <div class="pin-in">
+      <div class="copy">
+        <p class="lbl" data-rev>03 — Weight, sort of</p>
+        <ul class="stats">
+          <li data-at="0.08"><b data-count="212">0<small>g</small></b><span>Lighter than your motivation.</span></li>
+          <li data-at="0.36"><b>0</b><span>Laces you need to tie. (The Couch has none.)</span></li>
+          <li data-at="0.64"><b>∞</b><span>Naps supported. We tested. Extensively.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 layers -->
+  <section class="pin" id="ch-layers" data-ch="04" data-name="The layers">
+    <div class="pin-in">
+      <div class="copy" style="top:22%;transform:none" data-at="0.01">
+        <p class="lbl">04 — The expand</p>
+        <h2><span class="lm"><span>Every layer,</span></span><span class="lm"><span><em>doing nothing.</em></span></span></h2>
+        <p class="lede" data-rev>Six parts. Each one engineered to do as little as possible, as comfortably as possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 manifesto -->
+  <section id="manifesto" class="solid" data-ch="05" data-name="Manifesto">
+    <div class="marq r1" data-dir="-1"><span>DON'T RUN.</span><span>don't run.</span><span>DON'T RUN.</span><span>don't run.</span><span>DON'T RUN.</span><span>don't run.</span></div>
+    <div class="marq r2" data-dir="1"><span>DON'T RUSH.</span><span>don't rush.</span><span>DON'T RUSH.</span><span>don't rush.</span><span>DON'T RUSH.</span><span>don't rush.</span></div>
+    <div class="marq r3" data-dir="-1"><span>DON'T DO IT.</span><span>don't do it.</span><span>DON'T DO IT.</span><span>don't do it.</span><span>DON'T DO IT.</span><span>don't do it.</span></div>
+    <div class="wrap mf-body" data-rev>
+      <div>
+        <p class="lbl">05 — The anti-manifesto</p>
+        <p>We spent three years studying elite athletes. Then we went home and had a lie-down. SLOFFA is anti-performance footwear: so light you forget you're wearing it, so soft you forget why you stood up.</p>
+      </div>
+      <div class="mf-stk">
+        <span class="stk" style="--r:-6deg">No personal bests</span>
+        <span class="stk pink" style="--r:4deg">Certified horizontal</span>
+        <span class="stk lilac" style="--r:-3deg">Snooze-tested</span>
+        <span class="stk mint" style="--r:7deg">0% hustle</span>
+        <span class="stk tomato" style="--r:-8deg">Do not disturb</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 build -->
+  <section id="build" class="solid" data-ch="06" data-name="Build yours">
+    <div class="wrap build">
+      <div class="cz-stage" id="cz">
+        <div class="nm" aria-live="polite"><small>Your pair</small><span id="cz-name">The Pink Procrastinator</span></div>
+        <canvas id="cz-gl" aria-label="Your custom SLOFFA shoe in 3D. Drag to spin it; tap a part to choose it." role="img"></canvas>
+        <p class="tip">Drag to spin · tap a part to pick it</p>
+        <div class="fallback">Your device is too relaxed for 3D. Honestly, respect.</div>
+      </div>
+      <div class="panel">
+        <p class="lbl">06 — Build your lazy</p>
+        <h2><span class="lm"><span>Build your</span></span><span class="lm"><span><em>lazy.</em></span></span></h2>
+        <p class="lede">Seven parts. Ten colours. Zero pressure to finish.</p>
+        <div class="group"><p id="lab-part">1. Pick a part</p><div class="chips" id="cz-parts" role="group" aria-labelledby="lab-part"></div></div>
+        <div class="group"><p id="lab-col">2. Pick a colour <span id="cz-colname" style="color:var(--ink2);font-weight:400"></span></p><div class="sws" id="cz-sw" role="group" aria-labelledby="lab-col"></div></div>
+        <div class="group"><p><label for="cz-text">3. Heel text (optional)</label></p>
+          <div class="txt"><input id="cz-text" maxlength="6" autocomplete="off" spellcheck="false" placeholder="NOPE"><small>6 letters max.<br>+₹299. Worth it.</small></div>
+        </div>
+        <div class="group row">
+          <button class="btn ghost small" id="cz-rand" type="button">Can't decide? Don't. 🎲</button>
+          <button class="btn ghost small" id="cz-share" type="button">Copy link to this pair</button>
+        </div>
+        <div class="price"><b id="cz-price">₹4,999</b><span id="cz-pricenote">The Snooze, custom</span></div>
+        <div class="row" style="margin-top:16px"><button class="btn" id="cz-bag" type="button">Add to bag</button><span class="note">Free delivery. We'll bring it to the sofa.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 lineup -->
+  <section id="lineup" class="solid" data-ch="07" data-name="Lineup">
+    <div class="wrap">
+      <div class="sec-head" data-rev>
+        <div><p class="lbl">07 — The lineup</p><h2>Three ways to <em>not</em> bother.</h2></div>
+        <p>One low-top, one slip-on, one slide. Ranked by how much effort they ask of you: barely, hardly, and absolutely none.</p>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <!-- 08 what's in the box -->
+  <section id="inbox" class="solid" data-ch="08" data-name="What's in the box" style="background:var(--blue)">
+    <div class="wrap">
+      <div class="sec-head" data-rev>
+        <div><p class="lbl">08 — What's in the box</p><h2>Three things. <em>Exactly.</em></h2></div>
+        <p style="color:rgba(251,247,239,.8)">Scroll and they flip. Or tap them. Or don't, the box isn't going anywhere.</p>
+      </div>
+      <div class="flips">
+        <button class="flip" type="button" aria-label="A: the box. Tap to flip.">
+          <span class="f"><span class="mono">Included — A</span><span class="big">A</span><h3>The box</h3></span>
+          <span class="b"><span class="mono">A — The box</span><p>Sturdy, blue and excellent for storing more naps. Please don't recycle it. It's the best part.</p></span>
+        </button>
+        <button class="flip" type="button" aria-label="B: the shoes. Tap to flip.">
+          <span class="f"><span class="mono">Included — B</span><span class="big">B</span><h3>The shoes</h3></span>
+          <span class="b"><span class="mono">B — The shoes</span><p>Two of them, as is tradition. One left, one right, so you don't have to think about it.</p></span>
+        </button>
+        <button class="flip" type="button" aria-label="C: a permission slip. Tap to flip.">
+          <span class="f"><span class="mono">Included — C</span><span class="big">C</span><h3>A permission slip</h3></span>
+          <span class="b"><span class="mono">C — Permission slip</span>
+            <span class="slip"><b>The bearer is excused from:</b>☑ running<br>☑ rushing<br>☑ "quick" calls<br>☑ replying "per my last email"<span class="sig">— SLOFFA HQ</span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 reviews -->
+  <section id="reviews" class="solid" data-ch="09" data-name="Reviews">
+    <div class="wrap">
+      <div class="sec-head" data-rev>
+        <div><p class="lbl">09 — The word on the sofa</p><h2>Five stars. <em>Lying down.</em></h2></div>
+        <p class="note">Reviews are exactly as fictional as the brand.</p>
+      </div>
+      <div class="revs">
+        <figure class="rev" data-rev style="--r:-1deg"><div class="st">★★★★★</div><p>"Wore them to the gym. Didn't go in."</p><small>S. · Bengaluru · couch division</small></figure>
+        <figure class="rev" data-rev style="--r:1.2deg"><div class="st">★★★★★</div><p>"So light I forgot I was wearing them. Then I forgot I had plans."</p><small>M. · Pune</small></figure>
+        <figure class="rev" data-rev style="--r:-.6deg"><div class="st">★★★★★</div><p>"My running coach cried."</p><small>A. · Delhi · former runner</small></figure>
+        <figure class="rev" data-rev style="--r:.8deg"><div class="st">★★★★☆</div><p>"Took them out of the box. Needed a lie-down. Fair."</p><small>K. · Mumbai</small></figure>
+        <figure class="rev" data-rev style="--r:-1.4deg"><div class="st">★★★★★</div><p>"Finally, a shoe that matches my energy."</p><small>J. · Chennai</small></figure>
+        <figure class="rev" data-rev style="--r:.5deg"><div class="st">★★★★★</div><p>"Bought two pairs so I'd never have to come back."</p><small>T. · Jaipur · efficient</small></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 cta -->
+  <section id="cta" class="solid" data-ch="10" data-name="The end" style="background:var(--pink)">
+    <div class="wrap" data-rev>
+      <p class="lbl">10 — The end. Already.</p>
+      <h2>Go on.<br><em>Don't.</em></h2>
+      <a class="btn dont" href="#build"><span class="b1">Don't buy it.</span><span class="b2">(Okay, buy it.)</span></a>
+      <button class="nope-btn" type="button" id="nope">Don't click this</button>
+      <p class="nope-count" id="nope-count" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="logo">SLOFFA<i>z</i></div><p style="color:rgba(244,238,226,.7);max-width:26em">Ultra-light comfort sneakers for people with better things to not do.</p></div>
+      <div><h4>The lineup</h4><ul><li><a href="snooze/">The Snooze</a></li><li><a href="couch/">The Couch</a></li><li><a href="nope/">The Nope</a></li><li><a href="#build">Build your own</a></li></ul></div>
+      <div><h4>Say hello (eventually)</h4><ul><li><a href="mailto:hello@sloffa.example">hello@sloffa.example</a></li><li>Replies within 3–5 business naps</li></ul></div>
+    </div>
+    <div class="fict">
+      <span>SLOFFA is a fictional brand made for a design demo. No shoes were sold, mostly because nobody could be bothered.</span>
+      <span>Prototype · placeholder brand, prices and contacts · © 2026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="counter" aria-hidden="true"><span id="cnt">01</span> / 10 · <span id="cnt-name">The box</span></div>
+<div class="cur" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="nap" aria-hidden="true"><div><div class="zz"><span>Z</span><span>z</span><span>z</span></div><p>You clicked it. Bold. Here's a short nap.</p></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
