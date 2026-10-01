@@ -180,7 +180,7 @@ export async function createStage(canvas, { mobile = false, reduced = false, fon
     // hover peek (desktop, box closed)
     if (s < 0.15 && pointerLive) {
       ray.setFromCamera(pointer, camera);
-      hover = ray.intersectObject(box.root, true).length > 0;
+      hover = ray.intersectObjects([box.base, box.lid], true).length > 0;   // not the invisible floor
       peekTarget = hover ? 1 : 0;
     } else hover = false;
 

@@ -1,6 +1,6 @@
 /* SLOFFA (fictional) — shared styles for the home page and the three product pages. */
 :root{
-  --oat:#F4EEE2; --oat2:#EDE3D0; --paper:#FBF7EF; --ink:#1C1A17; --ink2:rgba(28,26,23,.68); --ink3:rgba(28,26,23,.42);
+  --oat:#F8EFE2; --oat2:#EDE3D0; --paper:#FBF7EF; --ink:#1C1A17; --ink2:rgba(28,26,23,.68); --ink3:rgba(28,26,23,.42);
   --line:rgba(28,26,23,.16);
   --tomato:#FF5A36; --pink:#F7A8C4; --blue:#3D5AFE; --lilac:#C9B6FF; --hi:#E8FF4F; --mint:#9EE6C5; --mustard:#F2B63D;
   --display:'Bricolage Grotesque',system-ui,sans-serif; --serif:'Instrument Serif',Georgia,serif;
@@ -91,12 +91,38 @@ html.past .nav::before{opacity:1}
 #gl{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;transition:opacity .9s}
 html.gl-on #gl{opacity:var(--gl-o,1)}
 html.no-webgl #gl{display:none}
+
+/* desktop: real footage instead of the 3D stage */
+#film{position:fixed;inset:0;z-index:1;pointer-events:none;display:none;opacity:0;transition:opacity .9s;background:var(--oat)}
+html.film #film{display:block}
+html.film body{background:var(--stage-bg,#FAF0E3)}
+#film{background:var(--stage-bg,#FAF0E3)!important}
+html.film #ch-layers .copy{width:min(470px,33vw)}
+html.film #ch-layers h2{font-size:clamp(40px,5.4vw,86px)}
+html.film .plabel{max-width:205px}
+html.film #gl{display:none}
+html.film.gl-on #film{opacity:var(--gl-o,1)}
+/* the footage sits in a 16:9 frame on the right; its left/top/bottom edges fade into the page (same cream) */
+#film .frame{position:absolute;right:0;top:50%;width:var(--fw,76vw);aspect-ratio:16/9;transform:translateY(-50%);
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%),linear-gradient(to bottom,transparent 0,#000 9%,#000 91%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 14%),linear-gradient(to bottom,transparent 0,#000 9%,#000 91%,transparent 100%);mask-composite:intersect}
+#film video,#film .xray{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:65% 50%}
+#film video{opacity:0}
+#film #v1{opacity:1}
+#film .xray{background:url(../media/v1-lid-last.jpg) center/cover no-repeat;opacity:0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+#film .lens{position:absolute;left:0;top:0;width:300px;height:300px;margin:-150px 0 0 -150px;border:3px solid var(--ink);border-radius:50%;
+  box-shadow:0 0 0 6px var(--hi),5px 5px 0 6px var(--ink);opacity:0;transition:opacity .2s;will-change:transform}
+#film .lens span{position:absolute;left:50%;top:-20px;transform:translateX(-50%) rotate(-4deg);padding:6px 12px;border:2px solid var(--ink);border-radius:99px;background:var(--hi);
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+html.film.fine .cur.big{opacity:0}
 #gl.hover{cursor:pointer}
 main{position:relative}
 .pin{position:relative}
 .pin-in{position:sticky;top:0;z-index:2;height:100vh;height:100svh;overflow:hidden}   /* text above the 3D canvas */
 .copy{position:absolute;z-index:3;left:var(--gut);top:50%;transform:translateY(-50%);width:min(560px,40vw)}
 .copy.low{top:auto;bottom:clamp(40px,9vh,96px);transform:none}
+.copy[data-at] .lede{opacity:0;transition:opacity .6s .15s}
+.copy[data-at].in .lede{opacity:1}
 
 /* chapter 1: the box */
 #ch-box{height:260vh}
@@ -187,12 +213,24 @@ html.no-webgl .cz-stage .fallback{display:grid}
 .pcard:hover{transform:translate(-3px,-3px) rotate(-.6deg);box-shadow:8px 8px 0 var(--ink)}
 .pcard .pic{aspect-ratio:4/3;display:grid;place-items:center;position:relative}
 .pcard .pic img{width:92%;height:auto;transition:transform .6s var(--ease)}
+.pcard .pic.photo{background:#F6EEE3}
+.pcard .pic.photo img{width:100%;height:100%;object-fit:cover}
 .pcard:hover .pic img{transform:rotate(-4deg) scale(1.05)}
 .pcard .pic .stk{position:absolute;top:16px;right:16px}
 .pcard .body{padding:20px 22px 22px;background:var(--paper);border-top:2px solid var(--ink);flex:1;display:flex;flex-direction:column;gap:8px}
 .pcard .body p{margin:0;color:var(--ink2);font-size:15px}
 .pcard .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;font-family:var(--display);font-weight:800;font-size:22px}
 .pcard .foot i{font-style:normal;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+
+/* life on the sofa */
+#sofa{padding:clamp(80px,12vh,140px) 0}
+.sofa{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:clamp(14px,2vw,26px)}
+.sh{position:relative;margin:0;border:2px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);background:var(--oat2)}
+.sh.big{grid-row:1/3}
+.sh img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--soft)}
+.sh:hover img{transform:scale(1.04)}
+.sh .stk{position:absolute;left:18px;bottom:18px}
+.sh:not(.big){aspect-ratio:16/10}
 
 /* what's in the box */
 #inbox{padding:clamp(80px,12vh,140px) 0;background:var(--blue);color:var(--paper)}
@@ -265,6 +303,7 @@ html.fine .cur{display:grid}
 .p-hero .lbl{display:flex}
 .p-stage{position:relative;aspect-ratio:1/0.9;border:2px solid var(--ink);border-radius:30px;background:var(--bg,var(--pink));box-shadow:6px 6px 0 var(--ink);overflow:hidden}
 .p-stage canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.p-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .p-stage .tip{position:absolute;left:16px;bottom:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
 .p-stage .stk{position:absolute;top:18px;right:18px}
 .ways{display:flex;gap:10px;flex-wrap:wrap}
@@ -308,7 +347,8 @@ html.fine .cur{display:grid}
   .mf-body,.build,.two,.p-hero{grid-template-columns:1fr}
   .mf-stk{justify-content:flex-start}
   .cz-stage{position:relative;top:0}
-  .cards,.flips{grid-template-columns:1fr}
+  .cards,.flips,.sofa{grid-template-columns:1fr}
+  .sh.big{grid-row:auto;aspect-ratio:16/10}
   .flip{aspect-ratio:3/2.4}
   .sec-head{flex-direction:column;align-items:flex-start}
   .foot-grid{grid-template-columns:1fr 1fr}

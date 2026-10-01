@@ -39,6 +39,13 @@
   </div>
 </header>
 
+<div id="film" aria-hidden="true"><div class="frame">
+  <video id="v1" muted playsinline preload="auto" poster="media/v1-lid-first.jpg" data-src="media/v1-lid.mp4"></video>
+  <video id="v2" muted playsinline preload="auto" poster="media/v2-rise-first.jpg" data-src="media/v2-rise.mp4"></video>
+  <video id="v3" muted playsinline preload="auto" poster="media/v3-explode-first.jpg" data-src="media/v3-explode.mp4"></video>
+  <div class="xray"></div>
+</div><div class="lens"><span>X-ray</span></div></div>
+
 <canvas id="gl" aria-label="A 3D SLOFFA shoebox opening, and the shoe inside floating out and coming apart into its layers" role="img"></canvas>
 
 <div id="labels" aria-hidden="true">
@@ -62,7 +69,7 @@
         <p class="lede" data-rev>The world's laziest sneaker is in this box. Probably. Scroll to open it, or don't. We're not your mum.</p>
         <div class="meta" data-rev><span>212 g</span><span>Zero effort</span><span>UK 5–12</span></div>
       </div>
-      <div class="peek-tip"><span class="stk paper" style="--r:6deg">Hover the box. It peeks.</span></div>
+      <div class="peek-tip"><span class="stk paper" style="--r:6deg">Hover the box. X-ray vision, included.</span></div>
       <div class="later" data-at="0.62"><span class="stk pink" style="--r:-5deg">The lid did most of the work.</span></div>
       <div class="hint" id="hint"><span>Scroll (gently)</span><i></i></div>
     </div>
@@ -163,11 +170,26 @@
     </div>
   </section>
 
-  <!-- 08 what's in the box -->
-  <section id="inbox" class="solid" data-ch="08" data-name="What's in the box" style="background:var(--blue)">
+  <!-- 08 life on the sofa -->
+  <section id="sofa" class="solid" data-ch="08" data-name="On the sofa">
     <div class="wrap">
       <div class="sec-head" data-rev>
-        <div><p class="lbl">08 — What's in the box</p><h2>Three things. <em>Exactly.</em></h2></div>
+        <div><p class="lbl">08 — Natural habitat</p><h2>Seen in <em>the wild.</em></h2></div>
+        <p>Field footage of SLOFFAs doing what they do best, which is very little, very comfortably.</p>
+      </div>
+      <div class="sofa">
+        <figure class="sh big" data-rev><img src="media/l-sofa.jpg" alt="A pair of pink SLOFFA sneakers kicked off on a rug in front of a mustard sofa" loading="lazy" width="1600" height="900"><figcaption class="stk" style="--r:-4deg">Natural habitat.</figcaption></figure>
+        <figure class="sh" data-rev><img src="media/l-feet-up.jpg" alt="Feet in pink SLOFFAs resting on a coffee table next to a mug and a TV remote" loading="lazy" width="1600" height="900"><figcaption class="stk pink" style="--r:3deg">Peak performance.</figcaption></figure>
+        <figure class="sh" data-rev><img src="media/l-pillow.jpg" alt="A single pink SLOFFA sneaker resting on a pillow on an unmade bed" loading="lazy" width="1600" height="900"><figcaption class="stk lilac" style="--r:-5deg">Do not disturb.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 what's in the box -->
+  <section id="inbox" class="solid" data-ch="09" data-name="What's in the box" style="background:var(--blue)">
+    <div class="wrap">
+      <div class="sec-head" data-rev>
+        <div><p class="lbl">09 — What's in the box</p><h2>Three things. <em>Exactly.</em></h2></div>
         <p style="color:rgba(251,247,239,.8)">Scroll and they flip. Or tap them. Or don't, the box isn't going anywhere.</p>
       </div>
       <div class="flips">
@@ -189,11 +211,11 @@
     </div>
   </section>
 
-  <!-- 09 reviews -->
-  <section id="reviews" class="solid" data-ch="09" data-name="Reviews">
+  <!-- 10 reviews -->
+  <section id="reviews" class="solid" data-ch="10" data-name="Reviews">
     <div class="wrap">
       <div class="sec-head" data-rev>
-        <div><p class="lbl">09 — The word on the sofa</p><h2>Five stars. <em>Lying down.</em></h2></div>
+        <div><p class="lbl">10 — The word on the sofa</p><h2>Five stars. <em>Lying down.</em></h2></div>
         <p class="note">Reviews are exactly as fictional as the brand.</p>
       </div>
       <div class="revs">
@@ -207,10 +229,10 @@
     </div>
   </section>
 
-  <!-- 10 cta -->
-  <section id="cta" class="solid" data-ch="10" data-name="The end" style="background:var(--pink)">
+  <!-- 11 cta -->
+  <section id="cta" class="solid" data-ch="11" data-name="The end" style="background:var(--pink)">
     <div class="wrap" data-rev>
-      <p class="lbl">10 — The end. Already.</p>
+      <p class="lbl">11 — The end. Already.</p>
       <h2>Go on.<br><em>Don't.</em></h2>
       <a class="btn dont" href="#build"><span class="b1">Don't buy it.</span><span class="b2">(Okay, buy it.)</span></a>
       <button class="nope-btn" type="button" id="nope">Don't click this</button>
@@ -234,7 +256,7 @@
   </div>
 </footer>
 
-<div class="counter" aria-hidden="true"><span id="cnt">01</span> / 10 · <span id="cnt-name">The box</span></div>
+<div class="counter" aria-hidden="true"><span id="cnt">01</span> / 11 · <span id="cnt-name">The box</span></div>
 <div class="cur" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div id="nap" aria-hidden="true"><div><div class="zz"><span>Z</span><span>z</span><span>z</span></div><p>You clicked it. Bold. Here's a short nap.</p></div></div>

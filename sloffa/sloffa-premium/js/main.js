@@ -1,6 +1,7 @@
 /* SLOFFA (fictional) — premium demo, home page.
-   Four pinned chapters drive one 3D stage (the box opens, the shoe floats out, laps, comes apart);
-   everything after that is regular page with a 3D customiser. */
+   Four pinned chapters drive one story (the box opens, the shoe floats out, hangs about, comes apart):
+   real footage on desktop (film.js), the code-built 3D version on phones (stage.js).
+   Everything after that is regular page with a 3D customiser. */
 import { SWATCHES, PARTS, DEFAULT_COLORS, MODELS, ORDER, inr } from './data.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -12,6 +13,14 @@ const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
 if (fine) root.classList.add('fine');
 const FONT = '"Bricolage Grotesque", system-ui, sans-serif';
+// desktop gets the footage; phones keep the 3D version until there are portrait videos
+const filmMode = !mobile && matchMedia('(orientation: landscape)').matches;
+if (filmMode) {
+  root.classList.add('film');
+  // WebM for Chrome / Edge / Firefox (smaller), MP4 for Safari
+  const webm = document.createElement('video').canPlayType('video/webm; codecs="vp9"') !== '';
+  $$('#film video').forEach((v) => { v.src = webm ? v.dataset.src.replace('.mp4', '.webm') : v.dataset.src; v.load(); });
+}
 
 // ── lazy mode (everything at half speed) ─────────────────────────
 let lazy = false;
@@ -69,6 +78,14 @@ function hasWebGL() { try { const c = document.createElement('canvas'); return !
 const webgl = hasWebGL();
 if (!webgl) root.classList.add('no-webgl');
 (async () => {
+  if (filmMode) {
+    try {
+      const { createFilm } = await import('./film.js');
+      stage = await createFilm($('#film'), { reduced });
+      addEventListener('resize', () => stage.resize());
+    } catch (e) { console.warn('footage unavailable', e); }
+    bump(); return;
+  }
   await fontsReady;
   if (!webgl) { bump(); return; }
   try {
@@ -122,10 +139,10 @@ function placeLabels(on) {
   pts.forEach((p, i) => plabels[p.key].classList.toggle('act', i === act));
   pts.forEach((p) => {
     const el = plabels[p.key], ln = lines[p.key];
-    const left = p.x < midX;            // labels sit on whichever side their anchor is on
+    const left = p.side ? p.side < 0 : p.x < midX;   // labels sit on whichever side their anchor is on
     const off = mobile ? 26 : 70;
     const w = el.offsetWidth, h = el.offsetHeight;
-    let x = left ? p.x - off - w : p.x + off;
+    let x = p.col ? p.col - w : left ? p.x - off - w : p.x + off;
     x = clamp(x, 10, W - w - 10);
     const y = clamp(p.y - h / 2, 70, innerHeight - h - 10);
     el.style.transform = `translate(${x}px,${y}px)`;
@@ -301,18 +318,11 @@ async function initLineup() {
   cards.innerHTML = ORDER.map((k) => {
     const m = MODELS[k];
     return `<a class="pcard" href="${k}/" style="--bg:${bgs[k]}" data-rev>
-      <div class="pic"><img alt="${m.name}, ${m.kind.toLowerCase()} sneaker in ${m.colorways[0].name}" data-snap="${k}" width="720" height="540"><span class="stk paper" style="--r:5deg">${m.weight} g</span></div>
+      <div class="pic photo"><img src="media/p-${k}.jpg" alt="${m.name}, ${m.kind.toLowerCase()} sneaker in ${m.colorways[0].name}" loading="lazy" width="900" height="900"><span class="stk paper" style="--r:5deg">${m.weight} g</span></div>
       <div class="body"><h3>${m.name}</h3><p class="mono" style="font-size:11px">${m.kind}</p><p>${m.line}</p>
       <div class="foot"><span>${inr(m.price)}</span><i>Meet it →</i></div></div></a>`;
   }).join('');
   $$('.pcard').forEach((el) => io.observe(el));
-  if (!webgl) return;
-  await fontsReady;
-  try {
-    const { snapshots } = await import('./viewer.js');
-    const shots = snapshots(ORDER.map((k) => ({ key: k, type: MODELS[k].type, colors: MODELS[k].colorways[0].colors })), { font: FONT });
-    $$('[data-snap]').forEach((img) => { img.src = shots[img.dataset.snap]; });
-  } catch (e) { console.warn('snapshots failed', e); }
 }
 initLineup();
 // build the customiser when it gets close, or when the browser is idle

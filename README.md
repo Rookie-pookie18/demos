@@ -22,7 +22,7 @@ https://demos-1g7.pages.dev/kestrel-premium/
 https://demos-1g7.pages.dev/kestrel-standard/
 https://demos-1g7.pages.dev/calder-finch-premium/
 
-GitHub: `Sidak-dang/demos` · Cloudflare Pages project: `demos-1g7`
+GitHub: `Rookie-pookie18/demos` · Cloudflare Pages project: `demos-1g7`
 
 `demos.pages.dev` was taken, so Cloudflare added `-1g7`. To lose it, point a real domain at
 this project under **Custom domains** in the Cloudflare dashboard and send clients that.
