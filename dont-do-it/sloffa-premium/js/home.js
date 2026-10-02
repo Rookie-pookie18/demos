@@ -5,8 +5,21 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const loadedAt = Date.now();
 const wantsColourway = /cw=/.test(location.hash);
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-if (!wantsColourway) scrollTo(0, 0);
+// A refresh always starts from the top, with the loader and the x-ray hint, like a first visit.
+// (ScrollTrigger remembers scroll positions and turns browser restoration back on, so override both,
+// and reset Lenis too, or it scrolls straight back to where it was.)
+const toTop = () => {
+  if (wantsColourway) return;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  ScrollTrigger.clearScrollMemory?.('manual');
+  scrollTo(0, 0);
+  lenis?.scrollTo(0, { immediate: true, force: true });
+};
+toTop();
+let introDone = false; // once the visitor can scroll, never yank them back
+addEventListener('load', () => { if (!introDone) toTop(); });
+addEventListener('pageshow', e => { if (e.persisted) toTop(); });
+addEventListener('beforeunload', () => { if (!wantsColourway) scrollTo(0, 0); });
 
 // ---------- loader: real progress of the hero images + V1 poster, 2.5s at most ----------
 function runLoader() {
@@ -319,6 +332,7 @@ addEventListener('load', () => ScrollTrigger.refresh());
 document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
 runLoader().then(() => {
+  toTop(); introDone = true;
   heroIntro();
   // on laptops, set up the 3D customiser while the visitor is still looking at the hero,
   // so its one-off setup cost never lands in the middle of a scroll
