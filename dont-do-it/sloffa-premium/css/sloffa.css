@@ -234,8 +234,9 @@ section{position:relative}
 .boxcard img{width:100%;height:100%;object-fit:cover}
 .boxcard--lilac{background:var(--lilac);display:grid;place-items:center}
 .boxcard--lilac img{object-fit:contain;width:92%;height:auto}
-.boxcard--effort img{object-position:12% 50%}
-.stamp{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%) rotate(-14deg);border:4px solid var(--orange);color:var(--orange);border-radius:14px;padding:14px 22px 8px;font:800 clamp(34px,3.8vw,64px)/.86 var(--f-head);font-variation-settings:'wdth' 75;text-transform:uppercase;text-align:center;letter-spacing:-.01em;white-space:nowrap;mix-blend-mode:multiply}
+.boxtext{display:flex;flex-direction:column;justify-content:center;gap:22px;padding:0 0 0 clamp(8px,1.5vw,24px)}
+.boxtext__h{font-size:clamp(56px,7.4vw,140px);line-height:.86}
+.boxtext__aside{font-size:clamp(22px,2vw,30px);margin:0}
 .boxcard__tag{position:absolute;left:14px;top:14px;background:var(--card);border-radius:999px;padding:9px 14px;font:500 10px/1 var(--f-mono);letter-spacing:.14em}
 ..flip__in{display:block;position:relative;width:100%;height:100%;transform-style:preserve-3d}
 
@@ -383,6 +384,7 @@ section{position:relative}
   .lounger__shoe{top:0;transform:translateX(-50%);width:100vw}
   .flip{position:relative;inset:auto!important;width:100%}
   .assembled__grid,.box__grid,.parts{grid-template-columns:1fr}
+  .boxtext{padding:30px 0 10px}
   .feat__slice{display:none}
   .feat__art{height:auto;margin:16px 0}
   .feat__photo{display:block;width:100%;height:220px;object-fit:cover;border-radius:14px}

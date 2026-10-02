@@ -20,6 +20,18 @@ if (!rm) {
   window.__lenis = lenis; // handy for testing scroll positions
 }
 
+// Keep every scroll animation measured against the real page: when the page's height changes
+// (the 3D customiser mounting, a late image), re-measure, or pinned sections start in the wrong place
+// and jump as you scroll into them.
+let lastH = 0, refreshT;
+new ResizeObserver(() => {
+  const h = document.body.scrollHeight;
+  if (Math.abs(h - lastH) < 2) return;
+  lastH = h;
+  clearTimeout(refreshT);
+  refreshT = setTimeout(() => ScrollTrigger.refresh(), 150);
+}).observe(document.body);
+
 export function scrollToEl(target) {
   const el = typeof target === 'string' ? document.querySelector(target) : target;
   if (!el) return;

@@ -195,6 +195,8 @@ export function mountCustomiser(el, { modelUrl, reducedMotion = false } = {}) {
     model.add(gltf.scene);
     PARTS.forEach(p => paint(p.id, true));
     loading?.remove();
+    // compile shaders and draw once now, so the first frame on screen doesn't stall the scroll
+    renderer.compile(scene, camera); renderer.render(scene, camera);
     if (!reducedMotion) gsap.from(model.position, { y: -0.35, duration: 1.2, ease: 'power3.out' });
     el.dispatchEvent(new CustomEvent('cz:ready', { detail: { names } }));
   }, undefined, err => { console.error('[Sloffa customiser] GLB failed to load', err); renderer.domElement.remove(); fallback('GLB failed'); });
@@ -218,7 +220,7 @@ export function mountCustomiser(el, { modelUrl, reducedMotion = false } = {}) {
     visible = en.isIntersecting;
     if (visible && !raf) loop();
     if (!visible && raf) { cancelAnimationFrame(raf); raf = 0; }
-  }).observe(stage);
+  }, { rootMargin: '60% 0px' }).observe(stage); // start a little before it scrolls in, so the first frames aren't on screen
 
   const api = { state, meshes, select, setColour, renderer, controls };
   window.__sloffaCz = api;

@@ -205,17 +205,7 @@ function customiser() {
   if (wantsColourway) start();
   new IntersectionObserver((ents, io) => { if (ents[0].isIntersecting) { start(); io.disconnect(); } }, { rootMargin: '100% 0px' }).observe($('#colourway'));
   if (!rm) gsap.from('.cz__stage', { y: 60, autoAlpha: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.cz', start: 'top 80%' } });
-}
-
-// ---------- 06 box: "not included" stamp ----------
-function boxFlip() {
-  // the third card gets stamped as it scrolls into view
-  if (rm) return;
-  const stamp = $('#effort .stamp');
-  gsap.set(stamp, { xPercent: -50, yPercent: -50, rotation: -14, autoAlpha: 0 });
-  gsap.timeline({ scrollTrigger: { trigger: '#effort', start: 'top 55%' } })
-    .fromTo(stamp, { scale: 2.6, rotation: -32, autoAlpha: 0 }, { scale: 1, rotation: -14, autoAlpha: 1, duration: 0.42, ease: 'power4.in' })
-    .fromTo('#effort', { x: 0 }, { keyframes: { x: [-6, 5, -3, 0] }, duration: 0.3, ease: 'none' });
+  return start;
 }
 
 // ---------- 07 composition: centre line darkens ----------
@@ -317,8 +307,7 @@ if (!rm) {
 const mm = gsap.matchMedia();
 unboxing(mm);
 manifesto();
-customiser();
-boxFlip();
+const czStart = customiser();
 compo();
 details(mm);
 unmask(mm);
@@ -331,5 +320,10 @@ document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
 runLoader().then(() => {
   heroIntro();
+  // on laptops, set up the 3D customiser while the visitor is still looking at the hero,
+  // so its one-off setup cost never lands in the middle of a scroll
+  if (matchMedia('(min-width: 861px) and (pointer: fine)').matches) {
+    setTimeout(() => (window.requestIdleCallback || (f => setTimeout(f, 0)))(czStart, { timeout: 3000 }), 1800);
+  }
   if (wantsColourway) setTimeout(() => scrollToEl('#colourway'), 300);
 });
