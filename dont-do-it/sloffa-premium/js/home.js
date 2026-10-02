@@ -40,11 +40,20 @@ function heroIntro() {
   const touch = !matchMedia('(hover: hover) and (pointer: fine)').matches;
   const lensR = () => box.offsetWidth * (touch ? 0.36 : 0.3);
   const lens = { x: 50, y: 50, r: 0 };
-  // pointer position as % of the box, undoing the box's own tilt so the lens sits under the cursor
-  const local = (cx, cy) => {
-    const b = box.getBoundingClientRect(), a = -gsap.getProperty(box, 'rotation') * Math.PI / 180;
-    const dx = cx - (b.left + b.width / 2), dy = cy - (b.top + b.height / 2);
-    return [((dx * Math.cos(a) - dy * Math.sin(a)) / box.offsetWidth + 0.5) * 100, ((dx * Math.sin(a) + dy * Math.cos(a)) / box.offsetHeight + 0.5) * 100];
+  const BASE = { x: 32, y: -24 }; // resting 3D angle: lid towards you, front and right side showing
+  gsap.set(box, { rotationX: BASE.x, rotationY: BASE.y, rotation: -4 });
+  // pointer position as % of the lid. The lid is tilted in 3D, so map the screen point back
+  // through the perspective of its four projected corners (a plane homography).
+  const pts = $$('.xbox__pt', box);
+  const local = (px, py) => {
+    const [p0, p1, p2, p3] = pts.map(el => { const b = el.getBoundingClientRect(); return [b.left, b.top]; });
+    const [x0, y0] = p0, [x1, y1] = p1, [x2, y2] = p2, [x3, y3] = p3;
+    const dx1 = x1 - x2, dx2 = x3 - x2, dx3 = x0 - x1 + x2 - x3, dy1 = y1 - y2, dy2 = y3 - y2, dy3 = y0 - y1 + y2 - y3;
+    const den = dx1 * dy2 - dx2 * dy1;
+    const g = (dx3 * dy2 - dx2 * dy3) / den, h = (dx1 * dy3 - dx3 * dy1) / den;
+    const a = x1 - x0 + g * x1, b = x3 - x0 + h * x3, c = x0, d = y1 - y0 + g * y1, e = y3 - y0 + h * y3, f = y0;
+    const w = (d * h - e * g) * px + (b * g - a * h) * py + (a * e - b * d);
+    return [((e - f * h) * px + (c * h - b) * py + (b * f - c * e)) / w * 100, ((f * g - d) * px + (a - c * g) * py + (c * d - a * f)) / w * 100];
   };
   const paint = () => {
     box.style.setProperty('--mx', lens.x + '%');
@@ -62,7 +71,6 @@ function heroIntro() {
 
   if (rm) { lens.r = lensR(); paint(); shoes(true, true); return; }
 
-  gsap.set(box, { transformPerspective: 1400 });
   gsap.set([l, r], { autoAlpha: 0 });
   // arrival: the box drops in with a little wobble, then floats
   gsap.timeline()
@@ -95,11 +103,11 @@ function heroIntro() {
   const ry = gsap.quickTo(box, 'rotationY', { duration: 0.8, ease: 'power3' });
   let over = false, teased = false, sweep;
   box.addEventListener('pointerenter', () => { over = true; teased = true; sweep?.kill(); openLens(true); shoes(true); });
-  box.addEventListener('pointerleave', () => { over = false; openLens(false); shoes(false); rx(0); ry(0); });
+  box.addEventListener('pointerleave', () => { over = false; openLens(false); shoes(false); rx(BASE.x); ry(BASE.y); });
   box.addEventListener('pointermove', e => {
     const [x, y] = local(e.clientX, e.clientY);
     mx(x); my(y);
-    ry((x / 100 - 0.5) * 14); rx(-(y / 100 - 0.5) * 12);
+    ry(BASE.y + (x / 100 - 0.5) * 12); rx(BASE.x - (y / 100 - 0.5) * 10);
   });
   // one sweep after landing, so nobody misses that the box can be looked into
   setTimeout(() => {
@@ -108,7 +116,7 @@ function heroIntro() {
     openLens(true); shoes(true);
     sweep = gsap.to(lens, { x: 82, y: 45, duration: 2.2, ease: 'sine.inOut', onUpdate: paint, onComplete: () => { if (!over) { openLens(false); shoes(false); } } });
   }, 1700);
-  stage.addEventListener('pointerleave', () => { if (!over) { rx(0); ry(0); } });
+  stage.addEventListener('pointerleave', () => { if (!over) { rx(BASE.x); ry(BASE.y); } });
 }
 
 // ---------- 03 unboxing: scrubbed video ----------
