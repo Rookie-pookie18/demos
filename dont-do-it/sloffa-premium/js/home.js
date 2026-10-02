@@ -14,7 +14,7 @@ function runLoader() {
   if (!el || rm) { el?.remove(); return Promise.resolve(); }
   lenis?.stop();
   const fill = $('.loader__fill', el);
-  const urls = ['media/k0-lounger-side.webp', 'media/v1-unbox.jpg'];
+  const urls = ['media/k0-lounger-side.webp', 'media/x-inside.webp', 'media/v1-unbox.jpg'];
   let done = 0;
   const shown = { p: 0 };
   return new Promise(resolve => {
@@ -32,35 +32,83 @@ function runLoader() {
   });
 }
 
-// ---------- 01 hero ----------
+// ---------- 01 hero: x-ray box ----------
+// A soft lens follows the pointer and shows what's inside the closed box; the pair slides out either side.
 function heroIntro() {
-  const card = $('#hanger');
-  const [l, r] = $$('.hanger-shoe');
-  if (rm) return;
-  const mobile = matchMedia('(max-width: 860px)').matches;
-  gsap.set(card, { transformPerspective: 1000 });
-  const tl = gsap.timeline();
-  tl.fromTo(card, { y: -innerHeight * 1.1 }, { y: 0, duration: 1.6, ease: 'back.out(1.15)' }, 0)
-    .fromTo(card, { rotation: -16 }, { keyframes: [{ rotation: 6, duration: 0.9, ease: 'power2.out' }, { rotation: -1.5, duration: 0.5, ease: 'sine.inOut' }, { rotation: 0, duration: 0.4, ease: 'sine.out' }] }, 0)
-    .from(l, { xPercent: mobile ? -70 : 55, autoAlpha: mobile ? 0 : 1, duration: 1.8, ease: 'power2.out' }, 1.15)
-    .from(r, { xPercent: mobile ? 70 : -55, autoAlpha: mobile ? 0 : 1, duration: 1.8, ease: 'power2.out' }, 1.3)
-    .add(() => {
-      // idle sway, so the hero is never frozen
-      gsap.to(card, { rotation: 1.6, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-      gsap.to([l, r], { y: -8, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 1.2 });
+  const box = $('#xbox'), stage = $('#xbox-stage');
+  const [l, r] = $$('.xbox-side');
+  const touch = !matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const lensR = () => box.offsetWidth * (touch ? 0.36 : 0.3);
+  const lens = { x: 50, y: 50, r: 0 };
+  // pointer position as % of the box, undoing the box's own tilt so the lens sits under the cursor
+  const local = (cx, cy) => {
+    const b = box.getBoundingClientRect(), a = -gsap.getProperty(box, 'rotation') * Math.PI / 180;
+    const dx = cx - (b.left + b.width / 2), dy = cy - (b.top + b.height / 2);
+    return [((dx * Math.cos(a) - dy * Math.sin(a)) / box.offsetWidth + 0.5) * 100, ((dx * Math.sin(a) + dy * Math.cos(a)) / box.offsetHeight + 0.5) * 100];
+  };
+  const paint = () => {
+    box.style.setProperty('--mx', lens.x + '%');
+    box.style.setProperty('--my', lens.y + '%');
+    box.style.setProperty('--r', lens.r + 'px');
+  };
+  // where the shoes sit when "out": tucked 12% behind the box edge; when "in": hidden behind the box
+  // (narrow screens: the pair sits side by side under the box instead)
+  const narrow = () => matchMedia('(max-width: 860px)').matches;
+  const shoes = (open, instant) => [[l, -1], [r, 1]].forEach(([s, dir]) => gsap.to(s, {
+    x: open ? dir * (narrow() ? s.offsetWidth * 0.02 : box.offsetWidth / 2 - s.offsetWidth * 0.12) : -dir * s.offsetWidth * 0.35,
+    rotation: open ? dir * 7 : 0, scale: open ? 1 : 0.7, autoAlpha: open ? 1 : 0,
+    duration: instant ? 0 : open ? 0.9 : 0.6, ease: open ? 'back.out(1.3)' : 'power3.in', overwrite: true,
+  }));
+
+  if (rm) { lens.r = lensR(); paint(); shoes(true, true); return; }
+
+  gsap.set(box, { transformPerspective: 1400 });
+  gsap.set([l, r], { autoAlpha: 0 });
+  // arrival: the box drops in with a little wobble, then floats
+  gsap.timeline()
+    .fromTo(box, { y: -innerHeight * 0.9, rotation: -16 }, { y: 0, rotation: -4, duration: 1.4, ease: 'back.out(1.2)' })
+    .add(() => gsap.to(box, { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+
+  const mx = gsap.quickTo(lens, 'x', { duration: 0.45, ease: 'power3', onUpdate: paint });
+  const my = gsap.quickTo(lens, 'y', { duration: 0.45, ease: 'power3', onUpdate: paint });
+  const openLens = open => gsap.to(lens, { r: open ? lensR() : 0, duration: open ? 0.6 : 0.45, ease: open ? 'power3.out' : 'power2.in', overwrite: 'auto', onUpdate: paint });
+
+  if (touch) {
+    // no hover on phones: the lens wanders on its own and follows a finger
+    const hint = $('.xbox-hint'); if (hint) hint.firstChild.nodeValue = 'Drag a finger over the box ';
+    let held = false, t0 = performance.now();
+    openLens(true); setTimeout(() => shoes(true), 900);
+    gsap.ticker.add(() => {
+      if (held) return;
+      const t = (performance.now() - t0) / 1000;
+      mx(50 + Math.sin(t * 0.7) * 30); my(50 + Math.sin(t * 1.1 + 1) * 22);
     });
-  // tilt toward the pointer, up to ±8°
-  if (matchMedia('(hover: hover)').matches) {
-    const rx = gsap.quickTo(card, 'rotationX', { duration: 0.8, ease: 'power3' });
-    const ry = gsap.quickTo(card, 'rotationY', { duration: 0.8, ease: 'power3' });
-    $('.hero').addEventListener('pointermove', e => {
-      const r0 = card.getBoundingClientRect();
-      const nx = gsap.utils.clamp(-1, 1, (e.clientX - (r0.left + r0.width / 2)) / (innerWidth / 2));
-      const ny = gsap.utils.clamp(-1, 1, (e.clientY - (r0.top + r0.height / 2)) / (innerHeight / 2));
-      ry(nx * 8); rx(-ny * 8);
-    });
-    $('.hero').addEventListener('pointerleave', () => { rx(0); ry(0); });
+    const follow = e => { const p = e.touches[0], [x, y] = local(p.clientX, p.clientY); mx(x); my(y); };
+    box.addEventListener('touchstart', e => { held = true; follow(e); }, { passive: true });
+    box.addEventListener('touchmove', follow, { passive: true });
+    box.addEventListener('touchend', () => { held = false; t0 = performance.now(); }, { passive: true });
+    return;
   }
+
+  // desktop: lens + 3D tilt follow the pointer, shoes slide out while hovering
+  const rx = gsap.quickTo(box, 'rotationX', { duration: 0.8, ease: 'power3' });
+  const ry = gsap.quickTo(box, 'rotationY', { duration: 0.8, ease: 'power3' });
+  let over = false, teased = false;
+  box.addEventListener('pointerenter', () => { over = true; teased = true; openLens(true); shoes(true); });
+  box.addEventListener('pointerleave', () => { over = false; openLens(false); shoes(false); rx(0); ry(0); });
+  box.addEventListener('pointermove', e => {
+    const [x, y] = local(e.clientX, e.clientY);
+    mx(x); my(y);
+    ry((x / 100 - 0.5) * 14); rx(-(y / 100 - 0.5) * 12);
+  });
+  // one sweep after landing, so nobody misses that the box can be looked into
+  setTimeout(() => {
+    if (teased || over) return;
+    lens.x = 18; lens.y = 55; paint();
+    openLens(true); shoes(true);
+    gsap.to(lens, { x: 82, y: 45, duration: 2.2, ease: 'sine.inOut', onUpdate: paint, onComplete: () => { if (!over) { openLens(false); shoes(false); } } });
+  }, 1700);
+  stage.addEventListener('pointerleave', () => { if (!over) { rx(0); ry(0); } });
 }
 
 // ---------- 03 unboxing: scrubbed video ----------
@@ -218,8 +266,8 @@ function parallax(mm) {
       const d = (1 - s) * innerHeight * 0.5;
       gsap.fromTo(el, { y: -d }, { y: d, ease: 'none', scrollTrigger: { trigger: el.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } });
     });
-    // hero: card + shoes rise slower than the page (0.6)
-    gsap.to('#hanger-wrap', { y: () => innerHeight * 0.4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+    // hero: box + shoes rise slower than the page (0.6)
+    gsap.to('#xbox-stage', { y: () => innerHeight * 0.4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
   });
 }
 
