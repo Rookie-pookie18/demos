@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>The Lounger, model no. zzz | Sloffa (fictional)</title>
+<meta name="description" content="Build your Sloffa Lounger in 3D: recolour the sole, footbed, upper, lining, pull loop and patch. A fictional parody brand; nothing ships.">
+<meta property="og:title" content="The Lounger — any colour, whatever">
+<meta property="og:description" content="A 3D customiser for a fictional slip-on mule. Nothing is for sale.">
+<meta property="og:image" content="../media/og-sloffa.jpg">
+<meta name="theme-color" content="#F2ECE1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,800&family=Caveat:wght@600&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/sloffa.css">
+<script type="importmap">
+{ "imports": {
+  "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js",
+  "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/ScrollTrigger.js",
+  "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.mjs",
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('rm')</script>
+</head>
+<body class="lounger-page">
+<a class="skip" href="#main">Skip to content (or don't)</a>
+<header class="nav">
+  <a class="logo" href="../" aria-label="Sloffa home">SLOFFA <span class="zzz-pill">zzz</span></a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="./" aria-current="page">The Lounger</a>
+    <a href="#colourway">Colourways</a>
+    <a href="#lookbook">Lookbook</a>
+    <a href="../story/">Story</a>
+  </nav>
+  <div class="nav__right">
+    <a class="pill pill--cta" href="#colourway">Maybe later</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <nav aria-label="Menu">
+    <a class="h" href="../">Home</a>
+    <a class="h" href="#colourway">Colourways</a>
+    <a class="h" href="#lookbook">Lookbook</a>
+    <a class="h" href="../story/">Story</a>
+    <a class="h" href="../help/">Help</a>
+  </nav>
+  <div><a class="pill pill--cta" href="#colourway">Maybe later</a><br><span class="aside">you could also just close this</span></div>
+</div>
+
+<main id="main">
+<section class="colourway" id="colourway" aria-labelledby="cw-title">
+  <p class="eyebrow">The Lounger — model no. zzz — colourway 01/∞</p>
+  <h1 class="h reveal" id="cw-title"><span class="ln"><span>Any colour.</span></span><span class="ln"><span><span class="chip">Whatever.</span></span></span></h1>
+  <div class="cz" data-customiser id="cz">
+    <div class="cz__stage" role="img" aria-label="A 3D Sloffa Lounger slip-on mule.">
+      <div class="cz__loading" aria-hidden="true">fetching the shoe… slowly</div>
+      <div class="cz__fallback">
+        <img src="../media/s1-lounger-three-quarter.webp" width="1256" height="800" alt="Photo of the Lounger in Oat / Lilac">
+        <p class="aside">3D is having a lie-down. Here's a photo.</p>
+      </div>
+      <div class="cz__err" role="alert"></div>
+      <span class="cz__hint" aria-hidden="true">Drag to turn · tap a part</span>
+    </div>
+    <div class="cz__panel card">
+      <div><p class="label muted" style="margin:0 0 10px">Part</p><div class="cz__row" data-parts></div></div>
+      <div><p class="cz__swname" style="margin:0 0 12px" aria-live="polite">Upper: Nap Lilac</p><div class="cz__swatches" data-swatches></div></div>
+      <div class="cz__row"><button type="button" class="pill pill--sm" data-random>Pick for me (can't be bothered)</button><button type="button" class="pill pill--sm" data-reset>Reset</button></div>
+      <p class="cz__summary" aria-live="polite"></p>
+      <div class="cz__actions">
+        <div class="cz__price" style="width:100%"><strong>$89</strong><span class="label muted">or whatever's down the back of the sofa</span></div>
+        <button type="button" class="pill pill--cta" data-cart>Add to cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-head" style="padding-top:100px" aria-labelledby="parts-title">
+  <p class="eyebrow">Six parts, named the same everywhere</p>
+  <h2 class="h h--m reveal" id="parts-title"><span class="ln"><span>What it's made of.</span></span><span class="ln"><span><span class="chip">Roughly.</span></span></span></h2>
+</section>
+<div class="parts">
+  <article class="card" data-rise><span class="dot" style="background:#EFE6D6"></span><h3>Sole</h3><p>PillowFoam with a rocker curve, so you can sort of roll into the next room.</p></article>
+  <article class="card" data-rise><span class="dot" style="background:#B9875C"></span><h3>Footbed</h3><p>Cork. Moulds to your foot eventually. No rush.</p></article>
+  <article class="card" data-rise><span class="dot" style="background:#C9B8FF"></span><h3>Upper</h3><p>Quilted like a sofa cushion, because that's what we were sitting on.</p></article>
+  <article class="card" data-rise><span class="dot" style="background:#FF7A3D"></span><h3>Lining</h3><p>Fleece, rolled over the edge. Warm enough to stay in.</p></article>
+  <article class="card" data-rise><span class="dot" style="background:#2B2622"></span><h3>Pull loop</h3><p>For pulling them on. Or hanging them up. Or ignoring.</p></article>
+  <article class="card" data-rise><span class="dot" style="background:#FF7A3D"></span><h3>Patch</h3><p>A round patch on the outside. It doesn't do anything. Relatable.</p></article>
+</div>
+
+<section class="specs" style="padding-top:40px" aria-labelledby="spec-title">
+  <p class="eyebrow" id="spec-title">The numbers, roughly</p>
+  <div class="spec"><span class="label">Weight</span><span class="spec__v" data-count="212">212<small>g</small></span></div>
+  <div class="spec"><span class="label">Laces</span><span class="spec__v" data-count="0">0</span></div>
+  <div class="spec"><span class="label">Sizes</span><span class="spec__v">"Yours"</span></div>
+  <div class="spec"><span class="label">Edition</span><span class="spec__v">"∞ pairs"</span></div>
+  <div class="spec"><span class="label">Release</span><span class="spec__v">Whenever</span></div>
+  <div class="spec"><span class="label">Price</span><span class="spec__v">$89 USD<small>(or sofa change)</small></span></div>
+</section>
+
+<section class="look" id="lookbook" aria-labelledby="look-title">
+  <div class="look__head">
+    <div><p class="eyebrow">Lookbook — on foot, on sofa</p><h2 class="h h--m" id="look-title">Worn <span class="chip">horizontally.</span></h2></div>
+    <a class="link-arrow" href="../story/">Read the story →</a>
+  </div>
+  <div class="look__grid">
+    <figure class="look__fig"><img src="../media/s8-look-sofa.webp" width="900" height="1599" loading="lazy" alt="Feet in Loungers crossed on the arm of an oat linen sofa, charcoal trousers, lilac cushion"><figcaption class="label">Look 01 — sofa arm</figcaption></figure>
+    <figure class="look__fig"><img src="../media/s9-look-hammock.webp" width="900" height="1599" loading="lazy" alt="Feet in Loungers hanging over the edge of a cream hammock in a sunny garden"><figcaption class="label">Look 02 — hammock</figcaption></figure>
+    <figure class="look__fig"><img src="../media/s10-look-table.webp" width="900" height="1599" loading="lazy" alt="Feet in Loungers crossed on a pale wooden coffee table next to a mug of tea and a TV remote"><figcaption class="label">Look 03 — coffee table</figcaption></figure>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="foot__cols">
+    <div><p class="label muted" style="margin:0">000 — No drop</p><h3>Sit down.<br>Stay down.</h3><span class="pill pill--sm" style="pointer-events:none">Always restocked</span></div>
+    <nav aria-label="Footer"><p class="label muted" style="margin:0 0 6px">Menu</p><ul><li><a href="../">Home</a></li><li><a href="./">The Lounger</a></li><li><a href="../story/">Story</a></li><li><a href="../help/">Help</a></li></ul></nav>
+    <div><p class="label muted" style="margin:0 0 6px">Drop info</p><ul><li style="padding:8px 0">Released whenever</li><li style="padding:8px 0">Unlimited pairs worldwide</li><li style="padding:8px 0">Every colourway, eventually</li><li style="padding:8px 0" class="label">Next drop — no.</li></ul></div>
+  </div>
+  <div class="foot__rule"><div class="foot__shoe"><img src="../media/k0-lounger-side.webp" width="1400" height="650" loading="lazy" alt=""></div><div class="foot__z" aria-hidden="true"><span>z</span><span>z</span><span>z</span></div></div>
+  <p class="foot__big" aria-hidden="true">SLOFFA</p>
+  <div class="foot__base">
+    <div>
+      <p class="label" style="margin-bottom:10px">© Sloffa (not a real company). Made to sit down.</p>
+      <p class="muted">Sloffa is a fictional parody brand made for a design demo. It is not affiliated with any sportswear company and nothing here is for sale.</p>
+    </div>
+    <button type="button" class="totop" data-totop>↑<br>(we'll wait)</button>
+  </div>
+</footer>
+<script type="module" src="../js/page.js"></script>
+</body>
+</html>

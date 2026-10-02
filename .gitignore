@@ -16,3 +16,8 @@ __pycache__/
 
 # Cloudflare / wrangler local state
 .wrangler/
+
+# Sloffa demo: prompt pack and raw source media stay local
+dont-do-it/*.md
+dont-do-it/**/*.md
+dont-do-it/**/media/*-raw.*
