@@ -93,8 +93,8 @@ function heroIntro() {
   // desktop: lens + 3D tilt follow the pointer, shoes slide out while hovering
   const rx = gsap.quickTo(box, 'rotationX', { duration: 0.8, ease: 'power3' });
   const ry = gsap.quickTo(box, 'rotationY', { duration: 0.8, ease: 'power3' });
-  let over = false, teased = false;
-  box.addEventListener('pointerenter', () => { over = true; teased = true; openLens(true); shoes(true); });
+  let over = false, teased = false, sweep;
+  box.addEventListener('pointerenter', () => { over = true; teased = true; sweep?.kill(); openLens(true); shoes(true); });
   box.addEventListener('pointerleave', () => { over = false; openLens(false); shoes(false); rx(0); ry(0); });
   box.addEventListener('pointermove', e => {
     const [x, y] = local(e.clientX, e.clientY);
@@ -106,7 +106,7 @@ function heroIntro() {
     if (teased || over) return;
     lens.x = 18; lens.y = 55; paint();
     openLens(true); shoes(true);
-    gsap.to(lens, { x: 82, y: 45, duration: 2.2, ease: 'sine.inOut', onUpdate: paint, onComplete: () => { if (!over) { openLens(false); shoes(false); } } });
+    sweep = gsap.to(lens, { x: 82, y: 45, duration: 2.2, ease: 'sine.inOut', onUpdate: paint, onComplete: () => { if (!over) { openLens(false); shoes(false); } } });
   }, 1700);
   stage.addEventListener('pointerleave', () => { if (!over) { rx(0); ry(0); } });
 }
