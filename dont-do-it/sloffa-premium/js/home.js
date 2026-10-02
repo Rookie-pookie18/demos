@@ -77,8 +77,13 @@ function unboxing(mm) {
   // only fetch the video once the section is within one screen
   new IntersectionObserver((ents, io) => {
     if (!ents[0].isIntersecting) return;
-    video.preload = 'auto'; video.src = video.dataset.src; video.load();
     io.disconnect();
+    video.preload = 'auto';
+    // Cloudflare Pages ignores Range requests, so Chrome can't seek a streamed mp4.
+    // A blob URL lives in memory and is always seekable.
+    fetch(video.dataset.src).then(r => { if (!r.ok) throw r.status; return r.blob(); })
+      .then(b => { video.src = URL.createObjectURL(b); video.load(); })
+      .catch(() => { video.src = video.dataset.src; video.load(); });
   }, { rootMargin: '100% 0px' }).observe($('#unboxing'));
 
   let prog = 0, cur = 0, raf = 0;
