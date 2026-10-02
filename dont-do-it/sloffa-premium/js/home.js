@@ -207,14 +207,15 @@ function customiser() {
   if (!rm) gsap.from('.cz__stage', { y: 60, autoAlpha: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.cz', start: 'top 80%' } });
 }
 
-// ---------- 06 box: scroll-to-flip card ----------
+// ---------- 06 box: "not included" stamp ----------
 function boxFlip() {
-  const inner = $('.sflip__in');
-  if (rm) {
-    $('#sflip').addEventListener('click', () => { inner.style.transform = inner.style.transform ? '' : 'rotateY(180deg)'; });
-    return;
-  }
-  gsap.fromTo(inner, { rotationY: 0 }, { rotationY: 180, ease: 'none', scrollTrigger: { trigger: '#sflip', start: 'top 80%', end: 'center 52%', scrub: 0.6 } });
+  // the third card gets stamped as it scrolls into view
+  if (rm) return;
+  const stamp = $('#effort .stamp');
+  gsap.set(stamp, { xPercent: -50, yPercent: -50, rotation: -14, autoAlpha: 0 });
+  gsap.timeline({ scrollTrigger: { trigger: '#effort', start: 'top 55%' } })
+    .fromTo(stamp, { scale: 2.6, rotation: -32, autoAlpha: 0 }, { scale: 1, rotation: -14, autoAlpha: 1, duration: 0.42, ease: 'power4.in' })
+    .fromTo('#effort', { x: 0 }, { keyframes: { x: [-6, 5, -3, 0] }, duration: 0.3, ease: 'none' });
 }
 
 // ---------- 07 composition: centre line darkens ----------
@@ -229,7 +230,8 @@ function details(mm) {
   mm.add('(min-width: 861px)', () => {
     const row = $('#hrow');
     const dist = () => Math.max(0, row.scrollWidth - innerWidth);
-    gsap.to(row, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.details__pin', start: 'top top', end: '+=150%', pin: true, scrub: 0.5, invalidateOnRefresh: true } });
+    // pin only for as long as there is sideways travel to show
+    gsap.to(row, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.details__pin', start: 'top top', end: () => '+=' + Math.max(dist() * 1.2, innerHeight * 0.6), pin: true, scrub: 0.5, invalidateOnRefresh: true } });
   });
 }
 
@@ -283,7 +285,21 @@ function parallax(mm) {
 $$('.flip').forEach(b => b.addEventListener('click', () => b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'))));
 
 // ---------- 3.5 cards rise in sequence ----------
-if (!rm) gsap.from('[data-seq]', { y: 90, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.22, scrollTrigger: { trigger: '.assembled__grid', start: 'top 82%' } });
+if (!rm) {
+  gsap.from('[data-seq]', { y: 90, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.22, scrollTrigger: { trigger: '.assembled__grid', start: 'top 82%' } });
+  const am = gsap.matchMedia();
+  // desktop: one shoe, cut across the three cards, drifts into line as you scroll
+  am.add('(min-width: 861px)', () => {
+    const slices = $$('.feat__slice');
+    gsap.timeline({ scrollTrigger: { trigger: '.assembled__grid', start: 'top 85%', end: 'center 50%', scrub: 0.8 } })
+      .fromTo(slices, { y: i => [130, -110, 170][i], rotation: i => [-12, 9, -14][i] }, { y: 0, rotation: 0, ease: 'power2.out', duration: 1 })
+      .to('.assembled__done', { opacity: 1, duration: 0.2 }, 0.85);
+  });
+  // phones: each card's own detail photo wipes up and settles
+  am.add('(max-width: 860px)', () => {
+    $$('.feat__photo').forEach(img => gsap.fromTo(img, { clipPath: 'inset(100% 0 0 0)', scale: 1.25 }, { clipPath: 'inset(0% 0 0 0)', scale: 1, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: img, start: 'top 88%' } }));
+  });
+}
 
 // ---------- 11 count-UP timer ----------
 (function counter() {
